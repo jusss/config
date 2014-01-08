@@ -1,0 +1,9 @@
+!pointer = 3 2 1
+keysym grave = Escape asciitilde
+keysym Escape = grave
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
