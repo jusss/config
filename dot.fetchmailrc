@@ -1,0 +1,8 @@
+poll pop.qq.com 
+proto pop3
+port 995
+user 123456789
+pass blablablah
+no fetchall
+keep
+ssl
