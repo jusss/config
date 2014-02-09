@@ -1,0 +1,35 @@
+account 126
+tls on
+tls_starttls off
+tls_certcheck off
+host smtp.126.com
+port 465
+from jusss@126.com
+auth on
+user jusss@126.com
+password blablablah
+
+account qq
+tls on
+tls_starttls off
+tls_certcheck off
+host smtp.qq.com
+port 465
+from 123456789@qq.com
+auth on
+user 123456789
+password blablablah
+
+account gmail
+tls on
+tls_starttls on
+tls_certcheck on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+host smtp.gmail.com
+port 587
+from jusss@gmail.com
+auth on
+user jusss@gmail.com
+password blablablah
+
+account default : qq
