@@ -5,6 +5,9 @@ vo=direct3d
 msgcolor=yes
 lavdopts=threads=2
 
+# fs means full screen
+fs=yes
+
 # ass=yes
 sub-fuzziness=0
 subfont-text-scale=2
