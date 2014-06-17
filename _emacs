@@ -20,12 +20,18 @@ chinese-gb2312:-outline-新宋体-normal-r-normal-normal-13-97-96-96-c-*-iso8859
 (setq inhibit-startup-echo-area-message "Administrator")
 
 ;set erc
-(defun lirc ()
-	(erc :server "irc.freenode.net" :port 6665 :nick "jusss"
-    :password "h3lloworld")
+(global-set-key (kbd "C-.") (lambda () 
+	
+	(interactive)
+
+	(erc :server "195.148.124.79" :port 6665 :nick "jusss"
+    :password "xxx")
+
 	(setq erc-autojoin-channels-alist '(("freenode.net" "#scheme" "#lisp"
-	"#ubuntu-cn"))))
-(setq erc-autojoin-timing 'ident)
+	"#ubuntu-cn")))
+
+	(setq erc-autojoin-timing 'ident)))
+
 
 (require `ido)
 (ido-mode t)
@@ -35,3 +41,6 @@ chinese-gb2312:-outline-新宋体-normal-r-normal-normal-13-97-96-96-c-*-iso8859
 
 ;set c-; bind (set-mark-command) , same as c-space or c-@
 (global-set-key (kbd "C-;") 'set-mark-command)
+
+;set the default file saved directory is Desktop
+(setq default-directory "C:/Users/Administrator/AppData/Desktop/")
