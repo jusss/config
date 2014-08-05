@@ -2,7 +2,7 @@ account qq
 tls on
 tls_certcheck off
 tls_starttls off
-delivery mbox ~/mbox
+delivery mbox /var/mail/root
 host pop.qq.com
 user 123456789
 password xxx
@@ -10,7 +10,7 @@ port 995
 auth on
 keep on
 only_new on
-uidls_file ~/.mpop_uidls/123456789_at_pop.qq.com
+uidls_file /var/mail/.mpop_uidls/123456789_at_pop.qq.com
 
 account default : qq
 
