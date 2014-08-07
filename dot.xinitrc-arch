@@ -1,0 +1,2 @@
+fcitx -rd
+exec fvwm
