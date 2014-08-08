@@ -1,0 +1,5 @@
+set sendmail="/usr/bin/msmtp"
+set MAIL='/home/lolkamea/mail/inbox'
+set screen=99
+set autoinc
+set newmail="/home/lolkamea/inbox"
