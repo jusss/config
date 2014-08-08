@@ -17,6 +17,6 @@ defaultroute
 ipcp-accept-local
 ipcp-accept-remote
 connect '/usr/sbin/chat -s -v -f /etc/ppp/peers/cmnet-chat-connect'
-# disconnect '/usr/sbin/chat -s -v -f /etc/ppp/peers/cmnet-chat-disconnect'
+# disconnect '/usr/sbin/chat -s -v -f /etc/ppp/peers/pppd-cmnet-chat-disconnect'
 # the disconnect script failed,run poff cmnet echo can't get terminal parameters:input/output error
 
