@@ -4,3 +4,5 @@ deb-src http://ftp.jaist.ac.jp/debian jessie main
 
 
 current stable is wheezy, testing is jessie
+
+把jessie换成sid 然后aptitude update , aptitude dist-upgrade升级成sid
