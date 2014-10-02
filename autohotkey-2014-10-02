@@ -49,3 +49,5 @@ CapsLock & -::Send ^-
 CapsLock & =::Send ^=
 CapsLock & [::Send ^[
 CapsLock & ]::Send ^]
+
+rcontrol::mbutton
