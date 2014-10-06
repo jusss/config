@@ -1,0 +1,22 @@
+# this is mplayer for win7 x64's config file. created by jusss
+# Write your default config options here!
+
+vo=direct3d
+msgcolor=yes
+lavdopts=threads=2
+
+# fs means full screen
+fs=yes
+
+# ass=yes
+sub-fuzziness=0
+subfont-text-scale=2
+
+# font="宋体"
+# font="c:\windows\fonts\simsun.ttc"
+# font="e:\simsun.ttf"
+font="c:\windows\fonts\msyh.ttf"
+
+# subcp is important,echo font in movies depends subcp
+subcp=enca:zh:UTF-8
+

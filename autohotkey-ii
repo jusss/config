@@ -1,0 +1,26 @@
+CapsLock & y::Send ^y
+CapsLock & z::Send ^z
+CapsLock & 0::Send ^0
+CapsLock & 1::Send ^1
+CapsLock & 2::Send ^2
+CapsLock & 3::Send ^3
+CapsLock & 4::Send ^4
+CapsLock & 5::Send ^5
+CapsLock & 6::Send ^6
+CapsLock & 7::Send ^7
+CapsLock & 8::Send ^8
+CapsLock & 9::Send ^9
+; how to scape ` and ; ?
+; CapsLock & `::Send ^`
+; CapsLock & ; ::Send ^;
+CapsLock & '::Send ^'
+CapsLock & ,::Send ^,
+CapsLock & .::Send ^.
+CapsLock & /::Send ^/
+CapsLock & -::Send ^-
+CapsLock & =::Send ^=
+CapsLock & [::Send ^[
+CapsLock & ]::Send ^]
+
+LControl::CapsLock
+RControl::mouseclick, middle

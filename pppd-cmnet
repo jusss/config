@@ -1,0 +1,22 @@
+nodetach
+debug
+lock
+/dev/ttyACM0
+115200
+user ""
+password ""
+nocrtscts
+usepeerdns
+noauth
+noipdefault
+noproxyarp
+novj
+novjccomp
+noccp
+defaultroute
+ipcp-accept-local
+ipcp-accept-remote
+connect '/usr/sbin/chat -s -v -f /etc/ppp/peers/pppd-cmnet-chat-connect'
+# disconnect '/usr/sbin/chat -s -v -f /etc/ppp/peers/pppd-cmnet-chat-disconnect'
+# the disconnect script failed,run poff cmnet echo can't get terminal parameters:input/output error
+

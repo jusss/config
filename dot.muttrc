@@ -1,0 +1,5 @@
+set folder=/var/mail/
+set editor=ex
+set sendmail=/usr/bin/msmtp
+my_hdr From:jusss@126.com
+my_hdr Reply-TO:jusss@126.com

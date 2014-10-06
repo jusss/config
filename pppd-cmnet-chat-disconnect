@@ -1,0 +1,7 @@
+ABORT 'ERROR'
+ABORT 'NO DIALTONE'
+SAY  " Hello,World "
++++
+OK 
+ATH
+OK
