@@ -1,0 +1,53 @@
+;用key-tweak把capslock和ctrl互换通过修改注册表，然后再用autohotkey修改成这样
+;之所以这样改，如果直接把capslock改成ctrl和esc,发现经常出现大小写自动切换。如果把capslock改成esc，再这样改，
+;发现按一下的esc会没反应，最后就改成了这样，切换capslock和ctrl,再如下设置
+
+lcontrol::send {esc}
+
+lcontrol & space::send ^{space}
+lcontrol & `::
+lcontrol & a::
+lcontrol & b::
+lcontrol & c::
+lcontrol & d::
+lcontrol & e::
+lcontrol & f::
+lcontrol & g::
+lcontrol & h::
+lcontrol & i::
+lcontrol & j::
+lcontrol & k::
+lcontrol & l::
+lcontrol & m::
+lcontrol & n::
+lcontrol & o::
+lcontrol & p::
+lcontrol & q::
+lcontrol & r::
+lcontrol & s::
+lcontrol & t::
+lcontrol & u::
+lcontrol & v::
+lcontrol & w::
+lcontrol & x::
+lcontrol & y::
+lcontrol & z::
+lcontrol & 0::
+lcontrol & 1::
+lcontrol & 2::
+lcontrol & 3::
+lcontrol & 4::
+lcontrol & 5::
+lcontrol & 6::
+lcontrol & 7::
+lcontrol & 8::
+lcontrol & 9::
+lcontrol & '::
+lcontrol & ,::
+lcontrol & .::
+lcontrol & /::
+lcontrol & -::
+lcontrol & =::
+lcontrol & [::
+lcontrol & ]::
+Send % "^" SubStr(A_ThisHotkey, 0)
