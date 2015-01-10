@@ -1,0 +1,57 @@
+
+lcontrol::send {esc}
+ralt::lbutton
+rcontrol::mbutton
+appskey::rbutton
+lcontrol & space::send ^{space}
+;9::(
+;shift & 9::send 9
+;or $(::send 9, $9::send (, $ is shift ,alt is !, super is #, ctrl is ^, delete is del
+;0::)
+;shift & 0::send 0
+lcontrol & `::
+lcontrol & a::
+lcontrol & b::
+lcontrol & c::
+lcontrol & d::
+lcontrol & e::
+lcontrol & f::
+lcontrol & g::
+lcontrol & h::
+lcontrol & i::
+lcontrol & j::
+lcontrol & k::
+lcontrol & l::
+lcontrol & m::
+lcontrol & n::
+lcontrol & o::
+lcontrol & p::
+lcontrol & q::
+lcontrol & r::
+lcontrol & s::
+lcontrol & t::
+lcontrol & u::
+lcontrol & v::
+lcontrol & w::
+lcontrol & x::
+lcontrol & y::
+lcontrol & z::
+lcontrol & 0::
+lcontrol & 1::
+lcontrol & 2::
+lcontrol & 3::
+lcontrol & 4::
+lcontrol & 5::
+lcontrol & 6::
+lcontrol & 7::
+lcontrol & 8::
+lcontrol & 9::
+lcontrol & '::
+lcontrol & ,::
+lcontrol & .::
+lcontrol & /::
+lcontrol & -::
+lcontrol & =::
+lcontrol & [::
+lcontrol & ]::
+Send % "^" SubStr(A_ThisHotkey, 0)
