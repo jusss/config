@@ -1,0 +1,24 @@
+# this is mplayer for win8 x64's config file. created by jusss
+# Write your default config options here!
+# config file is C:\Users\jusss\AppData\Roaming\mplayer\config
+
+vo=direct3d
+ao=dsound
+msgcolor=yes
+lavdopts=threads=2
+
+# fs means full screen
+fs=yes
+
+ass=yes
+sub-fuzziness=0
+subfont-text-scale=4
+
+font="c:\windows\fonts\simsun.ttc"
+#font="c:\windows\fonts\msyh.ttf"
+#font="simsun.ttf"
+
+# subcp is important,echo font in movies depends subcp
+# when use subcp option, the subtitle file should use cp936 encoding
+subcp=enca:zh:utf-8
+
