@@ -1,0 +1,10 @@
+poll jusss.org
+proto imap
+port 993
+user xxx
+pass xxx
+no fetchall
+keep
+ssl
+idle
+sslcertfile /root/myCA/ca.cert
