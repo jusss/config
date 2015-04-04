@@ -38,3 +38,5 @@ gnus-sum-thread-tree-vertical "│")
 
 (setq message-default-mail-headers
 "Cc: xxx@xxx.xxx\nBcc: xxx@xxx.xxx\n")
+
+(setq gnus-gcc-mark-as-read t)
