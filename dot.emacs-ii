@@ -1,0 +1,62 @@
+;emacs config for archlinux
+
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+;font can be set in .Xdefaults
+;(set-face-attribute 'default nil
+;		    :family "SimSun"
+;		    :height 100)
+(setq confirm-nonexistent-file-or-buffer nil)
+(transient-mark-mode -1)
+(ido-mode t)
+(global-set-key (kbd "C-,") 'ido-switch-buffer)
+(global-set-key (kbd "C-;") 'set-mark-command)
+
+;os clipboard swap with kill-ring
+
+(setq interprogram-cut-fucntion 'x-select-text)
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(setq x-select-enable-clipboard t)
+(setq select-active-regions t)
+(setq yank-pop-change-selection t)
+(setq save_interprogram-paste_before-kill t)
+
+(require `erc)
+(require `tls)
+(global-set-key (kbd "C-.")
+		(lambda ()
+		  "server ip can't be as variable's type"
+		  (interactive)
+		  (erc-ssl :server "morgan.freenode.net" 
+			   :port 6697 
+			   :nick "jusss" 
+			   :full-name "xxxxxxx" 
+			   :password "xxx")
+		  (setq erc-autojoin-channels-alist '(("freenode.net" 
+						       "emacs")))
+		  (setq erc-autojoin-timing 'ident)))
+
+(show-paren-mode t)
+(setq completion-ignore-case t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(erc-current-nick-face ((t (:foreground "red" :weight bold))))
+ '(erc-direct-msg-face ((t (:foreground "red"))))
+ '(erc-input-face ((t (:foreground "black"))))
+ '(erc-my-nick-face ((t (:foreground "dark orange" :weight bold))))
+ '(erc-nick-msg-face ((t (:foreground "red"))))
+ '(erc-notice-face ((t (:foreground "black"))))
+ '(mode-line ((t (:background "DarkSlateGray4" :foreground "black" :box (:line-width -1 :style released-button))))))

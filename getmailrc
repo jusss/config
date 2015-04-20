@@ -1,0 +1,30 @@
+# pacman -S getmail
+# mkdir ~/.getmail
+# touch ~/.getmail/getmailrc
+# chmod 700 ~/.getmail
+# mkdir ~/Mail
+# cd ~/Mail
+# mkdir cur new tmp
+
+# cat ~/.getmail/getmailrc
+
+[retriever]
+type = SimpleIMAPSSLRetriever
+server = jusss.org
+port = 993
+username = x
+password = x
+mailboxes = ALL
+
+[destination]
+type = Maildir
+path = ~/Mail/
+
+[options]
+read_all = false
+delete = false
+received = false
+delivered_to = false
+message_log = ~/.getmail/mvmail.log
+
+# getmail --idle INBOX

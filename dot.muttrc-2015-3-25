@@ -1,0 +1,10 @@
+set editor=ex
+set sendmail=/usr/bin/sendmail
+set spoolfile=/home/jusss/Mail/
+set folder=/home/jusss/Mail/
+set record=/home/jusss/Mail/sent/
+set mbox_type=Maildir
+set check_new=yes
+set timeout=60
+my_hdr From:l@jusss.org
+my_hdr Reply-TO:l@jusss.org
