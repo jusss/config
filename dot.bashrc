@@ -1,0 +1,7 @@
+alias ec='emacsclient -t'
+alias halt='halt -p'
+alias scp='scp -P 1990 -i /home/jusss/.ssh/id_rsa'
+alias ssh='ssh -p 1990 root@jusss.org'
+alias poweroff='systemctl poweroff'
+alias suspend='systemctl suspend'
+alias standby='xset dpms force standby'
