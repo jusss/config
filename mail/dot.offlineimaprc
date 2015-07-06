@@ -1,0 +1,37 @@
+[general]
+# ui = quiet, doesn't output anything
+ui = quiet
+# make a account called main, of course it can be called 126 or qq or what anything you like, it's just a name
+accounts = main
+
+[Account main]
+localrepository = main-local
+remoterepository = main-remote
+status_backend = sqlite
+
+[Repository main-local]
+# mail type, there are two type mbox and maildir, store all mail in one file, that's mbox, in a lot of file, that's maildir
+type = Maildir
+# where's mail stored, it's on ~/Maildir folder
+localfolders = ~/Maildir
+
+[Repository main-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /home/jusss/ca.cert
+remotehost = x.org
+remoteuser = x
+remotepass = x
+remoteport = 993
+
+# if you don't set folderfilter, then pull all folder on the server
+# folderfilter = lambda foldername: foldername in ['Inbox', 'Sent'] will only pull the two folders
+# folderfilter = lambda foldername: foldername not in ['Inbox', 'Sent'] will not pull the two folders
+# when I use idlefolders = ['Inbox'] get IO.Error too many read 0, it's because the inbox folder on server called INBOX not Inbox
+# idlefolders = ['INBOX']
+# maxconnections = 2
+# holdconnectionopen = true
+# keepalive = 600
+# autorefresh = 2
+# quick = 10
+
