@@ -38,23 +38,12 @@ gnus-sum-thread-tree-vertical "│")
      (gcc-self . "Sent"))))
 
 (setq message-default-mail-headers
-  "Cc: jusss_@groups.163.com\nBcc: ifvwm1@gmail.com\n")
+      "Cc: jusss_@groups.163.com\nBcc: ifvwm1@gmail.com\n")
+
+;postponed message is put in the following draft file
+(setq message-auto-save-directory "~/Mail/drafts")
 
 (setq gnus-gcc-mark-as-read t)
-
-; this is configure for gnus-autocheck.el
-;(load "~/lab/gnus-autocheck.el")
-;(setq gnus-autocheck-interval (* 60 2))
-;(setq gnus-autocheck-active-days '("Mon" "Tue" "Wed" "Thu" " Fri" "Sat" "Sun"))
-;gnus-notify.el gnus-notify+.el doesn't work
-
-;checking mail every 2 minutes
-;(defun my-check-mail ()
-;  "Fetch new mails only."
-;  (gnus-group-get-new-news 2)) ;special group level is 2
-;(add-hook 'gnus-startup-hook
-;	  '(lambda ()
-;	     (gnus-demon-add-handler 'my-check-mail 3 0))) ;every 3 mins auto check
 
 ;(setq gnus-agent t)                                 ;开启agent 
 ;(setq read-mail-command 'gnus)                      ;使用gnus阅读邮件
@@ -71,11 +60,34 @@ gnus-sum-thread-tree-vertical "│")
 (setq mm-inline-large-images t)                       ;显示内置图片
 (add-to-list 'mm-attachment-override-types "image/*") ;附件显示图片
 
+; this is configure for gnus-autocheck.el
+;(load "~/lab/gnus-autocheck.el")
+;(setq gnus-autocheck-interval (* 60 2))
+;(setq gnus-autocheck-active-days '("Mon" "Tue" "Wed" "Thu" " Fri" "Sat" "Sun"))
+;gnus-notify.el gnus-notify+.el doesn't work on emacs 24.4
+
 ;put cursor on the group like INBOX Sent in *Group* ,and then hit 'S l' you can get the level of current group and change it
-;the default level of new group like INBOX, it's 3, and if the level is higher, and it's get less info when async
+;the default level of new group like INBOX, it's 3, and if the level is higher, and it's get less info when sync
+
+;checking mail every 2 minutes
+(defun my-check-mail ()
+  "Fetch new mails only."
+  ;special group level is 1, only check level 1, I just set INBOX group is level 1
+  (gnus-group-get-new-news 1))
+(add-hook 'gnus-startup-hook
+	  '(lambda ()
+	     ;check it every 3 mins
+	     (gnus-demon-add-handler 'my-check-mail 3 nil)))
+
+;another version is the next section
+;this does a call to gnus-group-get-new-news You can have Gnus check for new mail every 5 minutes, the another version see above
+;if only it's only this line without the next 8 lines config, it will auto check new mail and show it in *Group*, but don't show it on modeline
+;but if it's with the next 8 lines config, and it will show nothing in *Group* buffer, show it on modeline
+;(gnus-demon-add-handler 'gnus-demon-scan-news 5 t)
 
 ; when there's new mail , put an icon on modeline, new mail store on this location through offlineimap download
 (setq display-time-mail-directory "~/Maildir/INBOX/new")
+; if it's without the next section, and there a text 'Mail' on the modeline when there's new mail
 (setq display-time-string-forms
       '((if display-time-day-and-date
            (format "%s %s %s" dayname monthname day) "")
@@ -84,5 +96,5 @@ gnus-sum-thread-tree-vertical "│")
         (if mail (propertize " " 'display display-time-mail-icon))))
 (display-time)
 
-; this does a call to gnus-group-get-new-news You can have Gnus check for new mail every 5 minutes, the another version see above
-(gnus-demon-add-handler 'gnus-demon-scan-news 5 t) 
+; don't ask me 'how many articles you want' again!
+(setq gnus-large-newsgroup 'nil)
