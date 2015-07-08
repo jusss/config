@@ -73,16 +73,19 @@ gnus-sum-thread-tree-vertical "│")
 (defun my-check-mail ()
   "Fetch new mails only."
   ;special group level is 1, only check level 1, I just set INBOX group is level 1
-  (gnus-group-get-new-news 1))
+  (gnus-group-get-new-news 2))
 (add-hook 'gnus-startup-hook
 	  '(lambda ()
-	     ;check it every 3 mins
+	     ;check it every 2 mins
 	     (gnus-demon-add-handler 'my-check-mail 3 nil)))
+
+; only update level 3
+;(setq gnus-activate-level 3) 
 
 ;another version is the next section
 ;this does a call to gnus-group-get-new-news You can have Gnus check for new mail every 5 minutes, the another version see above
 ;if only it's only this line without the next 8 lines config, it will auto check new mail and show it in *Group*, but don't show it on modeline
-;but if it's with the next 8 lines config, and it will show nothing in *Group* buffer, show it on modeline
+;but if it's with the next 8 lines config, and it will show nothing in *Group* buffer and show it on modeline for a while and show in *Group* don't show modeline
 ;(gnus-demon-add-handler 'gnus-demon-scan-news 5 t)
 
 ; when there's new mail , put an icon on modeline, new mail store on this location through offlineimap download
@@ -93,7 +96,7 @@ gnus-sum-thread-tree-vertical "│")
            (format "%s %s %s" dayname monthname day) "")
         (format "%s:%s"
                 24-hours minutes)
-        (if mail (propertize " " 'display display-time-mail-icon))))
+        (if mail (progn (start-process-shell-command "mail-sound" nil "mplayer -noconsolecontrols -really-quiet ~/sounds/mesg.wav 2>/dev/null") (propertize " " 'display display-time-mail-icon)))))
 (display-time)
 
 ; don't ask me 'how many articles you want' again!
