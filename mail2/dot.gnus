@@ -1,3 +1,4 @@
+;;;change gnus to read mail from local folder created by offlineimap not server
 ;(setq gnus-select-method
 ;     '(nnimap "my mail"
 ;	       (nnimap-address "jusss.org")
@@ -8,8 +9,76 @@
 (setq gnus-select-method
       '(nnmaildir "jusss" (directory "~/Mail/jusss")))
 (add-to-list 'gnus-secondary-select-methods
-      '(nnmaildir "qq" (directory "~/Mail/qq")))
+	     '(nnmaildir "qq" (directory "~/Mail/qq")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;change gnus to send mail with msmtp , not itself
+(defun setjusss ()
+   (interactive)
+   (message "from jusss")
+   (setq user-mail-address "l@jusss.org")
+   (setq message-sendmail-extra-arguments (list '"-a" "jusss"))
+ ;  (setq gnus-message-archive-group nil)
+   (setq gnus-parameters
+	 '((".*"
+	    (gcc-self . "Sent"))))
+;   (setq message-default-mail-headers
+;	 "Cc: jusss_@groups.163.com\nBcc: ifvwm1@gmail.com\n")
+   (setq message-default-mail-headers
+      "Bcc: jusss_@groups.163.com, ifvwm1@gmail.com\n"))
+ 
+(defun setqq ()
+  (interactive)
+  (message "from qq")
+  (setq user-mail-address "229333713@qq.com")
+  (setq message-sendmail-extra-arguments (list '"-a" "qq"))
+;;;   (setq gnus-message-archive-group "nnmaildir+qq:Sent")
+  (setq gnus-parameters
+	'((".*"
+	   (gcc-self . "nnmaildir+qq:Sent Messages"))))
+  (setq message-default-mail-headers
+	"Bcc: jusss_@groups.163.com, ifvwm1@gmail.com\n"))
+ 
+;;;Select automatically while replying 
+(add-hook 'message-mode-hook
+ 	  '(lambda ()
+ 	     (cond ((string-match "qq:" gnus-newsgroup-name) (setqq))
+		   (t (setjusss)))))
+ 
+(setq message-sendmail-f-is-evil 't)
+(setq message-send-mail-function 'message-send-mail-with-sendmail)
+(setq sendmail-program "msmtp")
+ 
+;(setq message-send-mail-function 'smtpmail-send-it
+;      smtpmail-starttls-credentials '(("jusss.org" 587 nil nil))
+;      smtpmail-auth-credentials '(("jusss.org" 587
+;				   "l" nil))
+;      smtpmail-default-smtp-server "jusss.org"
+;      smtpmail-smtp-server "jusss.org"
+;      smtpmail-smtp-service 587
+;      gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; set mail address as alias, to write alias me "l@jusss.org" into ~/.mailrc, and input me after
+;;; To: on gnus and hit space , it will transform to l@jusss.org
+
+(setq-default
+ user-mail-address "l@jusss.org"
+ mm-text-html-renderer 'gnus-w3m
+ gnus-group-line-format "%M%S%5y/%R:%B%(%g%)\n"
+ gnus-summary-line-format "%U%R%z %(%&user-date; %-15,15f %B%s%)\n"
+ gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+ gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+ gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+ gnus-summary-sort-functions '(gnus-summary-sort-by-most-recent-date)
+ gnus-sum-thread-tree-false-root ""
+ gnus-sum-thread-tree-indent " "
+ gnus-sum-thread-tree-leaf-with-other "├► "
+ gnus-sum-thread-tree-root ""
+ gnus-sum-thread-tree-single-leaf "╰► "
+ gnus-sum-thread-tree-vertical "│")
+
+(setq gnus-gcc-mark-as-read t)
 (setq gnus-startup-file "~/Mail/.newsrc")                  ;初始文件
 ;(setq gnus-default-directory "~/Mail/")                    ;默认目录
 (setq gnus-home-directory "~/Mail/")                       ;主目录
@@ -25,78 +94,6 @@
 (setq nnmail-message-id-cache-file "~/Mail/News/.nnmail-cache") ;nnmail的消息ID缓存
 (setq nnml-newsgroups-file "~/Mail/News/newsgroup")        ;邮件新闻组解释文件
 (setq nntp-marks-directory "~/Mail/News/marks")            ;nntp组存储目录
-
-(defun setjusss ()
-   (interactive)
-   (message "from jusss")
-   (setq user-mail-address "l@jusss.org")
-   (setq message-sendmail-extra-arguments (list '"-a" "jusss"))
- ;  (setq gnus-message-archive-group nil)
-   (setq gnus-parameters
-	 '((".*"
-	    (gcc-self . "Sent"))))
-;   (setq message-default-mail-headers
-;	 "Cc: jusss_@groups.163.com\nBcc: ifvwm1@gmail.com\n")
-   (setq message-default-mail-headers
-      "Bcc: jusss_@groups.163.com, ifvwm1@gmail.com\n")
-   )
- 
- (defun setqq ()
-   (interactive)
-   (message "from qq")
-   (setq user-mail-address "229333713@qq.com")
-   (setq message-sendmail-extra-arguments (list '"-a" "qq"))
-;   (setq gnus-message-archive-group "nnmaildir+qq:Sent")
-   (setq gnus-parameters
-	 '((".*"
-	    (gcc-self . "nnmaildir+qq:Sent Messages"))))
-   (setq message-default-mail-headers
-      "Bcc: jusss_@groups.163.com, ifvwm1@gmail.com\n")
-   )
- 
- ;;Select automatically while replying 
- (add-hook 'message-mode-hook
- 	  '(lambda ()
- 	     (cond ((string-match "qq:" gnus-newsgroup-name) (setqq))
-		    (t (setjusss)))))
- 
- (setq message-sendmail-f-is-evil 't)
- (setq message-send-mail-function 'message-send-mail-with-sendmail)
- (setq sendmail-program "msmtp")
- 
-;(setq message-send-mail-function 'smtpmail-send-it
-;      smtpmail-starttls-credentials '(("jusss.org" 587 nil nil))
-;      smtpmail-auth-credentials '(("jusss.org" 587
-;				   "l" nil))
-;      smtpmail-default-smtp-server "jusss.org"
-;      smtpmail-smtp-server "jusss.org"
-;      smtpmail-smtp-service 587
-;      gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
-;
-;(setq-default
-;user-mail-address "l@jusss.org"
-;mm-text-html-renderer 'gnus-w3m
-;gnus-group-line-format "%M%S%5y/%R:%B%(%g%)\n"
-;gnus-summary-line-format "%U%R%z %(%&user-date; %-15,15f %B%s%)\n"
-;gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
-;gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-;gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-;gnus-summary-sort-functions '(gnus-summary-sort-by-most-recent-date)
-;gnus-sum-thread-tree-false-root ""
-;gnus-sum-thread-tree-indent " "
-;gnus-sum-thread-tree-leaf-with-other "├► "
-;gnus-sum-thread-tree-root ""
-;gnus-sum-thread-tree-single-leaf "╰► "
-;gnus-sum-thread-tree-vertical "│")
-
-
-
-
-
-
-
-(setq gnus-gcc-mark-as-read t)
-
 ;(setq gnus-agent t)                                 ;开启agent 
 ;(setq read-mail-command 'gnus)                      ;使用gnus阅读邮件
 ;(setq mail-user-agent 'gnus-user-agent)             ;使用gnus发送邮件
@@ -153,4 +150,6 @@
 
 ; don't ask me 'how many articles you want' again!
 (setq gnus-large-newsgroup 'nil)
-(setq gnus-asynchronous t)
+
+; kill buffer after send mail
+(setq message-kill-buffer-on-exit t)
