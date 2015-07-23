@@ -258,8 +258,18 @@ Style "emacs"      Icon gnu-animal.xpm, Color Black/#f061c709e096
 
 # Change the Maximize and iconify buttons to up and down triangles.
 
-ButtonStyle : 2 4 50x35@1 65x65@0 35x65@0 50x35@1
-ButtonStyle : 4 4 50x65@1 35x35@1 65x35@1 50x65@0
+# created by jusss, change the icons of maximize and iconfy on title's location
+# two step for change icon on title bar and which function it means, set ButtonStyle is one of them, the other one is Mouse 0 1 N Close
+#ButtonStyle : 1 17 20x20@1 30x20@1 50x40@1 70x20@1 80x20@1 80x30@0 60x50@0 80x70@1 80x80@0 70x80@0 50x60@0 30x80@0 20x80@0 20x70@0 40x50@1 20x30@0 20x20@1
+#ButtonStyle : 3 13 60x20@0 60x40@0 80x40@1 80x60@0 60x60@0 60x80@0 40x80@0 40x60@1 20x60@0 20x40@1 40x40@1 40x20@1 60x20@1 
+#ButtonStyle : 5 5 25x40@1 25x60@1 75x60@0 75x40@0 25x40@1
+
+# Close icon
+ButtonStyle : 1 5 25x25@1 25x75@1 75x75@0 75x25@0 25x25@1
+# Maximize icon
+ButtonStyle : 3 4 50x25@1 75x75@0 25x75@0 50x25@1
+# Iconify icon
+ButtonStyle : 5 4 50x75@1 25x25@1 75x25@1 50x75@0
 
 
 ############################################################################
@@ -383,10 +393,11 @@ Mouse 3		R    	A      	WindowList
 # Any button in the rightmost title-bar button maximizes
 # Note the use of "Mouse 0" for AnyButton.
 
+# created by jusss. on the left of bar, three icons, and click them then run fuction
 #     Button	Context Modifi 	Function
-Mouse 0         1           N   PopUp "Window"
-Mouse 0         2           N   Maximize
-Mouse 0         4           N   Iconify
+Mouse 0         1           N   Close
+Mouse 0         3           N   Maximize
+Mouse 0         5           N   Iconify
 
 # Mouse buttons with the Meta (alt) key down always apply, even _inside_
 # the application's window.
@@ -567,8 +578,8 @@ Key 0 A C Quit
 *FvwmWinListUseSkipList
 *FvwmWinListGeometry +0-1
 
-# created by jusss, but I just want two lines for add close and destory icons on title bar, the left on the title bar is 1, and I add the icon on the 1, and mouse left click is 1
-# this is fucking fvwm2 config
+# created by jusss, but I just want two lines for add close and destory icons on title bar, the left on the title bar is 1, and I add the icon on the 1, and mouse left click is 1, ignore this config
+# this is fucking fvwm2 config, ok it's not necessary any more, ignore it
 #------------------------------------------------------------------------------
 # Border, Title and Button Styles
 #------------------------------------------------------------------------------
@@ -597,11 +608,11 @@ Key 0 A C Quit
 ##Mouse 2         2       A       Menu WindowGroupOps
 ##Mouse 3         2       A       Menu Move-Window
 
-Mouse 1         1       A       Close
+#Mouse 1         1       A       Close
 
 #Mouse 2         1       A       All ($c) Close
 
-Mouse 3         1       A       Destroy
+#Mouse 3         1       A       Destroy
 
 #Mouse 1         3       A       Maximize 100 100
 #Mouse 2         3       A       Maximize 0 100
