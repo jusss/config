@@ -1,0 +1,227 @@
+##########窗口和标题栏#############################################################################
+#窗口标题栏字体, 字体可以xlsfonts|more查
+Style * Font "-misc-dejavu sans-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
+
+#设置拥有焦点时的标题栏颜色设置
+Style * HilightFore white, HilightBack SlateBlue
+
+Style * BorderWidth 3, HandleWidth 3
+Style   "*"     FvwmBorder
+Style   "*"     FvwmButtons
+BorderStyle     Inactive -- HiddenHandles NoInset
+BorderStyle     Active -- HiddenHandles NoInset
+TitleStyle      ActiveUp (solid SlateBlue -- Flat)
+TitleStyle      ActiveDown (solid SlateBlue -- Flat)
+TitleStyle      Inactive (solid grey51 -- Flat)
+# 设置标题栏上的标题左对齐，标题栏的高度为20
+TitleStyle LeftJustified Height 20
+ButtonStyle     1       MiniIcon (-- flat)
+ButtonStyle     all     -- UseTitleStyle Flat
+AddButtonStyle  1       Pixmap mini.winXX-close.xpm
+AddButtonStyle  3       Pixmap mini.winXX-maximize.xpm
+AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm
+
+# 设置窗口iconify后图标放置的位置
+#Style * IconBox -100 +140 -1 +730
+#Style * IconBox +10 -40 +828 -1
+#Style * IconFill right top, IconSize 64 64, NoIconTitle
+#Style * IconBox 1000x100+40-120, IconGrid 20 20, IconFill right top, IconSize 64 64, !IconTitle
+# icons  - should go to top left
+Style * IconBox -360 +1 +1 -200, IconFill top left, NoIconTitle
+
+# Icon takes an (optional) unquoted string argument which is the icon bitmap or pixmap to use.  Icons specified this way
+# override pixmap icons, but not icon windows or the ewmh icon, provided by the client in the application (with the WM_HINTS
+# property or with the ewmh _NET_WM_ICON property).  The IconOverride style changes the behavior to override any client-provided
+# icons; the NoIconOverride style changes the behavior to not override any client-provided icons; the default overriding
+# behavior can be activated with the NoActiveIconOverride style.  With this style, fvwm uses application provided icons if the
+# icon is changed but uses the icon provided in the configuration file until then.
+# There is one exception to these rules, namely
+#Style * Icon unknown.xpm
+# doesn't force the unknown.xpm icon on every window, it just sets the default icon like the DefaultIcon command.  If you really
+# want all windows to have the same icon, you can use
+#Style ** Icon unknown.xpm
+# If the NoIcon attribute is set then the specified window simply disappears when it is iconified.  The window can be recovered
+# through the window-list.  If Icon is set without an argument then the NoIcon attribute is cleared but no icon is specified.
+# An example which allows only the FvwmPager module icon to exist:
+# Iconify窗口后不显示图标在desktop上，但是显示图标在FvwmPager上，FvwmPager就是一个所有Desktop和Page的缩略图，在fvwm1中叫Pager
+#Style * NoIcon
+#Style FvwmPager Icon
+
+
+# 不要图标化的窗口的标题
+#Style * NoIconTitle
+# 要图标化的窗口的标题
+# Style * IconTitle, IndexedIconName
+# 取消iconify后的图标stick在desktop上
+#StickyIcons
+
+# the new window will auto get a position without mouse click.
+Style * RandomPlacement
+Style * SmartPlacement
+# NoPPosition instructs fvwm to ignore the PPosition field in window 
+# geometry hints. Emacs annoyingly sets PPosition to (0,0)!
+Style * NoPPosition
+
+# kill the pager on the upper left top in the fvwm1, and called FvwmPager on fvwm2
+# Pager 5 5
+
+# this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title, then comment the next line
+#Style "*"  NoTitle, NoHandles
+
+Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
+Style "Fvwm Pager" StaysOnTop, BorderWidth 5, Color Black/#5f9ea0
+Style "FvwmPager"  StaysOnTop, BorderWidth 5
+Style "FvwmBanner" StaysOnTop
+Style "xterm"      Icon xterm.xpm, Color black/grey
+Style "emacs"      NoHandles, BorderWidth 0, Icon gnu-animal.xpm, Color Black/#f061c709e096
+
+# 取消mpv和mplayer窗口的标题栏和边框
+Style "mpv"	   NoTitle, NoHandles, BorderWidth 0
+Style "mplayer"	   NoTitle, NoHandles, BorderWidth 0
+
+#     Button	Context Modifi 	Function
+# Context的定义与后面鼠标动作的解释是一致的，Context 是用来描述在什麽地方才会有用。
+# R 表示是root window，也就是整个背景萤幕。
+# W 表示在视窗上面。
+# T 表示在Title Bar上面，也就是显示视窗标题的地方。
+# S 表示在在视窗四周的边框上面。
+# F 表示在视窗的四角上面。
+# I 表示在Icon上面。
+# A 表示在Title Bar以外的任何地方。
+# 0-9的数字则是表示在Title Bar上面的按钮。它 所表示的顺序如下所示：
+# 1 3 5 7 9 0 8 6 4 2
+# 上面的各项可以混合使用。如"FST" 表示整个视窗的任何地方。除了Title Bar 的按钮之外。
+
+# Modifiers 这个项目是指有无其他的组合键的配合。
+# N None表示没有其他的组合键。 C 表示CTRL键。 S 表示SHIFT 键。 M 表示Meta键。也可以混合用，例如"CA"表示CTRL+ALT 键。"CAS" 表示CTRL+ALT+SHIFT键。
+
+#Button: 1代表左键 2代表中键 3代表右键 0代表任何键
+#Context:
+#  A:除过标题栏按钮外的任意区域 
+#  R:代表根窗口(也就是桌面) Root
+#  T:代表标题栏 Titlebar
+#  S:代表边框   Sidebar
+#  F:代表窗口的四个角 Frame resize的四个角
+#  W:代表窗口 Work Area 窗口工作区
+#  I:代表图标 Icon
+#  n:
+#    1 3 5 7 9            0 8 6 4 2
+#    (0<=n<=9)窗口的标题栏上的按钮位置,靠左侧的是(1 3 5 7 9)
+#    靠右侧的是(0 8 6 4 2)例如常见的MS-Windows的最小化按钮是6,最大化是4,关闭是2,系统菜单是1
+
+
+######################鼠标和焦点#####################################################
+# the default way to make a focus on a window is SloppyFocus,
+# it means which window the point of mouse is, focus on the window,
+# the another way is ClickToFocus,that mean it needs click the mouse on the
+# window, and the window will be active, focus on the window,operate the window
+# use mouse to get focus for window,and auto raise the window with fvwmauto module
+Style * SloppyFocus
+Style * FocusFollowsMouse
+#Module FvwmAuto 200
+# or you can click window not title to raise the window, maybe it's better than `Module FvwmAuto 200`
+Style * MouseFocusClickRaises 
+# 窗口自动获得位置，找一个放下它但又不遮挡其它窗口的位置，若无空闲空间则覆盖
+Style * TileCascadePlacement
+
+####################标题栏按钮操作###########################
+Mouse 1         1           N   Close
+Mouse 1         3           N   Maximize
+Mouse 1         5           N   Iconify
+Mouse 1		S	    N	Resize
+
+###############鼠标操作窗口#############################
+Mouse 1 	T 	    N 	Iconify-or-Maximize-or-Move
+Mouse 2		T	    N	Close
+AddToFunc Iconify-or-Maximize-or-Move
++ C Iconify
++ D Maximize
++ M Move
+
+# «functions»  (to ".functions")
+# (find-fvwmhelp "AddToFunc [name [I | M | C | H | D action]]")
+# The letter before the action tells what kind of action triggers the
+# command which follows it.
+#   I: Immediate
+#   M: Motion (user moves the mouse)
+#   C: Click
+#   H: Hold
+#   D: Double-click
+
+####################鼠标操作图标##############################
+Mouse 1 	I 	    N 	Iconify-off-or-Maximize-or-Move
+Mouse 2		I	    N	Close
+AddToFunc Iconify-off-or-Maximize-or-Move
++ C Iconify Off
++ D Iconify Off
++ D Maximize
++ M Move
+
+####################################################################################
+##############窗口和图标化后的窗口#############################################
+#####鼠标操作窗口 : 左键标题栏iconify,双击最大化，双击拖住移动，中键标题栏关闭
+#####鼠标操作图标 : 左键图标恢复窗口，双击恢复窗口并最大化，双击拖住移动图标，中键图标关闭窗口
+#####键盘操作窗口 : Super-1 iconify窗口, Super-2最大化窗口, Super-5移动窗口, Super-0,关闭窗口
+#####键盘操作图标 : Super-1 iconify off恢复窗口, Super-2恢复窗口并最大化, Super-5移动图标, Super-0关闭图标和窗口
+##############################################################################################################
+
+#################键盘操作窗口################################
+# W means Window, 4 means super key or call windows key
+Key 1 W 4 Iconify
+Key 2 W 4 Maximize
+Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
+Key 4 A 4 Exec  exec emacs --geometry 169x48+0+0
+Key 5 W 4 Move
+Key 0 W 4 Close
+
+#############键盘操作图标###########################
+AddToFunc Maximize-icon
++ I Iconify Off
++ I Maximize
+Key 1 I 4 Iconify Off
+Key 2 I 4 Maximize-icon
+Key 5 I 4 Move
+Key 0 I 4 Close
+
+
+################Desktop and Page#####################
+# Desk and Page, DesktopSize set how many pages and to squence on one desk, page and desk are short for pager and desktop, I think
+DeskTopSize 3x3
+
+# A in the third position of Key means Anywhere, M means Meta also called Alt
+Key 1 A M GoToPage 0 0
+Key 2 A M GoToPage 1 0
+Key 3 A M GoToPage 2 0
+Key 4 A M GoToPage 0 1
+Key 5 A M GoToPage 1 1
+Key 6 A M GoToPage 2 1
+Key 7 A M GoToPage 0 2
+Key 8 A M GoToPage 1 2
+Key 9 A M GoToPage 2 2
+
+# create desktop and name it
+DesktopName 0 Main
+DesktopName 1 Game
+DesktopName 2 Work
+DesktopName 3 Fun
+# A means Anywhere, C means Control, it's called Desk in fvwm1, and called GotoDesk in fvwm2, see details on manual
+# the desktop start with 0, but 0 means end in my bind keys, like super(or call windows)-0 end current window, C-0 end current desktop
+Key 1 A C GotoDesk 0 0
+Key 2 A C GotoDesk 0 1
+Key 3 A C GotoDesk 0 2
+Key 4 A C GotoDesk 0 3
+Key 0 A C Quit
+
+#`Key Tab A M WindowList Root c c` need to press twice for switching window, make a function can solve this case
+AddToFunc SwitchToWindow
++ I WindowListFunc
+
+Key Tab A M WindowList "Prev SwitchToWindow"
+
+Key F9 A M Popup "Module-Popup"
+
+###################################编译和位置#########################################################
+# when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
+ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
+ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+ImagePath   /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
