@@ -1,12 +1,64 @@
-Style * IconBox -100 +140 -1 +730
-Style * IconBox +10 -40 +828 -1
+##########窗口和标题栏#############################################################################
 
+#设置拥有焦点时的标题栏颜色设置
+Style * HilightFore white, HilightBack SlateBlue
+
+#窗口标题栏字体
+Style * Font "-misc-dejavu sans-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
+
+# 按钮的样式
+Colorset 0 fg white, bg SlateBlue # active
+#Colorset 1 fg black, bg SlateBlue
+ButtonStyle All --flat
+ButtonStyle All Active  Colorset 0 
+#ButtonStyle All InActive Colorset 1 
+AddButtonStyle 5 Inactive   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 
+AddButtonStyle 5 ActiveUp   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 
+AddButtonStyle 5 ActiveDown Vector 5 35x65@3 65x65@3 65x60@3 35x60@3 35x65@3 
+AddButtonStyle 3 Inactive   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 
+AddButtonStyle 3 ActiveUp   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 
+AddButtonStyle 3 ActiveDown Vector 7 35x35@3 35x65@3 65x65@3 65x35@3 35x35@3 35x40@3 65x40@3 
+AddButtonStyle 1 Inactive   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 
+AddButtonStyle 1 ActiveUp   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 
+AddButtonStyle 1 ActiveDown Vector 4 35x35@3 65x65@3 65x35@4 35x65@3 
+ButtonStyle 5 - MwmDecorMin
+ButtonStyle 3 - MwmDecorMax
+
+
+
+Style * BorderWidth 5, HandleWidth 5
+#Style   "*"     FvwmBorder  
+#Style   "*"     FvwmButtons
+#BorderStyle     Inactive -- HiddenHandles NoInset
+#BorderStyle     Active -- HiddenHandles NoInset
+TitleStyle      ActiveUp (solid Blue4 -- Flat)
+TitleStyle      ActiveDown (solid Blue4 -- Flat)
+TitleStyle      Inactive (solid grey51 -- Flat)
+TitleStyle      LeftJustified
+#ButtonStyle     1       MiniIcon (-- flat)
+#ButtonStyle     all     -- UseTitleStyle Flat
+#AddButtonStyle  1       Pixmap mini.winXX-close.xpm -- left
+#AddButtonStyle  3       Pixmap mini.winXX-maximize.xpm -- left
+#AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm -- right
+
+
+
+
+# 设置窗口iconify后图标放置的位置
+#Style * IconBox -100 +140 -1 +730
+#Style * IconBox +10 -40 +828 -1
+#Style * IconFill right top, IconSize 64 64, NoIconTitle
+#Style * IconBox 1000x100+40-120, IconGrid 20 20, IconFill right top, IconSize 64 64, !IconTitle
+# icons  - should go to top left
+Style * IconBox -360 +1 +1 -200, IconFill top left, NoIconTitle
+# 不要图标化的窗口的标题
+#Style * NoIconTitle
+# Style * IconTitle, IndexedIconName
+# 取消iconify后的图标stick在desktop上
 #StickyIcons
+
 # created by jusss. the new window will auto get a position without mouse click.
 Style * RandomPlacement
-
-# SmartPlacement makes new windows pop-up in blank regions of screen 
-# if possible, or falls back to random or interactive placement.
 Style * SmartPlacement
 # NoPPosition instructs fvwm to ignore the PPosition field in window 
 # geometry hints. Emacs annoyingly sets PPosition to (0,0)!
@@ -16,21 +68,12 @@ Style * NoPPosition
 # Pager 5 5
 # Pager 5 555
 
-#set the desk top size in units of physical screen size
-# DeskTopSize 2x2
 
-# created by jusss.
-DeskTopSize 3x3
-# DeskTopSize 1x4
-ModulePath /usr/lib/fvwm
-ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
-ImagePath   /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
-# created by jusss. this make all windows don't have title and fringe
-Style "*"  NoHandles
-# created by jusss.the default way to make a focus on a window is SloppyFocus,
-# it means which window the point of mouse is, focus on the window,
-# the another way is ClickToFocus,that mean it needs click the mouse on the
-# window, and the window will be active, focus on the window,operate the window
+
+
+# created by jusss. this make all windows don't have title and fringe,but if it needs a resize fuction on fringe and other functions on title, then comment the next line
+#Style "*"  NoTitle, NoHandles
+
 Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
 # created by jusss.
 Style "Fvwm Pager" StaysOnTop, BorderWidth 5, Color Black/#5f9ea0
@@ -40,11 +83,85 @@ Style "xterm"      Icon xterm.xpm, Color black/grey
 Style "emacs"      Icon gnu-animal.xpm, Color Black/#f061c709e096
 
 #     Button	Context Modifi 	Function
-Mouse 0         1           N   Close
-Mouse 0         2           N   Maximize
-Mouse 0         4           N   Iconify
+# Context的定义与后面鼠标动作的解释是一致的，Context 是用来描述在什麽地方才会有用。
+# R 表示是root window，也就是整个背景萤幕。
+# W 表示在视窗上面。
+# T 表示在Title Bar上面，也就是显示视窗标题的地方。
+# S 表示在在视窗四周的边框上面。
+# F 表示在视窗的四角上面。
+# I 表示在Icon上面。
+# A 表示在Title Bar以外的任何地方。
+# 0-9的数字则是表示在Title Bar上面的按钮。它 所表示的顺序如下所示：
+# 1 3 5 7 9 0 8 6 4 2
+# 上面的各项可以混合使用。如"FST" 表示整个视窗的任何地方。除了Title Bar 的按钮之外。
 
-# created by jusss.
+# Modifiers 这个项目是指有无其他的组合键的配合。
+# N 表示没有其他的组合键。
+# C 表示CTRL键。
+# S 表示SHIFT 键。
+# A 表示ALT 键。
+# M 表示Meta键。
+# 上面各项也可以混合用，例如"CA"表示CTRL+ALT 键。"CAS" 表示CTRL+ALT+SHIFT键。
+#Button: 1代表左键
+#  2代表中键
+#  3代表右键
+#  0代表任何键
+
+#Context:
+#  A:除过标题栏按钮外的任意区域
+#  R:代表根窗口(也就是桌面)
+#  T:代表标题栏
+#  S:代表边框
+#  F:代表窗口的四个角
+#  W:代表窗口
+#  I:代表图标
+#  n:
+#    1 3 5 7 9            0 8 6 4 2
+#    (0<=n<=9)窗口的标题栏上的按钮位置,靠左侧的是(1 3 5 7 9)
+#    靠右侧的是(0 8 6 4 2)例如常见的MS-Windows的最小化按钮是
+#    6,最大化是4,关闭是2,系统菜单是1
+
+Mouse 1         1           N   Close
+Mouse 1         3           N   Maximize
+Mouse 1         5           N   Iconify
+Mouse 1 	I 	    N 	Iconify-off-or-Maximize-or-Move
+Mouse 1		S	    N	Resize
+
+AddToFunc Iconify-off-or-Maximize-or-Move
++ C Iconify Off
++ D Iconify Off
++ D Maximize
++ M Move
+
+Mouse 1 	T 	    N 	Iconify-or-Maximize-or-Move
+AddToFunc Iconify-or-Maximize-or-Move
++ C Iconify
++ D Maximize
++ M Move
+
+# «functions»  (to ".functions")
+# (find-fvwmhelp "AddToFunc [name [I | M | C | H | D action]]")
+# The letter before the action tells what kind of action triggers the
+# command which follows it.
+#   I: Immediate
+#   M: Motion (user moves the mouse)
+#   C: Click
+#   H: Hold
+#   D: Double-click
+
+# 标题栏中键关闭窗口
+Mouse 2		T	    N	Close
+
+
+TitleStyle      ActiveUp (solid SlateBlue -- Flat)
+TitleStyle      ActiveDown (solid SlateBlue -- Flat)
+TitleStyle      Inactive (solid grey51 -- Flat)
+TitleStyle      LeftJustified
+
+# Desk and Page, DesktopSize set how many pages and to squence on one desk, page and desk are short for pager and desktop, I think
+DeskTopSize 3x3
+
+# A in the third position of Key means Anywhere, M means Meta also called Alt
 Key 1 A M GoToPage 0 0
 Key 2 A M GoToPage 1 0
 Key 3 A M GoToPage 2 0
@@ -55,33 +172,49 @@ Key 7 A M GoToPage 0 2
 Key 8 A M GoToPage 1 2
 Key 9 A M GoToPage 2 2
 
-Key Tab A M WindowList Root c c
+# create desktop and name it
+DesktopName 0 Main
+DesktopName 1 Game
+DesktopName 2 Work
+DesktopName 3 Fun
+# A means Anywhere, C means Control, it's called Desk in fvwm1, and called GotoDesk in fvwm2, see details on manual
+# the desktop start with 0, but 0 means end in my bind keys, like super(or call windows)-0 end current window, C-0 end current desktop
+Key 1 A C GotoDesk 0 0
+Key 2 A C GotoDesk 0 1
+Key 3 A C GotoDesk 0 2
+Key 4 A C GotoDesk 0 3
+Key 0 A C Quit
+# W means Window, 4 means super key or call windows key
 Key 1 W 4 Iconify
 Key 2 W 4 Maximize
-Key 3 A 4 Exec "xterm"  exec xterm -geometry 151x42+0+0
-Key 4 A 4 Exec "emacs" exec emacs --geometry 169x48+0+0
+Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
+Key 4 A 4 Exec  exec emacs --geometry 169x48+0+0
 Key 5 W 4 Move
 Key 0 W 4 Close
-Key F9 A M Popup "Module-Popup"
-Key 1 A C Desk 0 0
-Key 2 A C Desk 0 1
-Key 3 A C Desk 0 2
-Key 4 A C Desk 0 3
-Key 5 A C Desk 0 4
-Key 0 A C Quit
-# created by jusss.
-*FvwmPagerLabel 4 LOL
-*FvwmPagerSmallFont 5x8
 
-# 窗口最小化后图标放置位置
-# icons  - should go to top left
-Style * IconBox 30 100 100 -15, IconFill top left
-# 不要图标标题
-Style * NoIconTitle
-# Style * IconTitle, IndexedIconName
-# Style * IconTitleColorset 3, HilightIconTitleColorset 3
-# Style * IconTitleRelief 0
-Style * FocusFollowsMouse 
+#`Key Tab A M WindowList Root c c` need to press twice for switching window, make a function can solve this case
+AddToFunc SwitchToWindow
++ I WindowListFunc
+
+Key Tab A M WindowList "Prev SwitchToWindow"
+
+Key F9 A M Popup "Module-Popup"
+
+# when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
+ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
+ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+ImagePath   /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+
+# the default way to make a focus on a window is SloppyFocus,
+# it means which window the point of mouse is, focus on the window,
+# the another way is ClickToFocus,that mean it needs click the mouse on the
+# window, and the window will be active, focus on the window,operate the window
+# use mouse to get focus for window,and auto raise the window with fvwmauto module
+Style * SloppyFocus
+Style * FocusFollowsMouse
+#Module FvwmAuto 200
+
+# or you can click window not title to raise the window, maybe it's better than `Module FvwmAuto 200`
+Style * MouseFocusClickRaises 
+
 Style * TileCascadePlacement
-# 在图标化的窗口上点左键，恢复窗口，Iconfiy是图标化， Iconify Off是窗口化
-Mouse 1 I A Iconify Off
