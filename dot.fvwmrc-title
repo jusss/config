@@ -478,6 +478,7 @@ Key 3 A 4 Exec "xterm"  exec xterm -geometry 151x42+0+0
 Key 4 A 4 Exec "emacs" exec emacs --geometry 169x48+0+0
 Key 5 W 4 Move
 # Key 6 W 4 ResizeMove 50 0 0 30
+Key Tab A M WindowList
 Key 0 W 4 Close
 
 Key F9 A M Popup "Module-Popup"
