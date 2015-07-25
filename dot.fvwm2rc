@@ -1,0 +1,87 @@
+Style * IconBox -100 +140 -1 +730
+Style * IconBox +10 -40 +828 -1
+
+#StickyIcons
+# created by jusss. the new window will auto get a position without mouse click.
+Style * RandomPlacement
+
+# SmartPlacement makes new windows pop-up in blank regions of screen 
+# if possible, or falls back to random or interactive placement.
+Style * SmartPlacement
+# NoPPosition instructs fvwm to ignore the PPosition field in window 
+# geometry hints. Emacs annoyingly sets PPosition to (0,0)!
+Style * NoPPosition
+
+# Created by jusss. kill the pager on the upper left top.
+# Pager 5 5
+# Pager 5 555
+
+#set the desk top size in units of physical screen size
+# DeskTopSize 2x2
+
+# created by jusss.
+DeskTopSize 3x3
+# DeskTopSize 1x4
+ModulePath /usr/lib/fvwm
+ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+ImagePath   /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+# created by jusss. this make all windows don't have title and fringe
+Style "*"  NoHandles
+# created by jusss.the default way to make a focus on a window is SloppyFocus,
+# it means which window the point of mouse is, focus on the window,
+# the another way is ClickToFocus,that mean it needs click the mouse on the
+# window, and the window will be active, focus on the window,operate the window
+Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
+# created by jusss.
+Style "Fvwm Pager" StaysOnTop, BorderWidth 5, Color Black/#5f9ea0
+Style "FvwmPager"  StaysOnTop, BorderWidth 5
+Style "FvwmBanner" StaysOnTop
+Style "xterm"      Icon xterm.xpm, Color black/grey
+Style "emacs"      Icon gnu-animal.xpm, Color Black/#f061c709e096
+
+#     Button	Context Modifi 	Function
+Mouse 0         1           N   Close
+Mouse 0         2           N   Maximize
+Mouse 0         4           N   Iconify
+
+# created by jusss.
+Key 1 A M GoToPage 0 0
+Key 2 A M GoToPage 1 0
+Key 3 A M GoToPage 2 0
+Key 4 A M GoToPage 0 1
+Key 5 A M GoToPage 1 1
+Key 6 A M GoToPage 2 1
+Key 7 A M GoToPage 0 2
+Key 8 A M GoToPage 1 2
+Key 9 A M GoToPage 2 2
+
+Key Tab A M WindowList Root c c
+Key 1 W 4 Iconify
+Key 2 W 4 Maximize
+Key 3 A 4 Exec "xterm"  exec xterm -geometry 151x42+0+0
+Key 4 A 4 Exec "emacs" exec emacs --geometry 169x48+0+0
+Key 5 W 4 Move
+Key 0 W 4 Close
+Key F9 A M Popup "Module-Popup"
+Key 1 A C Desk 0 0
+Key 2 A C Desk 0 1
+Key 3 A C Desk 0 2
+Key 4 A C Desk 0 3
+Key 5 A C Desk 0 4
+Key 0 A C Quit
+# created by jusss.
+*FvwmPagerLabel 4 LOL
+*FvwmPagerSmallFont 5x8
+
+# 窗口最小化后图标放置位置
+# icons  - should go to top left
+Style * IconBox 30 100 100 -15, IconFill top left
+# 不要图标标题
+Style * NoIconTitle
+# Style * IconTitle, IndexedIconName
+# Style * IconTitleColorset 3, HilightIconTitleColorset 3
+# Style * IconTitleRelief 0
+Style * FocusFollowsMouse 
+Style * TileCascadePlacement
+# 在图标化的窗口上点左键，恢复窗口，Iconfiy是图标化， Iconify Off是窗口化
+Mouse 1 I A Iconify Off
