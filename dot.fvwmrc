@@ -440,8 +440,8 @@ Key Up		A	C	Scroll +0   -100
 Key Down	A	C	Scroll +0   +100
 
 # Keyboard accelerators
-Key F1		A	M	Popup "/Debian"
-Key F2		A	M	Popup "Window"
+#Key F1		A	M	Popup "/Debian"
+#Key F2		A	M	Popup "Window"
 #Key F3		A	M	Module "WindowList" FvwmWinList 
 #Key F4		A	M	Iconify
 #Key F5		A	M	Move
@@ -461,6 +461,11 @@ Key 7 A M GoToPage 0 2
 Key 8 A M GoToPage 1 2
 Key 9 A M GoToPage 2 2
 
+# Meta-F1 switch previous window, Meta-F2 switch all window, it can instead of C-Tab WindowList, fvwm2 doesn't have this fuctions.
+Key F1 A M CirculateUp 
+Key F2 A M CirculateDown
+
+#Key Tab A M WindowList 1
 Key 1 W 4 Iconify
 Key 2 W 4 Maximize
 Key 3 A 4 Exec "xterm"  exec xterm -geometry 151x42+0+0
