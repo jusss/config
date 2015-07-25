@@ -1,22 +1,48 @@
+#########################字体，图标和按钮##########################################################
+
+
+#下面是定义了窗口使用的色彩。（其中41和42号是透明）其他文件里的色彩设定，我都用下面的号码表记。
+Colorset 22 fg #004e00, bg #e7f4fe
+Colorset 41 RootTransparent buffer, fg white, bg average
+Colorset 42 RootTransparent buffer, fg white, bg average
+
+#下面是透明的实现。如不使用透明，把下面的注销。
+# Style * Colorset 41, HilightColorset 42 # to use fg and bg
+# 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
+BorderStyle Inactive Colorset 22 -- flat
+BorderStyle Active Colorset 22 -- flat
+TitleStyle AllInactive Colorset 22 -- flat
+TitleStyle AllActive Colorset 22 -- flat
+TitleStyle Centered Height 22
+#ButtonStyle All -- UseTitleStyle flat
+
 ##########窗口和标题栏#############################################################################
 #窗口标题栏字体, 字体可以xlsfonts|more查
 Style * Font "-misc-dejavu sans-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
 
 #设置拥有焦点时的标题栏颜色设置
-Style * HilightFore white, HilightBack SlateBlue
-
-Style * BorderWidth 3, HandleWidth 3
+#Style * HilightFore white, HilightBack SlateBlue
+# BorderWidth 边框宽度
+Style * BorderWidth 5, HandleWidth 5
 Style   "*"     FvwmBorder
 Style   "*"     FvwmButtons
-BorderStyle     Inactive -- HiddenHandles NoInset
-BorderStyle     Active -- HiddenHandles NoInset
-TitleStyle      ActiveUp (solid SlateBlue -- Flat)
-TitleStyle      ActiveDown (solid SlateBlue -- Flat)
-TitleStyle      Inactive (solid grey51 -- Flat)
+#BorderStyle     Inactive -- HiddenHandles NoInset
+#BorderStyle     Active -- HiddenHandles NoInset
+#TitleStyle      ActiveUp (solid SlateBlue -- Flat)
+#TitleStyle      ActiveDown (solid SlateBlue -- Flat)
+#TitleStyle      Inactive (solid grey51 -- Flat)
 # 设置标题栏上的标题左对齐，标题栏的高度为20
-TitleStyle LeftJustified Height 20
-ButtonStyle     1       MiniIcon (-- flat)
+#TitleStyle LeftJustified Height 20
+#ButtonStyle     1       MiniIcon (-- flat)
 ButtonStyle     all     -- UseTitleStyle Flat
+
+# Close icon
+#ButtonStyle 1 Vector 5 25x25@1 25x75@1 75x75@0 75x25@0 25x25@1
+# Maximize icon
+#ButtonStyle 3 Vector 4 50x25@1 75x75@0 25x75@0 50x25@1
+# Iconify icon
+#ButtonStyle 5 Vector 4 50x75@1 25x25@1 75x25@1 50x75@0
+
 AddButtonStyle  1       Pixmap mini.winXX-close.xpm
 AddButtonStyle  3       Pixmap mini.winXX-maximize.xpm
 AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm
