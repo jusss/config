@@ -13,12 +13,13 @@ BorderStyle     Active -- HiddenHandles NoInset
 TitleStyle      ActiveUp (solid SlateBlue -- Flat)
 TitleStyle      ActiveDown (solid SlateBlue -- Flat)
 TitleStyle      Inactive (solid grey51 -- Flat)
-TitleStyle      LeftJustified
+# 设置标题栏上的标题左对齐，标题栏的高度为20
+TitleStyle LeftJustified Height 20
 ButtonStyle     1       MiniIcon (-- flat)
 ButtonStyle     all     -- UseTitleStyle Flat
-AddButtonStyle  1       Pixmap mini.winXX-close.xpm -- left
-AddButtonStyle  3       Pixmap mini.winXX-maximize.xpm -- left
-AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm -- right
+AddButtonStyle  1       Pixmap mini.winXX-close.xpm
+AddButtonStyle  3       Pixmap mini.winXX-maximize.xpm
+AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm
 
 # 设置窗口iconify后图标放置的位置
 #Style * IconBox -100 +140 -1 +730
@@ -27,6 +28,26 @@ AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm -- right
 #Style * IconBox 1000x100+40-120, IconGrid 20 20, IconFill right top, IconSize 64 64, !IconTitle
 # icons  - should go to top left
 Style * IconBox -360 +1 +1 -200, IconFill top left, NoIconTitle
+
+# Icon takes an (optional) unquoted string argument which is the icon bitmap or pixmap to use.  Icons specified this way
+# override pixmap icons, but not icon windows or the ewmh icon, provided by the client in the application (with the WM_HINTS
+# property or with the ewmh _NET_WM_ICON property).  The IconOverride style changes the behavior to override any client-provided
+# icons; the NoIconOverride style changes the behavior to not override any client-provided icons; the default overriding
+# behavior can be activated with the NoActiveIconOverride style.  With this style, fvwm uses application provided icons if the
+# icon is changed but uses the icon provided in the configuration file until then.
+# There is one exception to these rules, namely
+#Style * Icon unknown.xpm
+# doesn't force the unknown.xpm icon on every window, it just sets the default icon like the DefaultIcon command.  If you really
+# want all windows to have the same icon, you can use
+#Style ** Icon unknown.xpm
+# If the NoIcon attribute is set then the specified window simply disappears when it is iconified.  The window can be recovered
+# through the window-list.  If Icon is set without an argument then the NoIcon attribute is cleared but no icon is specified.
+# An example which allows only the FvwmPager module icon to exist:
+# Iconify窗口后不显示图标在desktop上，但是显示图标在FvwmPager上，FvwmPager就是一个所有Desktop和Page的缩略图，在fvwm1中叫Pager
+#Style * NoIcon
+#Style FvwmPager Icon
+
+
 # 不要图标化的窗口的标题
 #Style * NoIconTitle
 # 要图标化的窗口的标题
@@ -41,11 +62,10 @@ Style * SmartPlacement
 # geometry hints. Emacs annoyingly sets PPosition to (0,0)!
 Style * NoPPosition
 
-# Created by jusss. kill the pager on the upper left top in the fvwm1
+# kill the pager on the upper left top in the fvwm1, and called FvwmPager on fvwm2
 # Pager 5 5
-# Pager 5 555
 
-# this make all windows don't have title and fringe,but if it needs a resize fuction on fringe and other functions on title, then comment the next line
+# this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title, then comment the next line
 #Style "*"  NoTitle, NoHandles
 
 Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
@@ -53,7 +73,11 @@ Style "Fvwm Pager" StaysOnTop, BorderWidth 5, Color Black/#5f9ea0
 Style "FvwmPager"  StaysOnTop, BorderWidth 5
 Style "FvwmBanner" StaysOnTop
 Style "xterm"      Icon xterm.xpm, Color black/grey
-Style "emacs"      Icon gnu-animal.xpm, Color Black/#f061c709e096
+Style "emacs"      NoHandles, BorderWidth 0, Icon gnu-animal.xpm, Color Black/#f061c709e096
+
+# 取消mpv和mplayer窗口的标题栏和边框
+Style "mpv"	   NoTitle, NoHandles, BorderWidth 0
+Style "mplayer"	   NoTitle, NoHandles, BorderWidth 0
 
 #     Button	Context Modifi 	Function
 # Context的定义与后面鼠标动作的解释是一致的，Context 是用来描述在什麽地方才会有用。
