@@ -1,51 +1,99 @@
-#########################字体，图标和按钮##########################################################
+################# 标题栏 按钮 背景图片###########################
+Style * BorderWidth 2, HandleWidth 1
+Style * MWMBorder, FirmBorder
 
+#使用自己定义的MyDecor装饰标题栏
+Style * UseDecor MyDecor
 
-#下面是定义了窗口使用的色彩。（其中41和42号是透明）其他文件里的色彩设定，我都用下面的号码表记。
+#Style * IconBox 900x700+10+50, IconGrid 4 4, IconFill top left
+#Style * NoIconTitle
+
+#删除以前的MyDecor定义
+DestroyDecor MyDecor
+#因为在\的下一行加了#注释行，所以如果要使用，需要把\的下一行注释删掉
+#定义MyDecor
+AddToDecor MyDecor
+# TitleStyle的MultiPixmap选项可以设置分别设置标题栏和按钮的背景图
+#活动的窗口显示
+#+ TitleStyle Active (MultiPixmap \
+#标题栏文字的背景图 Main
+#Main TiledPixmap /home/jusss/icons/bar.png, \
+#按钮的背景图 Buttons
+#Buttons TiledPixmap /home/jusss/icons/bar.png, \
+#标题栏文字左边的背景图 LeftEnd
+#LeftEnd AdjustedPixmap /home/jusss/icons/bar.png, \
+#标题栏文字右边的背景图 RightEnd
+#RightEnd AdjustedPixmap	/home/jusss/icons/bar.png) \
+#不活动的窗口显示
+#InActive (MultiPixmap \
+#Main TiledPixmap /home/jusss/icons/bar.png, \
+#Buttons TiledPixmap /home/jusss/icons/bar.png, \
+#LeftEnd AdjustedPixmap /home/jusss/icons/bar.png, \
+#RightEnd AdjustedPixmap /home/jusss/icons/bar.png) \
+#标题栏上的文字居中显示
+#Centered
+#标题栏高度
++ TitleStyle Height 22
++ TitleStyle -- Flat
++ BorderStyle Simple -- NoInset Flat
+#标题栏上按钮1的位置显示的图标
++ ButtonStyle 1 \
+Active (Pixmap /home/jusss/icons/close.svg -- Flat) \
+ActiveDown (Pixmap /home/jusss/icons/close.svg -- Flat) \
+Inactive (Pixmap /home/jusss/icons/close.svg -- Flat)
+#按钮3显示的图标
++ ButtonStyle 3 \
+Active (Pixmap /home/jusss/icons/minimize.svg -- Flat) \
+ActiveDown (Pixmap /home/jusss/icons/minimize.svg -- Flat) \
+Inactive (Pixmap /home/jusss/icons/minimize.svg -- Flat) 
+#+ ButtonStyle 5 MiniIcon
+#按钮5显示的图标
++ ButtonStyle 5 \
+Active (Pixmap /home/jusss/icons/maximize.svg -- Flat) \
+ActiveDown (Pixmap /home/jusss/icons/maximize.svg -- Flat) \
+Inactive (Pixmap /home/jusss/icons/maximize.svg -- Flat)
++ ButtonStyle All -- UseTitleStyle
+
+##################################  END  ###############################################
+
+#窗口标题栏字体, 字体可以xlsfonts|more查
+Style * Font "-misc-dejavu sans-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
+#下面是定义了窗口使用的色彩。41和42号是透明
 Colorset 22 fg #004e00, bg #e7f4fe
 Colorset 41 RootTransparent buffer, fg white, bg average
 Colorset 42 RootTransparent buffer, fg white, bg average
-
 #下面是透明的实现。如不使用透明，把下面的注销。
 # Style * Colorset 41, HilightColorset 42 # to use fg and bg
 # 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
 BorderStyle Inactive Colorset 22 -- flat
 BorderStyle Active Colorset 22 -- flat
-TitleStyle AllInactive Colorset 22 -- flat
-TitleStyle AllActive Colorset 22 -- flat
-TitleStyle Centered Height 22
-#ButtonStyle All -- UseTitleStyle flat
+BorderStyle Inactive -- HiddenHandles NoInset
+BorderStyle Active -- HiddenHandles NoInset
 
-##########窗口和标题栏#############################################################################
-#窗口标题栏字体, 字体可以xlsfonts|more查
-Style * Font "-misc-dejavu sans-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
+#TitleStyle AllInactive Colorset 22 -- flat
+#TitleStyle AllActive Colorset 22 -- flat
+#TitleStyle Centered Height 22
+#ButtonStyle All -- UseTitleStyle flat
 
 #设置拥有焦点时的标题栏颜色设置
 #Style * HilightFore white, HilightBack SlateBlue
 # BorderWidth 边框宽度
-Style * BorderWidth 5, HandleWidth 5
-Style   "*"     FvwmBorder
-Style   "*"     FvwmButtons
-#BorderStyle     Inactive -- HiddenHandles NoInset
-#BorderStyle     Active -- HiddenHandles NoInset
+#Style * handlewidth 1, borderwidth 1
 #TitleStyle      ActiveUp (solid SlateBlue -- Flat)
 #TitleStyle      ActiveDown (solid SlateBlue -- Flat)
 #TitleStyle      Inactive (solid grey51 -- Flat)
+# 设置标题栏的背景和按钮的背景
+#TitleStyle MultiPixmap\
+	   Main TiledPixmap /home/jusss/icons/up.png\
+	   Buttons TiledPixmap /home/jusss/icons/up.png
 # 设置标题栏上的标题左对齐，标题栏的高度为20
-#TitleStyle LeftJustified Height 20
+#TitleStyle LeftJustified Height 22
 #ButtonStyle     1       MiniIcon (-- flat)
-ButtonStyle     all     -- UseTitleStyle Flat
+#ButtonStyle  1      Pixmap /home/jusss/icons/close.svg --flat
+#ButtonStyle  3      Pixmap /home/jusss/icons/minimize.svg --flat
+#ButtonStyle  5      AdjustedPixmap /home/jusss/icons/maximize.svg --flat
 
-# Close icon
-#ButtonStyle 1 Vector 5 25x25@1 25x75@1 75x75@0 75x25@0 25x25@1
-# Maximize icon
-#ButtonStyle 3 Vector 4 50x25@1 75x75@0 25x75@0 50x25@1
-# Iconify icon
-#ButtonStyle 5 Vector 4 50x75@1 25x25@1 75x25@1 50x75@0
-
-AddButtonStyle  1       Pixmap mini.winXX-close.xpm
-AddButtonStyle  3       Pixmap mini.winXX-maximize.xpm
-AddButtonStyle  5       Pixmap mini.winXX-minimize.xpm
+#####################################################################################################################################################
 
 # 设置窗口iconify后图标放置的位置
 #Style * IconBox -100 +140 -1 +730
@@ -250,4 +298,5 @@ Key F9 A M Popup "Module-Popup"
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
 ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
 ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+#write /home/jusss/icons on the ImagePath, and it doesn't work, in the ButtonStyle directly use the icon.png, and it still can't find it even write path on ImagePath
 ImagePath   /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
