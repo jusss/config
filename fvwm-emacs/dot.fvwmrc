@@ -166,7 +166,7 @@ SmartPlacement
 
 # NoPPosition instructs fvwm to ignore the PPosition field in window 
 # geometry hints. Emacs annoyingly sets PPosition to (0,0)!
-NoPPosition
+#NoPPosition
 
 
 ########################      DECORATIONS     #######################
