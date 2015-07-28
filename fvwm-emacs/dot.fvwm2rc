@@ -29,7 +29,7 @@ Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
 
 # 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
 # 2如果程序有图标，即使设置Style "program-name" Icon xterm.xpm也是改变不了图标的，需要加上IconOverride选项才可以
-# 找不到对应图标的程序Iconify后用xterm的图标代替, 窗口名区分大小写， Style "firefox"不是firefox窗口的名字，Style "Firefox"才是
+# 找不到对应图标的程序Iconify后用xterm的图标代替, 窗口名区分大小写， Style "firefox"不是firefox窗口的名字，Style "Firefox"才是, 使用xprop可以查询窗口的名字，WM_CLASS后面跟的就是窗口名
 Style "*"       Icon xterm.xpm
 Style "emacs"	Icon /home/jusss/icons/e2.png, IconOverride, Color black/gray86
 Style "xterm"   Icon /home/jusss/icons/t2.png, IconOverride, Color black/gray86
