@@ -7,7 +7,27 @@
 # 替换Icon用IconOverride, Iconify后图标有边框，修改图标为索引模式
 
 
-#menu菜单, icon排列方式
+DestroyMenu MenuFvwmRoot
+AddToMenu MenuFvwmRoot    " Application "    Title
++	  	       	  " Xterm"	     Exec exec xterm
++		       	  " Emacs"	     Exec exec emacs
++		       	  " Chromium"	     Exec exec chromium
++			  " Firefox"	     Exec exec firefox
++			  " "		     Nop
++			  " Resize"	     Resize
++			  " Maximize"	     Maximize
++			  " Iconify"	     Iconify
++			  " Move"	     Move
++			  " Iconify Off"     Iconify Off
++			  " Focus"	     Focus
++			  " Raise"	     Raise
++			  " Close"	     Close
+MenuStyle * Font "StringEncoding=UTF-8:xft:DejaVu Sans Mono:size=11:encoding=iso10646-1"
+MenuStyle * TitleColorset 20, HilightBack green, BorderWidth 0, TitleUnderlines0, MenuColorset 25
+
+
+#Style * IconBox 80x30-1-1, IconGrid 10 10, IconFill t r
+# icon排列方式
 
 # 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
 # 2如果程序有图标，即使设置Style "program-name" Icon xterm.xpm也是改变不了图标的，需要加上IconOverride选项才可以
@@ -121,6 +141,8 @@ Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
 Colorset 22 fg #004e00, bg #e7f4fe
 Colorset 21 fg #004e00, bg #ededed
 Colorset 23 fg #004e00, bg #bcbcbc
+Colorset 20 fg black, bg #e7f4fe
+Colorset 25 fg #004e00, bg #e7f4fe
 Colorset 41 RootTransparent buffer, fg white, bg average
 Colorset 42 RootTransparent buffer, fg white, bg average
 #下面是透明的实现。如不使用透明，把下面的注销。
