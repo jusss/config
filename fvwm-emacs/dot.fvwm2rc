@@ -6,7 +6,6 @@
 #Style "emacs" IconBackgroundRelief 0
 # 替换Icon用IconOverride, Iconify后图标有边框，修改图标为索引模式
 
-
 DestroyMenu MenuFvwmRoot
 AddToMenu MenuFvwmRoot    " Application "    Title
 +	  	       	  " Xterm"	     Exec exec xterm
@@ -25,29 +24,26 @@ AddToMenu MenuFvwmRoot    " Application "    Title
 MenuStyle * Font "StringEncoding=UTF-8:xft:DejaVu Sans Mono:size=11:encoding=iso10646-1"
 MenuStyle * TitleColorset 20, HilightBack green, BorderWidth 0, TitleUnderlines0, MenuColorset 25
 
-
-#Style * IconBox 80x30-1-1, IconGrid 10 10, IconFill t r
-# icon排列方式
+# -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
+Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
 
 # 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
 # 2如果程序有图标，即使设置Style "program-name" Icon xterm.xpm也是改变不了图标的，需要加上IconOverride选项才可以
-Style "emacs"	Icon /home/jusss/icons/emacs.png, IconOverride, Color black/gray86
+# 找不到对应图标的程序Iconify后用xterm的图标代替, 窗口名区分大小写， Style "firefox"不是firefox窗口的名字，Style "Firefox"才是
+Style "*"       Icon xterm.xpm
+Style "emacs"	Icon /home/jusss/icons/e2.png, IconOverride, Color black/gray86
+Style "xterm"   Icon /home/jusss/icons/t2.png, IconOverride, Color black/gray86
+Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoTitle, NoHandles
+Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoTitle, NoHandles
+Style "Chromium"   Icon /home/jusss/icons/chromium.png, IconOverride, Color black/gray86
+Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86
 
-
-# 找不到对应图标的程序Iconify后用xterm的图标代替
-Style "*"      Icon xterm.xpm
-#Style "xterm"      Icon xterm.xpm, Color black/grey
-Style *		   NoIconTitle
-# 取消mpv和mplayer窗口的标题栏和边框
-Style "mpv"	   NoTitle, NoHandles
-Style "mplayer"	   NoTitle, NoHandles
-# this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title, then comment the next line
+# this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句
 #Style "*"  NoTitle, NoHandles
 
 # 窗口移动/调解大小时，窗口尺寸/位置 信息窗口是否显示[Never|Move|Resize|Always]
 HideGeometryWindow  Always
-
 
 Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
 
@@ -64,6 +60,30 @@ Style * PositionPlacement UnderMouse
 # 忽略程序打开窗口在指定的位置，比如emacs和xterm的配置文件都可以设置窗口打开后的所在位置，这个选项会忽略它们,使用程序指定的位置打开窗口用UsePPosition
 Style * NoPPosition
 
+#窗口标题栏字体, 字体可以xlsfonts|more查
+Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
+#Style * Font "-misc-dejavu sans mono-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
+#下面是定义了窗口使用的色彩。41和42号是透明
+Colorset 22 fg #004e00, bg #e7f4fe
+Colorset 21 fg #004e00, bg #ededed
+Colorset 23 fg #004e00, bg #bcbcbc
+Colorset 20 fg black, bg #e7f4fe
+Colorset 25 fg #004e00, bg #e7f4fe
+Colorset 41 RootTransparent buffer, fg white, bg average
+Colorset 42 RootTransparent buffer, fg white, bg average
+#下面是透明的实现。如不使用透明，把下面的注销。
+# Style * Colorset 41, HilightColorset 42 # to use fg and bg
+#拥有焦点时的标题栏颜色设置, HilightFore获得焦点时标题栏的字体的颜色，HilightBack获得焦点时标题栏的颜色
+Style * HilightFore black, HilightBack gray86
+#Style * HilightFore black, HilightBack blue
+#失去焦点时标题栏的背景颜色和文字颜色用Color指定
+Style * Color black/gray86
+
+# 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
+BorderStyle Inactive Colorset 22 -- flat
+BorderStyle Active Colorset 22 -- flat
+BorderStyle Inactive -- HiddenHandles NoInset
+BorderStyle Active -- HiddenHandles NoInset
  
 
 ################# 标题栏 按钮 背景图片###########################
@@ -73,8 +93,6 @@ Style * MWMBorder, FirmBorder
 
 #使用自己定义的MyDecor装饰标题栏
 Style * UseDecor MyDecor
-
-#Style * IconBox 900x700+10+50, IconGrid 4 4, IconFill top left
 
 #删除以前的MyDecor定义
 DestroyDecor MyDecor
@@ -134,30 +152,6 @@ Inactive (Pixmap /home/jusss/icons/maximize.svg -- Flat)
 ##################################  END  ###############################################
 # the definition of AddToDecor AddToFunc will end with one directly statement without + beginning, like Style * Font... ,if it's + Style * Font, then it's in the definition
 # and because use MyDecor, then the TitleStyle statement of MyDecor's definition will doesn't work any more, TitleStyle statement only works if it's in MyDecor's definition
-#窗口标题栏字体, 字体可以xlsfonts|more查
-Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
-#Style * Font "-misc-dejavu sans mono-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
-#下面是定义了窗口使用的色彩。41和42号是透明
-Colorset 22 fg #004e00, bg #e7f4fe
-Colorset 21 fg #004e00, bg #ededed
-Colorset 23 fg #004e00, bg #bcbcbc
-Colorset 20 fg black, bg #e7f4fe
-Colorset 25 fg #004e00, bg #e7f4fe
-Colorset 41 RootTransparent buffer, fg white, bg average
-Colorset 42 RootTransparent buffer, fg white, bg average
-#下面是透明的实现。如不使用透明，把下面的注销。
-# Style * Colorset 41, HilightColorset 42 # to use fg and bg
-#拥有焦点时的标题栏颜色设置, HilightFore获得焦点时标题栏的字体的颜色，HilightBack获得焦点时标题栏的颜色
-Style * HilightFore black, HilightBack gray86
-#Style * HilightFore black, HilightBack blue
-#失去焦点时标题栏的背景颜色和文字颜色用Color指定
-Style * Color black/gray86
-
-# 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
-BorderStyle Inactive Colorset 22 -- flat
-BorderStyle Active Colorset 22 -- flat
-BorderStyle Inactive -- HiddenHandles NoInset
-BorderStyle Active -- HiddenHandles NoInset
 
 # 设置标题栏的背景和按钮的背景
 #TitleStyle MultiPixmap\
@@ -169,14 +163,6 @@ BorderStyle Active -- HiddenHandles NoInset
 #ButtonStyle  5      AdjustedPixmap /home/jusss/icons/maximize.svg --flat
 
 #####################################################################################################################################################
-
-# 设置窗口iconify后图标放置的位置
-#Style * IconBox -100 +140 -1 +730
-#Style * IconBox +10 -40 +828 -1
-#Style * IconFill right top, IconSize 64 64, NoIconTitle
-#Style * IconBox 1000x100+40-120, IconGrid 20 20, IconFill right top, IconSize 64 64, !IconTitle
-# icons  - should go to top left
-#Style * IconBox -360 +1 +1 -200, IconFill top left, NoIconTitle
 
 # Icon takes an (optional) unquoted string argument which is the icon bitmap or pixmap to use.  Icons specified this way
 # override pixmap icons, but not icon windows or the ewmh icon, provided by the client in the application (with the WM_HINTS
@@ -191,7 +177,7 @@ BorderStyle Active -- HiddenHandles NoInset
 #Style ** Icon unknown.xpm
 # If the NoIcon attribute is set then the specified window simply disappears when it is iconified.  The window can be recovered
 # through the window-list.  If Icon is set without an argument then the NoIcon attribute is cleared but no icon is specified.
-# An example which allows only the FvwmPager module icon to exist:
+# An example which allows only the FvwmPager module icon to exist:# Icon takes an (optional) unquoted string argument which is the icon bitmap or pixmap to use.  Icons specified this way
 # Iconify窗口后不显示图标在desktop上，但是显示图标在FvwmPager上，FvwmPager就是一个所有Desktop和Page的缩略图，在fvwm1中叫Pager,如果不指定fvwmpager就不会显示在桌面
 #Style * NoIcon
 #Style FvwmPager Icon
@@ -427,6 +413,5 @@ Key F9 A M Popup "Module-Popup"
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
 ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
-ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
+ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps:/home/jusss/icons
 #write /home/jusss/icons on the ImagePath, and it doesn't work, in the ButtonStyle directly use the icon.png, and it still can't find it even write path on ImagePath
-ImagePath   /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps
