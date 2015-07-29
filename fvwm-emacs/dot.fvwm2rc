@@ -24,7 +24,7 @@ AddToMenu MenuFvwmRoot    " Application "    Title
 MenuStyle * Font "StringEncoding=UTF-8:xft:DejaVu Sans Mono:size=11:encoding=iso10646-1"
 MenuStyle * TitleColorset 20, HilightBack green, BorderWidth 0, TitleUnderlines0, MenuColorset 25
 
-# -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
+#图标排列 -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
 Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
 
 # 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
@@ -33,10 +33,10 @@ Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
 Style "*"       Icon xterm.xpm
 Style "emacs"	Icon /home/jusss/icons/e2.png, IconOverride, Color black/gray86
 Style "xterm"   Icon /home/jusss/icons/t2.png, IconOverride, Color black/gray86
-Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoTitle, NoHandles
-Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoTitle, NoHandles
-Style "Chromium"   Icon /home/jusss/icons/chromium.png, IconOverride, Color black/gray86
-Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86
+#Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
+#Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
+#Style "Chromium"   Icon /home/jusss/icons/chromium.png, IconOverride, Color black/gray86
+#Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86
 
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句
@@ -46,6 +46,10 @@ Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/
 HideGeometryWindow  Always
 
 Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
+
+#关于有些软件最大化后无法覆盖整个屏幕，因为一个以字为单位放置窗口，一个以像素为单位放置窗口
+Style * ResizeHintOverride
+#还可以ResizeMove 100 100 0 0 这样强制，代替 Maximize。
 
 # 像瀑布般下落的放置窗口
 #Style * TileCascadePlacement
