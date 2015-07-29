@@ -30,8 +30,8 @@ AddToMenu MenuFvwmRoot    " Application "    Title
 +			  " Focus"	     Focus
 +			  " Raise"	     Raise
 +			  " Close"	     Close
-MenuStyle * Font "StringEncoding=UTF-8:xft:DejaVu Sans Mono:size=11:encoding=iso10646-1"
-MenuStyle * TitleColorset 20, HilightBack green, BorderWidth 0, TitleUnderlines0, MenuColorset 25
+MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
+MenuStyle * TitleColorset 20, HilightBack purple, BorderWidth 0, TitleUnderlines0, MenuColorset 25, Hilight3DThickness -2,ActiveFore black
 
 #图标排列 -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
 Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
@@ -77,7 +77,7 @@ Colorset 22 fg #004e00, bg #e7f4fe
 Colorset 21 fg #004e00, bg #ededed
 Colorset 23 fg #004e00, bg #bcbcbc
 Colorset 20 fg black, bg #e7f4fe
-Colorset 25 fg #004e00, bg #e7f4fe
+Colorset 25 fg black, bg yellow
 Colorset 41 RootTransparent buffer, fg white, bg average
 Colorset 42 RootTransparent buffer, fg white, bg average
 #下面是透明的实现。如不使用透明，把下面的注销。
@@ -417,9 +417,10 @@ AddToFunc WindowListFunc
 # Key Tab A M WindowList Root c c总是需要按2下才能切换到下个窗口，使用下面这个函数可以按一下切换到下一个窗口
 #`Key Tab A M WindowList Root c c` need to press twice for switching window, make a function can solve this case
 AddToFunc SwitchToWindow
-+ I WindowListFunc
++ I WindowListFunc 
 
-Key Tab A M WindowList "Prev SwitchToWindow"
+# NoGeometryWithInfo是WindowList的选项
+Key Tab A M WindowList NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, MaxLabelWidth 50 "Prev SwitchToWindow"
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
