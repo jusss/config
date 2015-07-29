@@ -410,13 +410,16 @@ Key 3 A C GotoDesk 0 2
 Key 4 A C GotoDesk 0 3
 Key 0 A C Quit
 
+# Ctrl-Tab切换窗口时，鼠标总是自动跳到切换窗口的左上角，导致只能通过点击或数字键来切换窗口，加下面这句可让鼠标指针不再自动跳转到左上角，然后可以通过Tab键来切换窗口
+AddToFunc WindowListFunc
++ I WarpToWindow 50 50
+
+# Key Tab A M WindowList Root c c总是需要按2下才能切换到下个窗口，使用下面这个函数可以按一下切换到下一个窗口
 #`Key Tab A M WindowList Root c c` need to press twice for switching window, make a function can solve this case
 AddToFunc SwitchToWindow
 + I WindowListFunc
 
 Key Tab A M WindowList "Prev SwitchToWindow"
-
-Key F9 A M Popup "Module-Popup"
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
