@@ -1,3 +1,12 @@
+###################################################### 最大化 ############################################
+#关于有些软件最大化后无法覆盖整个屏幕，如xterm
+#第一个方法Style * ResizeHintOverride可以覆盖整个屏幕但是仍然无法会在以前覆盖不到的地方输出信息，就好比只是拿背景色遮盖了那块覆盖不到的地方一样，但无真正覆盖
+#第二个方法ResizeMove 100 100 0 0 这样强制，代替 Maximize，但是这样最大化后再点最大化按钮无法恢复原有窗口大小，还有其它函数ResizeMaximize, ResizeMoveMaximize等都
+#一样全屏最大化，但在最大化的窗口上再点最大化按钮无法恢复原有窗口大小
+#第三个方法 EwmhBaseStruts 0 0 20 25 窗口最大化是两边撑满,而上面留出20个(像素?),下面相应的留出25，仿照出EwmhBaseStruts 0 1 0 1或0 -1 0 -1无效
+#第四个方法把Maximize替换成Maximize 101 101, 这样就可以覆盖全屏，并且在最大化窗口上再次点击最大化按钮会恢复原有窗口，因为Maximize可以指定实际比全屏还大，所以就用
+#它比全屏大一个像素，这样就一定会全屏，而Maximize 100 100和Maximize是一样的，都无法全屏最大化，一般都是在右下角留空隙
+
 ################################# 窗口 图标###########################################
 # iconify后图标有方块是图标自己的问题不是fvwm的问题，有些图标如emacs本身就是有方框的而xterm的没有方框
 # Iconify后图标有边框是因为图标是rgb模式的，用gimp或photo shop修改图标文件为索引模式的，然后就没有边框了
@@ -47,10 +56,6 @@ HideGeometryWindow  Always
 
 Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
 
-#关于有些软件最大化后无法覆盖整个屏幕，因为一个以字为单位放置窗口，一个以像素为单位放置窗口
-Style * ResizeHintOverride
-#还可以ResizeMove 100 100 0 0 这样强制，代替 Maximize。
-
 # 像瀑布般下落的放置窗口
 #Style * TileCascadePlacement
 #Style * RandomPlacement, SmartPlacement
@@ -88,7 +93,6 @@ BorderStyle Inactive Colorset 22 -- flat
 BorderStyle Active Colorset 22 -- flat
 BorderStyle Inactive -- HiddenHandles NoInset
 BorderStyle Active -- HiddenHandles NoInset
- 
 
 ################# 标题栏 按钮 背景图片###########################
 #BorderWidth 边框宽度和像素
