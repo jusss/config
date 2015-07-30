@@ -40,7 +40,11 @@ AddToMenu MenuFvwmRoot    " Application "    Title
 +			  " Raise"	     Raise
 +			  " Close"	     Close
 MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
-MenuStyle * TitleColorset 20, HilightBack purple, BorderWidth 0, TitleUnderlines0, MenuColorset 25, Hilight3DThickness -2,ActiveFore black
+# WindowList也会使用MenuStyle的配置
+# TitleColorset是窗口标题栏的背景和字体颜色,MenuColorset是窗口的背景和字体颜色,HilightBack是高亮时的背景色,ActiveFore是高亮时的字体颜色
+MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore green, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
+Colorset 20 fg black, bg #3c5468
+Colorset 25 fg black, bg #3c5468
 
 #图标排列 -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
 Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
@@ -85,8 +89,6 @@ Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
 Colorset 22 fg #004e00, bg #e7f4fe
 Colorset 21 fg #004e00, bg #ededed
 Colorset 23 fg #004e00, bg #bcbcbc
-Colorset 20 fg black, bg #e7f4fe
-Colorset 25 fg black, bg yellow
 Colorset 41 RootTransparent buffer, fg white, bg average
 Colorset 42 RootTransparent buffer, fg white, bg average
 #下面是透明的实现。如不使用透明，把下面的注销。
@@ -433,7 +435,7 @@ AddToFunc SwitchToWindow
 + I WindowListFunc 
 
 # NoGeometryWithInfo是WindowList的选项
-Key Tab A M WindowList NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, MaxLabelWidth 50 "Prev SwitchToWindow"
+Key Tab A M WindowList NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 "Prev SwitchToWindow"
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
