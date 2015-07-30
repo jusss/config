@@ -1,3 +1,12 @@
+####################################### 操作方式和所需 #########################
+# archlinux, fvwm2.6.1从fvwm.org下源码编译,使用源码包自带的configure生成Makefile时用./configure --prefix=/usr/local指定安装位置为/usr/local/bin/fvwm2,模块位置为
+# /usr/local/libexec/fvwm/2.6.1/,可以用ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/添加模块位置
+# 所需文件 ~/.fvwm2rc, /home/jusss/icons/下的图标文件, button文件需要使用绝对路径,因为同时开着2个Xorg,分别跑着fvwm1和fvwm2,所以创建2个软链接fvwm1和fvwm2到/usr/bin用以区分
+# 笔记本触摸板，敲1下是左键单击，连续敲2下是左键双击，双指敲击是中键单击, 双指上下左右滑动是滑动鼠标滚轮， 无右键操作
+# 可在/etc/X11/xorg.conf设置触摸板的操作方式，触摸板一般为synaptics或elan的，上述动作是默认无需在xorg.conf里配置的
+# 窗口标题栏操作: 单击标题栏会Iconify窗口变成图标,双击标题栏会最大化窗口,双击标题栏Hold住滑动是移动窗口,中键敲击标题栏关闭窗口,窗口边框处双击Hold住调整窗口大小,无右键操作
+# 图标操作: 单击图标会Iconify Off恢复窗口,双击图标会恢复窗口并最大化,双击图标Hold住滑动是移动图标,中键敲击图标会关闭图标和窗口,无调整图标大小的操作，无右键操作
+
 ###################################################### 最大化 ############################################
 #关于有些软件最大化后无法覆盖整个屏幕，如xterm
 #第一个方法Style * ResizeHintOverride可以覆盖整个屏幕但是仍然无法会在以前覆盖不到的地方输出信息，就好比只是拿背景色遮盖了那块覆盖不到的地方一样，但无真正覆盖
@@ -41,9 +50,9 @@ Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
 # 找不到对应图标的程序Iconify后用xterm的图标代替, 窗口名区分大小写， Style "firefox"不是firefox窗口的名字，Style "Firefox"才是, 使用xprop可以查询窗口的名字，WM_CLASS后面跟的就是窗口名
 Style "*"       Icon xterm.xpm
 Style "emacs"	Icon /home/jusss/icons/e2.png, IconOverride, Color black/gray86
-Style "xterm"   Icon /home/jusss/icons/t2.png, IconOverride, Color black/gray86
-#Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
-#Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
+Style "xterm"   Icon /home/jusss/icons/t3.png, IconOverride, Color black/gray86
+Style "mpv"	Icon /home/jusss/icons/m1.png, IconOverride, Color black/gray86, NoHandles
+Style "mplayer"	Icon /home/jusss/icons/m1.png, IconOverride, Color black/gray86, NoHandles
 Style "Chromium"   Icon /home/jusss/icons/c1.png, IconOverride, Color black/gray86
 Style "Firefox"   Icon /home/jusss/icons/f1.png, IconOverride, Color black/gray86
 
