@@ -44,8 +44,8 @@ Style "emacs"	Icon /home/jusss/icons/e2.png, IconOverride, Color black/gray86
 Style "xterm"   Icon /home/jusss/icons/t2.png, IconOverride, Color black/gray86
 #Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
 #Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
-#Style "Chromium"   Icon /home/jusss/icons/chromium.png, IconOverride, Color black/gray86
-#Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86
+Style "Chromium"   Icon /home/jusss/icons/c1.png, IconOverride, Color black/gray86
+Style "Firefox"   Icon /home/jusss/icons/f1.png, IconOverride, Color black/gray86
 
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句
@@ -425,5 +425,8 @@ Key Tab A M WindowList NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTi
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
 ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
+
+# write /home/jusss/icons on the ImagePath, use the icon.svg directly in the ButtonStyle, and it doesn't work, it still can't find it even write path on ImagePath
+# so you can only use absolute path in the ButtonStyle
 ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps:/home/jusss/icons
-#write /home/jusss/icons on the ImagePath, and it doesn't work, in the ButtonStyle directly use the icon.png, and it still can't find it even write path on ImagePath
+
