@@ -62,11 +62,16 @@ Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86
 Style "Chromium"   Icon /home/jusss/icons/chrome.png, IconOverride, Color black/gray86, NoHandles
 Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86, NoHandles
 
+#BorderWidth 边框宽度和像素
+#Style * BorderWidth 3, HandleWidth 5
+#Style * MWMBorder, FirmBorder
+# 取消边框,使用MenuStyle或鼠标加Super键调整窗口大小
+Style * !Borders, !Handles
+
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
-# 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮所以注释这句
+# 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句
 #Style "*"  NoTitle, NoHandles
-# 原来没有边框也是可以在窗口边界处调整窗口大小的，只不过不好选中，全屏后点左边或上边这种不容易穿越到其它page的位置可以调整窗口大小,所以就可以不要边框了
-Style "*" NoHandles
+
 
 # 窗口移动/调解大小时，窗口尺寸/位置 信息窗口是否显示[Never|Move|Resize|Always]
 HideGeometryWindow  Always
@@ -103,20 +108,10 @@ Style * HilightFore black, HilightBack gray86
 #失去焦点时标题栏的背景颜色和文字颜色用Color指定
 Style * Color black/gray86
 
-# 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
-#BorderStyle Inactive Colorset 22 -- flat
-#BorderStyle Active Colorset 22 -- flat
-#BorderStyle Inactive -- HiddenHandles NoInset
-#BorderStyle Active -- HiddenHandles NoInset
-
 ################# 标题栏 按钮 背景图片###########################
 # 打开fvwm2后自动执行指令设置桌面背景图片，也可加入其它指令执行
 AddToFunc StartFunction
 + I Exec exec fvwm-root -r /home/jusss/icons/desktop.png
-
-#BorderWidth 边框宽度和像素
-#Style * BorderWidth 2, HandleWidth 1
-#Style * MWMBorder, FirmBorder
 
 #使用自己定义的MyDecor装饰标题栏
 Style * UseDecor MyDecor
@@ -144,6 +139,13 @@ AddToDecor MyDecor
 + TitleStyle -- Flat
 + TitleStyle Centered
 #+ BorderStyle Simple -- NoInset Flat
+
+# 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
+#+ BorderStyle Inactive Colorset 22 -- flat
+#+ BorderStyle Active Colorset 22 -- flat
+#+ BorderStyle Inactive -- HiddenHandles NoInset
+#+ BorderStyle Active -- HiddenHandles NoInset
+
 #标题栏上按钮1的位置显示的图标, 图标位置只能使用绝对路径，如果使用相对路径或把路径写ImagePath路径了都会找不到文件，不知道为什么会这样
 #+ ButtonStyle 1 \
 #Active (Pixmap /home/jusss/icons/close_focused_prelight.svg -- Flat) \
@@ -310,7 +312,10 @@ Style * MouseFocusClickRaises
 Mouse 1         1           N   Close
 Mouse 1         3           N   Iconify
 Mouse 1         5           N   Maximize-Focus-Raise
-Mouse 1		S	    N	Resize-Focus-Raise
+# 点击边框调整大小，但因为取消了窗口边框故注释
+#Mouse 1		S	    N	Resize-Focus-Raise
+# 鼠标左键加Windows键调整窗口大小，Windows键或叫Super键或Mod4, 用4来表示Windows键
+Mouse 1		W	    4	Resize-Focus-Raise
 
 AddToFunc Maximize-Focus-Raise
 + I Maximize
