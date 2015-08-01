@@ -10,11 +10,13 @@
 ###################################################### 最大化 ############################################
 #关于有些软件最大化后无法覆盖整个屏幕，如xterm
 #第一个方法Style * ResizeHintOverride可以覆盖整个屏幕但是仍然无法会在以前覆盖不到的地方输出信息，就好比只是拿背景色遮盖了那块覆盖不到的地方一样，但无真正覆盖
+#在5.5寸手机上chroot使用archlinuxarm和xserver xsdl打开X,然后xterm使用该参数最大化无法覆盖整个屏幕只是背景色遮盖而已，但是在14.1寸笔记本上却可以覆盖整个屏幕而不是背景色遮盖
 #第二个方法ResizeMove 100 100 0 0 这样强制，代替 Maximize，但是这样最大化后再点最大化按钮无法恢复原有窗口大小，还有其它函数ResizeMaximize, ResizeMoveMaximize等都
 #一样全屏最大化，但在最大化的窗口上再点最大化按钮无法恢复原有窗口大小
 #第三个方法 EwmhBaseStruts 0 0 20 25 窗口最大化是两边撑满,而上面留出20个(像素?),下面相应的留出25，仿照出EwmhBaseStruts 0 1 0 1或0 -1 0 -1无效
 #第四个方法把Maximize替换成Maximize 101 101, 这样就可以覆盖全屏，并且在最大化窗口上再次点击最大化按钮会恢复原有窗口，因为Maximize可以指定实际比全屏还大，所以就用
 #它比全屏大一个像素，这样就一定会全屏，而Maximize 100 100和Maximize是一样的，都无法全屏最大化，一般都是在右下角留空隙
+Style * ResizeHintOverride
 
 ################################# 窗口 图标###########################################
 # iconify后图标有方块是图标自己的问题不是fvwm的问题，有些图标如emacs本身就是有方框的而xterm的没有方框
@@ -57,8 +59,8 @@ Style "emacs"	Icon /home/jusss/icons/emacs.png, IconOverride, Color black/gray86
 Style "xterm"   Icon /home/jusss/icons/xterm.png, IconOverride, Color black/gray86
 Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
 Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
-Style "Chromium"   Icon /home/jusss/icons/chrome.png, IconOverride, Color black/gray86
-Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86
+Style "Chromium"   Icon /home/jusss/icons/chrome.png, IconOverride, Color black/gray86, NoHandles
+Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86, NoHandles
 
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句
@@ -434,7 +436,8 @@ AddToFunc WindowListFunc
 AddToFunc SwitchToWindow
 + I WindowListFunc 
 
-# NoGeometryWithInfo是WindowList的选项
+# NoGeometryWithInfo是WindowList的选项,在tty1打开Xorg :0跑fvwm1,在tty2打开Xorg :1跑fvwm2,在fvwm2上可以按一下C-Tab切窗口也可按多下切任意窗口，但是
+# 如果直接在tty1打开Xorg :0跑fvwm2而不打开其它Xorg,按一下可切窗口，但无法连按多下切任意窗口
 Key Tab A M WindowList NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 "Prev SwitchToWindow"
 
 ###################################编译和位置#########################################################
