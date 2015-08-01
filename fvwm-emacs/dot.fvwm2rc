@@ -438,7 +438,11 @@ AddToFunc SwitchToWindow
 
 # NoGeometryWithInfo是WindowList的选项,在tty1打开Xorg :0跑fvwm1,在tty2打开Xorg :1跑fvwm2,在fvwm2上可以按一下C-Tab切窗口也可按多下切任意窗口，但是
 # 如果直接在tty1打开Xorg :0跑fvwm2而不打开其它Xorg,按一下可切窗口，但无法连按多下切任意窗口
+# 知道原因了，因为fvwm1开启了xmodmap把Tab映射成了Meta_L,而在fvwm2上没开xmodmap
+# 在xmodmap中取消Tab的映射或修改切换窗口的快捷键, 现在修改为Super键加Meta_L切换窗口,xmodmap映射Tab为按一下释放是Tab,按住组合其它键是Meta_L是为了M-v在emacs中，映射可用xcape实现
+# 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，只能修改xmodmap和xcape了，取消Tab键的映射
 Key Tab A M WindowList NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 "Prev SwitchToWindow"
+
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
