@@ -1,0 +1,2 @@
+fcitx &
+exec fvwm2
