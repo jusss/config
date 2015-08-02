@@ -89,7 +89,12 @@ Style * PositionPlacement UnderMouse
 # NoPPosition instructs fvwm to ignore the PPosition field in window 
 # geometry hints. Emacs annoyingly sets PPosition to (0,0)!
 # 忽略程序打开窗口在指定的位置，比如emacs和xterm的配置文件都可以设置窗口打开后的所在位置，这个选项会忽略它们,使用程序指定的位置打开窗口用UsePPosition
+# NoPPosition已经不在建议使用了在fvwm2中，建议用NoUsePPosition
 Style * NoPPosition
+# emacs的起始位置和窗口大小可以在.Xdefaults里指定，如emacs.geometry:100x29+0+0,也可以在.emacs里指定，现在用了NoPPosition不想使用emacs的起始位置+0+0
+# 但如果想设置emacs的窗口大小的话，可以在在.Xdefaults里写emacs.geometry:100x29，这样就可以不在+0+0位置出现但有可以指定emacs的窗口大小，因为用了新窗口放置
+# 在指针所在的位置PositionPlacement UnderMouse，还有不在指定emacs位置打开窗口NoPPosition，而且又没有在.Xdefaults里设置+0+0所以，emacs就回以100x29的窗口
+# 大小出现在鼠标指针所在的位置
 
 #窗口标题栏字体, 字体可以xlsfonts|more查
 Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
