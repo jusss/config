@@ -62,7 +62,8 @@ Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86
 Style "Chromium"   Icon /home/jusss/icons/chrome.png, IconOverride, Color black/gray86, NoHandles
 Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86, NoHandles
 
-#BorderWidth 边框宽度和像素
+# 关于Border边框做个标记 Lable 01,如果要修改边框就搜索01
+#BorderWidth 边框宽度和像素, MWMBorder和FvwmBorder的不同就是一个边框是2pixels一个边框是1pixels,FirmBorder是按下边框无陷下去的3d效果，对应的是DepressableBorder
 #Style * BorderWidth 3, HandleWidth 5
 #Style * MWMBorder, FirmBorder
 # 取消边框,使用MenuStyle或鼠标加Super键调整窗口大小
@@ -89,12 +90,13 @@ Style * PositionPlacement UnderMouse
 # NoPPosition instructs fvwm to ignore the PPosition field in window 
 # geometry hints. Emacs annoyingly sets PPosition to (0,0)!
 # 忽略程序打开窗口在指定的位置，比如emacs和xterm的配置文件都可以设置窗口打开后的所在位置，这个选项会忽略它们,使用程序指定的位置打开窗口用UsePPosition
-# NoPPosition已经不在建议使用了在fvwm2中，建议用NoUsePPosition
-Style * NoPPosition
+# NoPPosition已经不在建议使用了在fvwm2中，建议用NoUsePPosition, 但是用了Sytle * NoUsePPosition却提示Error bad style option
+#Style * NoPPosition
 # emacs的起始位置和窗口大小可以在.Xdefaults里指定，如emacs.geometry:100x29+0+0,也可以在.emacs里指定，现在用了NoPPosition不想使用emacs的起始位置+0+0
 # 但如果想设置emacs的窗口大小的话，可以在在.Xdefaults里写emacs.geometry:100x29，这样就可以不在+0+0位置出现但有可以指定emacs的窗口大小，因为用了新窗口放置
 # 在指针所在的位置PositionPlacement UnderMouse，还有不在指定emacs位置打开窗口NoPPosition，而且又没有在.Xdefaults里设置+0+0所以，emacs就回以100x29的窗口
 # 大小出现在鼠标指针所在的位置
+# 然后在.Xdefaults里指定了emacs的起始位置，发现NoPPosition没起作用，它出现在了指定的位置,故不再使用该选项只使用PositionPlacement即可
 
 #窗口标题栏字体, 字体可以xlsfonts|more查
 Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
@@ -144,7 +146,7 @@ AddToDecor MyDecor
 + TitleStyle -- Flat
 + TitleStyle Centered
 #+ BorderStyle Simple -- NoInset Flat
-
+# this is a tag, Lable 01
 # 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
 #+ BorderStyle Inactive Colorset 22 -- flat
 #+ BorderStyle Active Colorset 22 -- flat
