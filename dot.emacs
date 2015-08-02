@@ -48,8 +48,9 @@
 			   :password "")
 		  (setq erc-autojoin-channels-alist '(("freenode.net"
 						       "#archlinux"
-						       "#emacs")))
-		  (setq erc-autojoin-timing 'ident)))
+						       "#emacs")))))
+;;;		  (setq erc-autojoin-timing 'ident)))
+;;; waiting for identify, then join channel
 
 (show-paren-mode t)
 (setq completion-ignore-case t)
@@ -76,12 +77,18 @@
  '(erc-notice-face ((t (:foreground "SlateBlue"))))
  '(erc-timestamp-face ((t (:foreground "green"))))
  '(ido-first-match ((t nil)))
+ ;;; set the face of topic on erc, it's called header-line, set the same color on foreground and background to hide topic, or just remove it
+ ;;; (setq header-line-format t) will draw one on the buffer like *scratch*
+ ;;; '(header-line ((t (:background "#e7f4fe"))))
+ ;;; '(header-line ((t (:foreground "#e7f4fe" :background "#e7f4fe"))))
  '(mode-line ((t (:background "snow" :foreground "forest green" :box (:line-width -1 :style released-button)))))
  '(mode-line-buffer-id ((t nil))))
 (set-background-color "#e7f4fe")
 (set-foreground-color "#004e00")
 (set-face-foreground 'fringe "#e7f4fe")
 (set-face-background 'fringe "#e7f4fe")
+;;; remove erc header-line
+(setq erc-header-line-format nil)
 (setq gnus-asynchronous t)
 (setq gnus-use-cache t)
 (global-set-key (kbd "C-'") 'gnus)
