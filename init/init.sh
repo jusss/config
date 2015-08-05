@@ -5,4 +5,4 @@
 
 ~/lab/xcape.sh &
 ~/lab/network.sh &
-~/lab/offlineimap.sh &
+~/lab/mail-notify.py > /dev/null 2>&1 &
