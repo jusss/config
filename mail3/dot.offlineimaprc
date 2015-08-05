@@ -1,0 +1,61 @@
+# when you want to change the folder stored mail, you must delete ~/.offlineimap before first run offlineimap, otherwise, it will
+# delete all mail on the server
+[general]
+# ui = quiet, doesn't output anything
+ui = basic
+# make a account called jusss, of course it can be called 126 or qq or what anything you like, it's just a name
+accounts = jusss, qq
+maxsyncaccounts = 2
+
+[Account jusss]
+localrepository = jusss-local
+remoterepository = jusss-remote
+status_backend = sqlite
+
+[Repository jusss-local]
+# mail type, there are two type mbox and maildir, store all mail in one file, that's mbox, in a lot of file, that's maildir
+type = Maildir
+# where's mail stored, it's on ~/Mail folder
+# you should mkdir Mail before run offlineimap at the first time
+localfolders = ~/Mail/jusss
+
+[Repository jusss-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /home/jusss/ca.cert
+remotehost = x
+remoteuser = x
+remotepass = x
+remoteport = 993
+
+[Account qq]
+localrepository = qq-local
+remoterepository = qq-remote
+status_backend = sqlite
+
+[Repository qq-local]
+# mail type, there are two type mbox and maildir, store all mail in one file, that's mbox, in a lot of file, that's maildir
+type = Maildir
+# where's mail stored, it's on ~/Mail folder
+localfolders = ~/Mail/qq
+
+[Repository qq-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remotehost = imap.qq.com
+remoteuser = x
+remotepass = x
+remoteport = 993
+
+# if you don't set folderfilter, then pull all folder on the server
+# folderfilter = lambda foldername: foldername in ['Inbox', 'Sent'] will only pull the two folders
+# folderfilter = lambda foldername: foldername not in ['Inbox', 'Sent'] will not pull the two folders
+# when I use idlefolders = ['Inbox'] get IO.Error too many read 0, it's because the inbox folder on server called INBOX not Inbox
+# idlefolders = ['INBOX']
+# maxconnections = 2
+# holdconnectionopen = true
+# keepalive = 600
+# autorefresh = 2
+# quick = 10
+

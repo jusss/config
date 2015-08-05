@@ -1,0 +1,37 @@
+account qq
+tls on
+tls_starttls off
+tls_certcheck off
+host smtp.qq.com
+port 465
+from x@qq.com
+auth on
+user x
+password x
+
+#account 126
+#tls on
+#tls_starttls off
+#tls_certcheck off
+#host smtp.126.com
+#port 465
+#from jusss@126.com
+#auth on
+#user jusss@126.com
+#password blablablah
+#
+#
+#
+account jusss
+tls on
+tls_starttls off
+tls_certcheck on
+tls_trust_file ~/ca.cert
+host x
+port 465
+from x
+auth on
+user x
+password x
+
+account default : jusss
