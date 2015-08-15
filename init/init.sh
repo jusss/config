@@ -5,4 +5,4 @@
 
 ~/lab/xcape.sh &
 ~/lab/network.sh &
-~/lab/mail-notify.py
+~/lab/m-notify.py
