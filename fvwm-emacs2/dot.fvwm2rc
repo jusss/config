@@ -1,0 +1,474 @@
+####################################### 操作方式和所需 #########################
+# archlinux, fvwm2.6.1从fvwm.org下源码编译,使用源码包自带的configure生成Makefile时用./configure --prefix=/usr/local指定安装位置为/usr/local/bin/fvwm2,模块位置为
+# /usr/local/libexec/fvwm/2.6.1/,可以用ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/添加模块位置
+# 所需文件 ~/.fvwm2rc, /home/jusss/icons/下的图标文件, button文件需要使用绝对路径,因为同时开着2个Xorg,分别跑着fvwm1和fvwm2,所以创建2个软链接fvwm1和fvwm2到/usr/bin用以区分
+# 笔记本触摸板，敲1下是左键单击，连续敲2下是左键双击，双指敲击是中键单击, 双指上下左右滑动是滑动鼠标滚轮， 无右键操作
+# 可在/etc/X11/xorg.conf设置触摸板的操作方式，触摸板一般为synaptics或elan的，上述动作是默认无需在xorg.conf里配置的
+# 窗口标题栏操作: 单击标题栏会Iconify窗口变成图标,双击标题栏会最大化窗口,双击标题栏Hold住滑动是移动窗口,中键敲击标题栏关闭窗口,窗口边框处双击Hold住调整窗口大小,无右键操作
+# 图标操作: 单击图标会Iconify Off恢复窗口,双击图标会恢复窗口并最大化,双击图标Hold住滑动是移动图标,中键敲击图标会关闭图标和窗口,无调整图标大小的操作，无右键操作
+
+###################################################### 最大化 ############################################
+#关于有些软件最大化后无法覆盖整个屏幕，如xterm
+#第一个方法Style * ResizeHintOverride可以覆盖整个屏幕但是仍然无法会在以前覆盖不到的地方输出信息，就好比只是拿背景色遮盖了那块覆盖不到的地方一样，但无真正覆盖
+#在5.5寸手机上chroot使用archlinuxarm和xserver xsdl打开X,然后xterm使用该参数最大化无法覆盖整个屏幕只是背景色遮盖而已，但是在14.1寸笔记本上却可以覆盖整个屏幕而不是背景色遮盖
+#第二个方法ResizeMove 100 100 0 0 这样强制，代替 Maximize，但是这样最大化后再点最大化按钮无法恢复原有窗口大小，还有其它函数ResizeMaximize, ResizeMoveMaximize等都
+#一样全屏最大化，但在最大化的窗口上再点最大化按钮无法恢复原有窗口大小
+#第三个方法 EwmhBaseStruts 0 0 20 25 窗口最大化是两边撑满,而上面留出20个(像素?),下面相应的留出25，仿照出EwmhBaseStruts 0 1 0 1或0 -1 0 -1无效
+#第四个方法把Maximize替换成Maximize 101 101, 这样就可以覆盖全屏，并且在最大化窗口上再次点击最大化按钮会恢复原有窗口，因为Maximize可以指定实际比全屏还大，所以就用
+#它比全屏大一个像素，这样就一定会全屏，而Maximize 100 100和Maximize是一样的，都无法全屏最大化，一般都是在右下角留空隙
+Style * ResizeHintOverride
+
+################################# 窗口 图标###########################################
+# iconify后图标有方块是图标自己的问题不是fvwm的问题，有些图标如emacs本身就是有方框的而xterm的没有方框
+# Iconify后图标有边框是因为图标是rgb模式的，用gimp或photo shop修改图标文件为索引模式的，然后就没有边框了
+# 打开gimp, File-Open打开图标文件， Image-Mode-Indexed, File-Export as为png格式即可，修改图片像素大小可以点Image-Scale Image然后输入指定的大小点链锁可以保持比例输出,然后保存
+# 有边框的图标如emacs，用IconBackgroundRelief选项可以设置其在黑色背景的Root Window下不显示出边框，但在其它窗口上还是会显示出边框，用gimp修改为图标文件为indexed模式
+#Style "emacs" IconBackgroundRelief 0
+# 替换Icon用IconOverride, Iconify后图标有边框，修改图标为索引模式
+
+DestroyMenu MenuFvwmRoot
+AddToMenu MenuFvwmRoot    " Window "    Title
++			  " Resize"	     Resize
++			  " Maximize"	     Maximize
++			  " Iconify"	     Iconify
++			  " Move"	     Move
++			  " Iconify Off"     Iconify Off
++			  " Focus"	     Focus
++			  " Raise"	     Raise
++			  " Close"	     Close
+MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
+# WindowList也会使用MenuStyle的配置
+# TitleColorset是窗口标题栏的背景和字体颜色,MenuColorset是窗口的背景和字体颜色,HilightBack是高亮时的背景色,ActiveFore是高亮时的字体颜色
+MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore green, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
+Colorset 20 fg black, bg #3c5468
+Colorset 25 fg black, bg #3c5468
+
+#图标排列 -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
+Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
+
+# 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
+# 2如果程序有图标，即使设置Style "program-name" Icon xterm.xpm也是改变不了图标的，需要加上IconOverride选项才可以
+# 找不到对应图标的程序Iconify后用xterm的图标代替, 窗口名区分大小写， Style "firefox"不是firefox窗口的名字，Style "Firefox"才是, 使用xprop可以查询窗口的名字，WM_CLASS后面跟的就是窗口名
+Style "*"       Icon xterm.xpm
+Style "emacs"	Icon /home/jusss/icons/emacs.png, IconOverride, Color black/gray86
+Style "xterm"   Icon /home/jusss/icons/xterm.png, IconOverride, Color black/gray86
+Style "mpv"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
+Style "mplayer"	Icon /home/jusss/icons/mpv.png, IconOverride, Color black/gray86, NoHandles
+Style "Chromium"   Icon /home/jusss/icons/chrome.png, IconOverride, Color black/gray86, NoHandles
+Style "Firefox"   Icon /home/jusss/icons/firefox.png, IconOverride, Color black/gray86, NoHandles
+
+# 关于Border边框做个标记 Lable 01,如果要修改边框就搜索01
+#BorderWidth 边框宽度和像素, MWMBorder和FvwmBorder的不同就是一个边框是2pixels一个边框是1pixels,FirmBorder是按下边框无陷下去的3d效果，对应的是DepressableBorder
+#Style * BorderWidth 3, HandleWidth 5
+#Style * MWMBorder, FirmBorder
+# 取消边框,使用MenuStyle或鼠标加Super键调整窗口大小
+Style * !Borders, !Handles
+
+
+
+# 窗口移动/调解大小时，窗口尺寸/位置 信息窗口是否显示[Never|Move|Resize|Always]
+HideGeometryWindow  Always
+
+Style "Fvwm*"      NoTitle, NoHandles, Sticky, WindowListSkip,BorderWidth 0, CirculateSkip
+
+# 像瀑布般下落的放置窗口
+#Style * TileCascadePlacement
+#Style * RandomPlacement, SmartPlacement
+# 在fvwm1没有TileCascadePlacement,它是fvwm2的窗口放置方式，fvwm1中的RandomPlacement和SmartPlacement相当于fvwm2中的TileCascadePlacement
+# 也就是窗口自动获得位置不需要手动指定位置，找一个放下它但又不遮挡其它窗口的位置，若没有这样的位置就按瀑布般下落的方式覆盖其它的窗口
+# 手动指定新窗口位置是ManualPlacement,其它具体见man fvwm,搜window manager placement
+# 新窗口放置在鼠标指针所在的位置
+Style * PositionPlacement UnderMouse
+# NoPPosition instructs fvwm to ignore the PPosition field in window 
+# geometry hints. Emacs annoyingly sets PPosition to (0,0)!
+# 忽略程序打开窗口在指定的位置，比如emacs和xterm的配置文件都可以设置窗口打开后的所在位置，这个选项会忽略它们,使用程序指定的位置打开窗口用UsePPosition
+# NoPPosition已经不在建议使用了在fvwm2中，建议用NoUsePPosition, 但是用了Sytle * NoUsePPosition却提示Error bad style option
+#Style * NoPPosition
+# emacs的起始位置和窗口大小可以在.Xdefaults里指定，如emacs.geometry:100x29+0+0,也可以在.emacs里指定，现在用了NoPPosition不想使用emacs的起始位置+0+0
+# 但如果想设置emacs的窗口大小的话，可以在在.Xdefaults里写emacs.geometry:100x29，这样就可以不在+0+0位置出现但有可以指定emacs的窗口大小，因为用了新窗口放置
+# 在指针所在的位置PositionPlacement UnderMouse，还有不在指定emacs位置打开窗口NoPPosition，而且又没有在.Xdefaults里设置+0+0所以，emacs就回以100x29的窗口
+# 大小出现在鼠标指针所在的位置
+# 然后在.Xdefaults里指定了emacs的起始位置，发现NoPPosition没起作用，它出现在了指定的位置,故不再使用该选项只使用PositionPlacement即可
+
+#窗口标题栏字体, 字体可以xlsfonts|more查
+Style * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
+#Style * Font "-misc-dejavu sans mono-medium-r-*-*-14-*-*-*-*-*-*-*,-*-simsun-medium-r-normal-*-14-*-*-*-*-*-*-*"
+#下面是定义了窗口使用的色彩。41和42号是透明
+Colorset 22 fg #004e00, bg #e7f4fe
+Colorset 21 fg #004e00, bg #ededed
+Colorset 23 fg #004e00, bg #bcbcbc
+Colorset 41 RootTransparent buffer, fg white, bg average
+Colorset 42 RootTransparent buffer, fg white, bg average
+#下面是透明的实现。如不使用透明，把下面的注销。
+# Style * Colorset 41, HilightColorset 42 # to use fg and bg
+#拥有焦点时的标题栏颜色设置, HilightFore获得焦点时标题栏的字体的颜色，HilightBack获得焦点时标题栏的颜色
+Style * HilightFore black, HilightBack gray86
+#Style * HilightFore black, HilightBack blue
+#失去焦点时标题栏的背景颜色和文字颜色用Color指定
+Style * Color black/gray86
+
+################# 标题栏 按钮 背景图片###########################
+# 打开fvwm2后自动执行指令设置桌面背景图片，也可加入其它指令执行
+AddToFunc StartFunction
++ I Exec exec fvwm-root -r /home/jusss/icons/desktop.png
+
+#使用自己定义的MyDecor装饰标题栏
+Style * UseDecor MyDecor
+
+#删除以前的MyDecor定义
+DestroyDecor MyDecor
+
+#定义MyDecor
+AddToDecor MyDecor
+# TitleStyle的MultiPixmap选项可以设置分别设置标题栏和按钮的背景图
+#活动的窗口显示Active,标题栏文字的背景图Main,按钮的背景图 Buttons,文字左边的背景图LeftEnd,文字右边的背景图RightEnd,不活动的窗口显示InActive,文字居中Centered
+#+ TitleStyle Active (MultiPixmap \
+#Main TiledPixmap /home/jusss/icons/bar.png, \
+#Buttons TiledPixmap /home/jusss/icons/bar.png, \
+#LeftEnd AdjustedPixmap /home/jusss/icons/bar.png, \
+#RightEnd AdjustedPixmap	/home/jusss/icons/bar.png) \
+#InActive (MultiPixmap \
+#Main TiledPixmap /home/jusss/icons/bar.png, \
+#Buttons TiledPixmap /home/jusss/icons/bar.png, \
+#LeftEnd AdjustedPixmap /home/jusss/icons/bar.png, \
+#RightEnd AdjustedPixmap /home/jusss/icons/bar.png) \
+#Centered
+#标题栏高度Height, 文字居中Centered
++ TitleStyle Height 22
++ TitleStyle -- Flat
++ TitleStyle Centered
+#+ BorderStyle Simple -- NoInset Flat
+# this is a tag, Lable 01
+# 把边框颜色设成和背景颜色一样，取代透明颜色， BorderStyle边框格式
+#+ BorderStyle Inactive Colorset 22 -- flat
+#+ BorderStyle Active Colorset 22 -- flat
+#+ BorderStyle Inactive -- HiddenHandles NoInset
+#+ BorderStyle Active -- HiddenHandles NoInset
+
+#标题栏上按钮1的位置显示的图标, 图标位置只能使用绝对路径，如果使用相对路径或把路径写ImagePath路径了都会找不到文件，不知道为什么会这样
+#+ ButtonStyle 1 \
+#Active (Pixmap /home/jusss/icons/close_focused_prelight.svg -- Flat) \
+#ActiveDown (Pixmap /home/jusss/icons/close_focused_pressed.svg -- Flat) \
+#Inactive (Pixmap /home/jusss/icons/close.svg -- Flat)
++ ButtonStyle 1 \
+Active (Pixmap /home/jusss/icons/close.svg -- Flat) \
+ActiveDown (Pixmap /home/jusss/icons/close.svg -- Flat) \
+Inactive (Pixmap /home/jusss/icons/close.svg -- Flat)
+
+#按钮3显示的图标
+#+ ButtonStyle 3 \
+#Active (Pixmap /home/jusss/icons/minimize_focused_prelight.svg -- Flat) \
+#ActiveDown (Pixmap /home/jusss/icons/minimize_focused_pressed.svg -- Flat) \
+#Inactive (Pixmap /home/jusss/icons/minimize.svg -- Flat)
++ ButtonStyle 3 \
+Active (Pixmap /home/jusss/icons/minimize.svg -- Flat) \
+ActiveDown (Pixmap /home/jusss/icons/minimize.svg -- Flat) \
+Inactive (Pixmap /home/jusss/icons/minimize.svg -- Flat) 
+
+#+ ButtonStyle 5 MiniIcon
+#按钮5显示的图标
+#+ ButtonStyle 5 \
+#Active (Pixmap /home/jusss/icons/maximize_focused_prelight.svg -- Flat) \
+#ActiveDown (Pixmap /home/jusss/icons/maximize_focused_pressed.svg -- Flat) \
+#Inactive (Pixmap /home/jusss/icons/maximize.svg -- Flat)
++ ButtonStyle 5 \
+Active (Pixmap /home/jusss/icons/maximize.svg -- Flat) \
+ActiveDown (Pixmap /home/jusss/icons/maximize.svg -- Flat) \
+Inactive (Pixmap /home/jusss/icons/maximize.svg -- Flat)
++ ButtonStyle All -- UseTitleStyle
+
+##################################  END  ###############################################
+# the definition of AddToDecor AddToFunc will end with one directly statement without + beginning, like Style * Font... ,if it's + Style * Font, then it's in the definition
+# and because use MyDecor, then the TitleStyle statement of MyDecor's definition will doesn't work any more, TitleStyle statement only works if it's in MyDecor's definition
+
+# 设置标题栏的背景和按钮的背景
+#TitleStyle MultiPixmap\
+	   Main TiledPixmap /home/jusss/icons/up.png\
+	   Buttons TiledPixmap /home/jusss/icons/up.png
+#ButtonStyle     1       MiniIcon (-- flat)
+#ButtonStyle  1      Pixmap /home/jusss/icons/close.svg --flat
+#ButtonStyle  3      Pixmap /home/jusss/icons/minimize.svg --flat
+#ButtonStyle  5      AdjustedPixmap /home/jusss/icons/maximize.svg --flat
+
+#####################################################################################################################################################
+
+# Icon takes an (optional) unquoted string argument which is the icon bitmap or pixmap to use.  Icons specified this way
+# override pixmap icons, but not icon windows or the ewmh icon, provided by the client in the application (with the WM_HINTS
+# property or with the ewmh _NET_WM_ICON property).  The IconOverride style changes the behavior to override any client-provided
+# icons; the NoIconOverride style changes the behavior to not override any client-provided icons; the default overriding
+# behavior can be activated with the NoActiveIconOverride style.  With this style, fvwm uses application provided icons if the
+# icon is changed but uses the icon provided in the configuration file until then.
+# There is one exception to these rules, namely
+#Style * Icon unknown.xpm
+# doesn't force the unknown.xpm icon on every window, it just sets the default icon like the DefaultIcon command.  If you really
+# want all windows to have the same icon, you can use
+#Style ** Icon unknown.xpm
+# If the NoIcon attribute is set then the specified window simply disappears when it is iconified.  The window can be recovered
+# through the window-list.  If Icon is set without an argument then the NoIcon attribute is cleared but no icon is specified.
+# An example which allows only the FvwmPager module icon to exist:# Icon takes an (optional) unquoted string argument which is the icon bitmap or pixmap to use.  Icons specified this way
+# Iconify窗口后不显示图标在desktop上，但是显示图标在FvwmPager上，FvwmPager就是一个所有Desktop和Page的缩略图，在fvwm1中叫Pager,如果不指定fvwmpager就不会显示在桌面
+#Style * NoIcon
+#Style FvwmPager Icon
+# kill the pager on the upper left top in the fvwm1, and called FvwmPager on fvwm2
+# Pager 5 5
+
+# 不要图标化的窗口的标题
+#Style * NoIconTitle
+# 要图标化的窗口的标题
+# Style * IconTitle, IndexedIconName
+# 取消iconify后的图标stick在desktop上
+#StickyIcons
+
+#     Button	Context Modifi 	Function
+# Context的定义与后面鼠标动作的解释是一致的，Context 是用来描述在什麽地方才会有用。
+# R 表示是root window，也就是整个背景萤幕。
+# W 表示在视窗上面。
+# T 表示在Title Bar上面，也就是显示视窗标题的地方。
+# S 表示在在视窗四周的边框上面。
+# F 表示在视窗的四角上面。
+# I 表示在Icon上面。
+# A 表示在Title Bar以外的任何地方。
+# 0-9的数字则是表示在Title Bar上面的按钮。它 所表示的顺序如下所示：
+# 1 3 5 7 9 0 8 6 4 2
+# 上面的各项可以混合使用。如"FST" 表示整个视窗的任何地方。除了Title Bar 的按钮之外。
+
+# Modifiers 这个项目是指有无其他的组合键的配合。
+# N None表示没有其他的组合键。 C 表示CTRL键。 S 表示SHIFT 键。 M 表示Meta键。也可以混合用，例如"CA"表示CTRL+ALT 键。"CAS" 表示CTRL+ALT+SHIFT键。
+
+#Button: 1代表左键 2代表中键 3代表右键 0代表任何键
+#Context:
+#  A:除过标题栏按钮外的任意区域 
+#  R:代表根窗口(也就是桌面) Root
+#  T:代表标题栏 Titlebar
+#  S:代表边框   Sidebar
+#  F:代表窗口的四个角 Frame resize的四个角
+#  W:代表窗口 Work Area 窗口工作区
+#  I:代表图标 Icon
+#  n:
+#    1 3 5 7 9            0 8 6 4 2
+#    (0<=n<=9)窗口的标题栏上的按钮位置,靠左侧的是(1 3 5 7 9)
+#    靠右侧的是(0 8 6 4 2)例如常见的MS-Windows的最小化按钮是6,最大化是4,关闭是2,系统菜单是1
+
+####################################################################################
+##############窗口和图标化后的窗口###################################################
+#####Iconify时不Focus不Raise,关闭时不Focus不Raise,最大化时Focus和Raise,
+#####移动时Focus和Raise,调整窗口时Focus和Raise,Iconify Off时Focus和Raise
+###################################################################################
+#####鼠标操作窗口 : 左键标题栏iconify,双击最大化，双击拖住移动，中键标题栏关闭
+#####鼠标操作图标 : 左键图标恢复窗口，双击恢复窗口并最大化，双击拖住移动图标，中键图标关闭窗口
+#####键盘操作窗口 : Super-1 iconify窗口, Super-2最大化窗口, Super-5移动窗口, Super-0,关闭窗口
+#####键盘操作图标 : Super-1 iconify off恢复窗口, Super-2恢复窗口并最大化, Super-5移动图标, Super-0关闭图标和窗口
+####################################################################################
+
+######################鼠标和焦点#####################################################
+
+##### 鼠标点击获得焦点ClickToFocus, 鼠标跟随获得焦点SloppyFocus, 鼠标点击获得Raise MouseFocusClickRaise, 鼠标跟随获得Raise Module FvwmAuto 100
+##### Raise就是把窗口放到其它窗口上面，也就是叠加窗口
+##### fcitx就因为鼠标跟随获得焦点竟然导致无法输入完整的拼音就自动输出不想要的汉字，
+##### emacs的莫名奇妙的自动跳转或许也和自动获得焦点有关但是鼠标跟随获得焦点又有好处，因为省了点击就能获得焦点输入
+
+#  Focus policy
+# ClickToFocus instructs fvwm to give the focus to a window when it is clicked in.  The default MouseFocus (or its alias
+# FocusFollowsMouse) tells fvwm to give a window the focus as soon as the pointer enters the window, and take it away when the
+# pointer leaves the window.  SloppyFocus is similar, but doesn't give up the focus if the pointer leaves the window to pass
+# over the root window or a ClickToFocus window (unless you click on it, that is), which makes it possible to move the mouse out
+# of the way without losing focus.  A window with the style NeverFocus never receives the focus.  This is useful for modules
+# like FvwmButtons.  for example.  Note: Once any of the "FP..." styles has been used, the defaults that come with the basic
+# focus policies are not restored when the latter are used again.  For example, once !FPGrabFocus has been used, using
+# ClickToFocus does not restore FPGrabFocus.
+
+# ClickToFocus在窗口内点击鼠标获得焦点，默认用MouseFocus别名FocusFollowsMouse鼠标进入窗口就获得焦点，鼠标离开窗口，窗口失去焦点
+# SloppyFocus和MouseFocus很像，但当鼠标从当前窗口移出到根窗口(就是Iconify之后图标所在的位置)或到一个需要点击才能获得焦点的窗口上时，当前窗口不会失去焦点,
+# 也就是说鼠标移出窗口，但窗口不失去焦点， 除非移动一个可以通过鼠标移动获得焦点的窗口上时才能失去焦点，
+# Style * 可以设置所有窗口获得焦点的方式，而单个的 Style xterm ClickToFocus却可以设置xterm的窗口只有通过鼠标点击才能获得焦点
+# 如果 Style * SloppyFocus然后 Style xterm ClickToFocus,比如鼠标在emacs上，然后移动到xterm窗口或根窗口上时，焦点还在emacs上，而移动到firefox窗口上时，焦点就到firefox上了
+# 如果移动到xterm窗口然后点击，焦点才能到xterm上，这就是SloppyFocus, 而FocusFollowsMouse却是只要移出emacs，emacs就失去了焦点不管是否移动到了xterm或firefox上或根窗口
+# NerverFocus就是永远不会接收焦点不管是鼠标移动到窗口上或点击窗口，比如 Style xclock NeverFocus这样xclock窗口就永远不会获得焦点，不管是把鼠标移动到xclock窗口或点击xclock窗口
+# fvwm1没有FocusFollowsMouse和NeverFocus，只有SloppyFocus和ClickToFocus
+# ClickToFocus, FocusFollowsMouse, SloppyFocus, NeverFocus, 默认的是MouseFocus (or its alias FocusFollowsMouse)
+
+#Style * ClickToFocus
+#Style * SloppyFocus
+Style * MouseFocus
+Style * MouseFocusClickRaises 
+#Module FvwmAuto 100
+# FvwmAuto模块的位置需要写进ModulePath里，具体位置见下面的编译和位置,这个可以写ModulePath里使用,不像按钮图标文件位置写进ImagePath里无效
+
+# 现在改成点击才能获得raise而不是跟随焦点自动获得raise,所以才可以把图标拖动到窗口上面而不会被窗口覆盖
+
+################函数定义#########################################
+# «functions»  (to ".functions")
+# (find-fvwmhelp "AddToFunc [name [I | M | C | H | D action]]")
+# The letter before the action tells what kind of action triggers the
+# command which follows it.
+#   I: Immediate
+#   M: Motion (user moves the mouse)
+#   C: Click
+#   H: Hold
+#   D: Double-click
+
+####################标题栏按钮操作###########################
+Mouse 1         1           N   Close
+Mouse 1         3           N   Iconify
+Mouse 1         5           N   Maximize-Focus-Raise
+# 点击边框调整大小，但因为取消了窗口边框故注释
+#Mouse 1		S	    N	Resize-Focus-Raise
+# 鼠标左键加Windows键调整窗口大小，Windows键或叫Super键或Mod4, 用4来表示Windows键
+Mouse 1		W	    4	Resize-Focus-Raise
+
+AddToFunc Maximize-Focus-Raise
++ I Maximize
++ I Focus
++ I Raise
+
+AddToFunc Resize-Focus-Raise
++ I Resize
++ I Focus
++ I Raise
+
+###############鼠标操作窗口#############################
+Mouse 1 	T 	    N 	Iconify-or-Maximize-or-Move
+Mouse 2		T	    N	Close
+
+AddToFunc Iconify-or-Maximize-or-Move
++ C Iconify
++ D Maximize
++ D Focus
++ D Raise
++ M Move
++ M Focus
++ M Raise
+
+####################鼠标操作图标##############################
+Mouse 1 	I 	    N 	Iconify-off-or-Maximize-or-Move
+Mouse 2		I	    N	Close
+
+AddToFunc Iconify-off-or-Maximize-or-Move
++ C Iconify Off
++ C Focus
++ C Raise
++ D Iconify Off
++ D Maximize
++ D Focus
++ D Raise
++ M Move
++ M Focus
++ M Raise
+
+#################键盘操作窗口################################
+# W means Window, 4 means super key or call windows key
+Key 1 W 4 Iconify
+Key 2 W 4 Maximize-Focus-Raise
+#Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
+Key 3 A 4 Exec  exec xterm
+#Key  3 A 4 Exec-xterm
+# 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
+# PositionPlacement应该可以避免这种情况，但PositionPlacement UnderMouse会自动在鼠标指针所在位置打开窗口覆盖其它窗口，又因为指针在窗口上，根据SloppyFocus又会自动获得焦点，
+# 所有不用再指定在新打开的xterm窗口上加Raise和Focus
+#Key 4 A 4 Exec  exec emacs --geometry 169x48+0+0
+#Key  4 A 4 Exec-emacs
+Key  4 A 4 Exec exec emacs
+Key 5 W 4 Move-Focus-Raise
+Key 0 W 4 Close
+
+AddToFunc Move-Focus-Raise
++ I Move
++ I Focus
++ I Raise
+
+AddToFunc Exec-xterm
++ I Exec exec xterm 
++ I Focus
++ I Raise
+
+AddToFunc Exec-emacs
++ I Exec exec emacs
++ I Focus
++ I Raise
+
+#############键盘操作图标###########################
+Key 1 I 4 Iconify-Off-Focus-Raise
+Key 2 I 4 Maximize-Icon
+Key 5 I 4 Move-Focus-Raise
+Key 0 I 4 Close
+
+AddToFunc Iconify-Off-Focus-Raise
++ I Iconify Off
++ I Focus
++ I Raise
+
+AddToFunc Maximize-Icon
++ I Iconify Off
++ I Maximize
++ I Focus
++ I Raise
+
+########################   END   #######################################
+
+################Desktop and Page#####################
+# Desk and Page, DesktopSize set how many pages and to squence on one desk, page and desk are short for pager and desktop, I think
+DeskTopSize 3x3
+
+# A in the third position of Key means Anywhere, M means Meta also called Alt
+Key 1 A M GoToPage 0 0
+Key 2 A M GoToPage 1 0
+Key 3 A M GoToPage 2 0
+Key 4 A M GoToPage 0 1
+Key 5 A M GoToPage 1 1
+Key 6 A M GoToPage 2 1
+Key 7 A M GoToPage 0 2
+Key 8 A M GoToPage 1 2
+Key 9 A M GoToPage 2 2
+
+# create desktop and name it
+DesktopName 0 Main
+DesktopName 1 Game
+DesktopName 2 Work
+DesktopName 3 Fun
+# A means Anywhere, C means Control, it's called Desk in fvwm1, and called GotoDesk in fvwm2, see details on manual
+# the desktop start with 0, but 0 means end in my bind keys, like super(or call windows)-0 end current window, C-0 end current desktop
+Key 1 A C GotoDesk 0 0
+Key 2 A C GotoDesk 0 1
+Key 3 A C GotoDesk 0 2
+Key 4 A C GotoDesk 0 3
+Key 0 A C Quit
+
+# Ctrl-Tab切换窗口时，鼠标总是自动跳到切换窗口的左上角，导致只能通过点击或数字键来切换窗口，加下面这句可让鼠标指针不再自动跳转到左上角，然后可以通过Tab键来切换窗口
+AddToFunc WindowListFunc
++ I WarpToWindow 50 50
+
+# Key Tab A M WindowList Root c c总是需要按2下才能切换到下个窗口，使用下面这个函数可以按一下切换到下一个窗口
+#`Key Tab A M WindowList Root c c` need to press twice for switching window, make a function can solve this case
+AddToFunc SwitchToWindow
++ I WindowListFunc 
+
+# NoGeometryWithInfo是WindowList的选项,在tty1打开Xorg :0跑fvwm1,在tty2打开Xorg :1跑fvwm2,在fvwm2上可以按一下C-Tab切窗口也可按多下切任意窗口，但是
+# 如果直接在tty1打开Xorg :0跑fvwm2而不打开其它Xorg,按一下可切窗口，但无法连按多下切任意窗口
+# 知道原因了，因为fvwm1开启了xmodmap把Tab映射成了Meta_L,而在fvwm2上没开xmodmap
+# 在xmodmap中取消Tab的映射或修改切换窗口的快捷键, 现在修改为Super键加Meta_L切换窗口,xmodmap映射Tab为按一下释放是Tab,按住组合其它键是Meta_L是为了M-v在emacs中，映射可用xcape实现
+# 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，因为还需要修改SelectOnRelease就不改了,只能修改xmodmap和xcape了，取消Tab键的映射
+#Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
+Key Tab A M WindowList ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
+
+
+
+
+###################################编译和位置#########################################################
+# when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
+ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
+
+# write /home/jusss/icons on the ImagePath, use the icon.svg directly in the ButtonStyle, and it doesn't work, it still can't find it even write path on ImagePath
+# so you can only use absolute path in the ButtonStyle
+ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/share/icons:/usr/share/pixmaps:/usr/include/X11/pixmaps:/usr/include/X11/bitmaps:/usr/X11R6/include/bitmaps:/home/jusss/icons
+
+# reference:
+# http://blog.chinaunix.net/uid-173934-id-2801039.html
+# http://blog.chinaunix.net/uid-45094-id-3012147.html
+# http://blog.chinaunix.net/uid-20399870-id-1687821.html
+# http://forum.ubuntu.org.cn/viewtopic.php?t=192004
+# http://wenku.baidu.com/view/69d8e80c844769eae009ed09.html
+# http://forum.ubuntu.org.cn/viewforum.php?f=168
+
+# this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
+# 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句
+Style "*"  NoTitle, NoHandles
