@@ -118,3 +118,9 @@
 ;; display time on mode bar
 (display-time-mode 1)
 (require 'w3m-load)
+
+;;; disable auto fill mode, if it enable, input like 'a b RET c', it maybe change to 'a RET b c', special when you're composing mail in gnus
+;;; use C-h m or M-x describe-mode to get the name of major mode in current buffer
+;;; and add hook to disable auto-fill-mode
+(add-hook 'message-mode-hook 'turn-off-auto-fill)
+
