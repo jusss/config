@@ -1,0 +1,32 @@
+# C-a esc Enter copy/scrollback mode. then C-f C-b will scroll page just like vi, in copy mode, press space will mark a position as beginningh
+# press space again will mark a position as ending, C-a ] will paste this paragraph
+# C-a a will jump to head of line just like emacs, C-s C-p C-n will work like emacs, and h i j k will work like vi
+# C-a x will lock screen, C-a s will disable output messages on the monitor and C-a q will enable
+# scroll page with mouse in copy mode
+termcapinfo xterm* ti@:te@
+
+# support 256 color
+term xterm-256color
+
+# turn off startup mesg
+startup_message off
+
+# buffer's line
+defscrollback 40000
+
+# execute .bashrc .profile /etc/profile
+shell -$SHELL
+
+# set default encoding using utf8
+defutf8 on
+defencoding utf8
+encoding utf8 utf8
+
+# shutdown the noise
+vbell off
+
+# erase text with background color
+defbce "on"
+
+# auto detach when it disconnect
+autodetach on
