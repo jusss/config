@@ -1,6 +1,7 @@
 # C-a esc Enter copy/scrollback mode. then C-f C-b will scroll page just like vi, in copy mode, press space will mark a position as beginningh
 # press space again will mark a position as ending, C-a ] will paste this paragraph
-# C-a a will jump to head of line just like emacs, C-s C-p C-n will work like emacs, and h i j k will work like vi
+# in copy mode, C-a a will jump to head of line just like emacs, C-s C-p C-n will work like emacs, and h i j k will work like vi
+# when you open emacs -nw in screen, C-a a will send C-a message to emacs
 # C-a x will lock screen, C-a s will disable output messages on the monitor and C-a q will enable
 # scroll page with mouse in copy mode
 termcapinfo xterm* ti@:te@
