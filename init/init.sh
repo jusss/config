@@ -4,5 +4,6 @@
 
 
 ~/lab/xcape.sh &
-~/lab/network.sh &
-~/lab/m-notify.py
+~/lab/network.sh
+# sleep 3
+# ~/lab/m-notify.py
