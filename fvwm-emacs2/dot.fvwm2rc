@@ -431,7 +431,7 @@ Key 1 A C GotoDesk 0 0
 Key 2 A C GotoDesk 0 1
 Key 3 A C GotoDesk 0 2
 Key 4 A C GotoDesk 0 3
-Key 0 A C Quit
+#Key 0 A C Quit
 
 # Ctrl-Tab切换窗口时，鼠标总是自动跳到切换窗口的左上角，导致只能通过点击或数字键来切换窗口，加下面这句可让鼠标指针不再自动跳转到左上角，然后可以通过Tab键来切换窗口
 AddToFunc WindowListFunc
