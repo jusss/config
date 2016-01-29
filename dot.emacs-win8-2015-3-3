@@ -100,3 +100,6 @@
 ;; if do not, emacs will invoke python interpreter with the Path environment of Windows OS
 ;; it must be in python-mode buffer that use M-x python-shell-switch-to-shell or C-c C-z to invoke python interpreter 
 ;(setq python-shell-interpreter "D:/python3.4.2/python.exe")
+;(autoload 'python-mode "python-mode.el" "Python mode." t)
+;(setq auto-mode-alist (append '(("/.*\.py\'" . python-mode)) auto-mode-alist))
+
