@@ -22,6 +22,10 @@
 (ido-mode t)
 (global-set-key (kbd "C-,") 'ido-switch-buffer)
 (global-set-key (kbd "C-;") 'set-mark-command)
+;;; emacs -nw in screen, C-; doesn't work, so set M-; as set-mark-command
+;;;M-; runs the command comment-dwim, which is an interactive compiled
+;;;Lisp function in `newcomment.el'.
+(global-set-key (kbd "M-;") 'set-mark-command)
 ;;; C-u C-; jump to the previous mark position only in local buffer
 ;;; C-x C-; jump to the previous mark position in global buffer
 (global-set-key (kbd "C-x C-;") 'pop-global-mark)
