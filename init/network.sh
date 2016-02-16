@@ -2,7 +2,7 @@
 killall wpa_supplicant > /dev/null 2>&1
 sleep 1
 # wpa_supplicant -iwlp3s0 -c ~/networks/home -Dwext -d >> ~/lab/log 2>&1 &
-wpa_supplicant -i wlp3s0 -c ~/networks/home > /dev/null 2>&1 &
+wpa_supplicant -iwlp3s0 -c ~/networks/home -Dnl80211 > /dev/null 2>&1 &
 sleep 2
 # ip address, subnet mask, broadcast address, device interface
 ip addr add 192.168.2.254/24 broadcast 192.168.2.255 dev wlp3s0
