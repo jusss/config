@@ -1,0 +1,9 @@
+1. wifi, compile rtl8723bs module, download from github
+2. touch screen, compile gt9xx module, download from github
+3. clocksource, give 'linux /boot/vmlinuz-4.4.1 root=/dev/mmcblk0p20 rw 
+   irqpoll clocksource=tsc i915.modeset=1 threadirqs intel_iommu=igfx-off tsc=reliable' to grub2
+4. charge, CONFIG_AXP288_FUEL_GAUGE=y  
+5. mmc, don't respond anything when writing mmc though downloading files, unsolved
+6. soundcard, proper drivers not found, unsolved
+7. apci, unsolved, use alias standby='xset dpms force standby' in .bashrc to keep screen sleep
+ 
