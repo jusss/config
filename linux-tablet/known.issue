@@ -1,9 +1,48 @@
-1. wifi, compile rtl8723bs module, download from github
-2. touch screen, compile gt9xx module, download from github
-3. clocksource, give 'linux /boot/vmlinuz-4.4.1 root=/dev/mmcblk0p20 rw 
-   irqpoll clocksource=tsc i915.modeset=1 threadirqs intel_iommu=igfx-off tsc=reliable' to grub2
-4. charge, CONFIG_AXP288_FUEL_GAUGE=y  
-5. mmc, don't respond anything when writing mmc though downloading files, unsolved
-6. soundcard, proper drivers not found, unsolved
-7. apci, unsolved, use alias standby='xset dpms force standby' in .bashrc to keep screen sleep
- 
+1. wifi, compile rtl8723bs module, download from github.
+2. touch screen, compile gt9xx module, download from github.
+3. clocksource unstable, use 'clocksource=tsc tsc=reliable force_tsc_stable=1 clocksource_failover=tsc' in grub2.
+4. charge, set 'CONFIG_AXP288_FUEL_GAUGE=y' when compiling kernel.
+5. mmc, don't respond anything when writing mmc though downloading files, unsolved.
+6. soundcard, proper drivers not found, unsolved.
+7. apci, unsolved, use alias standby='xset dpms force standby' in .bashrc to keep screen sleep.
+8. random freeze,  give 'intel_idle.max_cstate=1' to linux line in grub2, it will not be random freeze. 
+   DO NOT use 'irqpoll i915.modeset=1 threadirqs intel_iommu=igfx-off',
+   if you use them, and it will still be random freeze.
+9. bluetooth, unsolved.
+
+
+
+$ cat linux-tablet/grub.cfg 
+menuentry 'debian 4.4.1'{
+insmod efi_gop
+insmod efi_uga
+insmod video_bochs
+insmod video_cirrus
+insmod all_video
+insmod gzio
+insmod part_gpt
+insmod ext2
+set gfxpayload=keep
+set root=(hd1,gpt20)
+# https://communities.intel.com/thread/60984
+# https://bugzilla.kernel.org/show_bug.cgi?id=109051
+# some parameters will cause intel baytrail cpu random freeze, even use intel_idle.max_cstate=1 parameter, so don't use other parameters
+# linux /boot/vmlinuz-4.4.1 root=/dev/mmcblk0p20 rw irqpoll i915.modeset=1 threadirqs intel_iommu=igfx-off clocksource=tsc tsc=reliable force_tsc_stable=1 clocksource_failover=tsc intel_idle.max_cstate=1
+linux /boot/vmlinuz-4.4.1 root=/dev/mmcblk0p20 rw clocksource=tsc tsc=reliable force_tsc_stable=1 clocksource_failover=tsc intel_idle.max_cstate=1
+initrd /boot/initrd.img-4.4.1
+} 
+menuentry 'debian 3.16.0'{
+insmod efi_gop
+insmod efi_uga
+insmod video_bochs
+insmod video_cirrus
+insmod all_video
+insmod gzio
+insmod part_gpt
+insmod ext2
+set gfxpayload=keep
+set root=(hd1,gpt20)
+linux /boot/vmlinuz-3.16.0-4-amd64 root=/dev/mmcblk0p20 rw clocksource=tsc tsc=reliable force_tsc_stable=1 clocksource_failover=tsc intel_idle.max_cstate=1
+
+initrd /boot/initrd.img-3.16.0-4-amd64
+}
