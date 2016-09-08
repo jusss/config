@@ -1,3 +1,4 @@
+        debian jessie on intel baytrail z3735f tablet cube i6 air
 1. wifi, compile rtl8723bs module, download from github.
 2. touch screen, compile gt9xx module, download from github.
 3. clocksource unstable, use 'clocksource=tsc tsc=reliable force_tsc_stable=1 clocksource_failover=tsc' in grub2.
