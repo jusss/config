@@ -1,0 +1,15 @@
+http://cn.bing.com/search?q=intel+baytrail+linux&qs=n&pq=intel+baytrail+linux&sc=1-19&sp=-1&sk=&cvid=8E1A95DC7C8E4B90B012A526559861CA&first=11&FORM=PORE
+random freeze bug https://communities.intel.com/thread/60984
+random freeze https://bugzilla.kernel.org/show_bug.cgi?id=109051
+patch for random freeze https://github.com/hadess/rtl8723bs/tree/master/patches
+driver for wifi https://github.com/hadess/rtl8723bs
+patch for random freeze https://github.com/hadess/rtl8723bs/tree/master/patches_4.5
+patch for random freeze https://lkml.org/lkml/2015/3/24/271
+driver and patch http://www.jfwhome.com/2014/03/07/perfect-ubuntu-or-other-linux-on-the-asus-transformer-book-t100/
+http://www.jfwhome.com/2016/01/04/latest-steps-to-install-ubuntu-on-the-asus-t100ta/
+driver and patch https://github.com/jfwells/linux-asus-t100ta/tree/master/patches
+bluetooth http://bbs.teclast.com/thread-403341-1-1.html
+bluetooth driver https://github.com/lwfinger/rtl8723bs_bt
+bluetooth patch for kernel  https://github.com/lwfinger/rtl8723bs_bt/issues/7
+https://raw.githubusercontent.com/Manouchehri/vi8/master/Ubuntu_support_files/rfkill.patch
+
