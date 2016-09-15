@@ -1,23 +1,23 @@
         debian jessie on intel baytrail z3735f tablet cube i6 air
-1. wifi, compile rtl8723bs module, download from github.
-2. touch screen, compile gt9xx module, download from github.
+1. wifi, compile rtl8723bs module, download from github.com/hadess/rtl8723bs.git
+2. touch screen, compile gt9xx module, download from github.com/hadess/gt9xx.git
 3. clocksource unstable, use 'clocksource=tsc tsc=reliable' in grub2.
 4. charge, set 'CONFIG_AXP288_FUEL_GAUGE=y' when compiling kernel.
-5. mmc, don't respond anything when writing mmc though downloading files, unsolved.
+5. mmc, don't respond anything when writing mmc though downloading files, unsolved. maybe it's random freeze bug.
 6. soundcard, proper drivers not found, unsolved.
 7. apci, unsolved, use alias standby='xset dpms force standby' in .bashrc to keep screen sleep.
 8. random freeze,  give 'intel_idle.max_cstate=1' to linux line in grub2, it will not be random freeze. 
    DO NOT use 'irqpoll i915.modeset=1 threadirqs intel_iommu=igfx-off',
    if you use them, and it will still be random freeze.
-    or patch for kernel, https://github.com/hadess/rtl8723bs/tree/master/patches_4.5 will solve this issue either.
+    or patch for kernel, https://github.com/hadess/rtl8723bs/tree/master/patches.git will solve this issue either.
 9. bluetooth, see https://github.com/lwfinger/rtl8723bs_bt/issues/7
     'CONFIG_RFKILL_GPIO=m' in kernel config, and '{ "OBDA8723", RFKILL_TYPE_BLUETOOTH },' in net/rfkill/rfkill-gpio.c
     https://raw.githubusercontent.com/Manouchehri/vi8/master/Ubuntu_support_files/rfkill.patch
     then compile kernel and install https://github.com/lwfinger/rtl8723bs_bt and https://github.com/hadess/rtl8723bs 
-    and patch https://github.com/hadess/rtl8723bs/tree/master/patches_4.5
+    and patch https://github.com/hadess/rtl8723bs/tree/master/patches
 10. poweroff, 3.16.0 of debian jessie can poweroff and reboot normally. but 4.4.1 NOT
     there's a patch about poweroff and reboot for old kernel, see https://github.com/jfwells/linux-asus-t100ta/tree/master/patches
-11. mouse, unsolved
+11. usb mouse, compile gt9xx modules, github.com/hadess/gt9xx.git
 
 reference:
 http://cn.bing.com/search?q=intel+baytrail+linux&qs=n&pq=intel+baytrail+linux&sc=1-19&sp=-1&sk=&cvid=8E1A95DC7C8E4B90B012A526559861CA&first=11&FORM=PORE
