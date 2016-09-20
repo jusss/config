@@ -1,3 +1,4 @@
+#vim character override issue, caught by default ~/.bashrc, delete it and touch new ~/.bashrc will be fine
 # alias ec='emacsclient -t'
 alias ec='emacs -nw'
 alias halt='halt -p'

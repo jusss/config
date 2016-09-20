@@ -1,5 +1,6 @@
 "there's no space in options or parameters, otherwise, it will be errors"
 "encoding error, set fileencoding and reload, not set encoding"
+"vim character override issue, caught by default ~/.bashrc, delete it and touch new ~/.bashrc will be fine"
 "set number"
 "set cursorline"
 set encoding=utf-8
