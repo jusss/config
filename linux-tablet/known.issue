@@ -18,6 +18,7 @@
 10. poweroff, 3.16.0 of debian jessie can poweroff and reboot normally. but 4.4.1 NOT
     there's a patch about poweroff and reboot for old kernel, see https://github.com/jfwells/linux-asus-t100ta/tree/master/patches
 11. usb mouse, compile gt9xx modules, github.com/hadess/gt9xx.git
+12. batter status, workaround with https://github.com/zhaofengli/iwork8/blob/master/scripts/battery.sh, install libi2c-dev and compile test_power module
 
 reference:
 http://cn.bing.com/search?q=intel+baytrail+linux&qs=n&pq=intel+baytrail+linux&sc=1-19&sp=-1&sk=&cvid=8E1A95DC7C8E4B90B012A526559861CA&first=11&FORM=PORE
@@ -35,3 +36,8 @@ bluetooth driver https://github.com/lwfinger/rtl8723bs_bt
 bluetooth patch for kernel  https://github.com/lwfinger/rtl8723bs_bt/issues/7
 https://raw.githubusercontent.com/Manouchehri/vi8/master/Ubuntu_support_files/rfkill.patch
 
+batter status
+http://www.gossamer-threads.com/lists/linux/kernel/2091627
+https://github.com/zhaofengli/iwork8/blob/master/scripts/battery.sh
+https://github.com/Icenowy/axpd/blob/master/axpd.sh
+https://bugzilla.kernel.org/show_bug.cgi?id=88471#c31
