@@ -3,6 +3,7 @@
 ;;; emacs config for archlinux
 
 ;;; slime for common lisp, geiser for scheme, elpy for python
+;;; cider for clojure, eclim for java, inf-ruby for ruby
 ;;; scroll up/down for reading 
 ;;; (global-set-key (kbd "z") 'scroll-up-command)
 ;;; (global-set-key (kbd "a") 'scroll-down-command)
