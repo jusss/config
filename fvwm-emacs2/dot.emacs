@@ -2,6 +2,7 @@
 ;;; C-h a read-only RET get C-x C-q will change the current buffer to read-only mode, or you can change the file to read-only with chmod command
 ;;; emacs config for archlinux
 
+;;; slime for common lisp, geiser for scheme, elpy for python
 ;;; scroll up/down for reading 
 ;;; (global-set-key (kbd "z") 'scroll-up-command)
 ;;; (global-set-key (kbd "a") 'scroll-down-command)
