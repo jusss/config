@@ -1,0 +1,125 @@
+Section "ServerLayout"
+	Identifier     "X.org Configured"
+	Screen      0  "Screen0" 0 0
+	InputDevice    "Mouse0" "CorePointer"
+	InputDevice    "Keyboard0" "CoreKeyboard"
+EndSection
+
+Section "Files"
+	ModulePath   "/usr/lib/xorg/modules"
+	FontPath     "/usr/share/fonts/X11/misc"
+	FontPath     "/usr/share/fonts/X11/cyrillic"
+	FontPath     "/usr/share/fonts/X11/100dpi/:unscaled"
+	FontPath     "/usr/share/fonts/X11/75dpi/:unscaled"
+	FontPath     "/usr/share/fonts/X11/Type1"
+	FontPath     "/usr/share/fonts/X11/100dpi"
+	FontPath     "/usr/share/fonts/X11/75dpi"
+	FontPath     "/var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType"
+	FontPath     "built-ins"
+EndSection
+
+Section "Module"
+	Load  "glx"
+	Load  "dri"
+	Load  "extmod"
+	Load  "dbe"
+	Load  "dri2"
+	Load  "record"
+EndSection
+
+Section "InputDevice"
+	Identifier  "Keyboard0"
+	Driver      "kbd"
+EndSection
+
+Section "InputDevice"
+	Identifier  "Mouse0"
+	Driver      "mouse"
+	Option	    "Protocol" "auto"
+	Option	    "Device" "/dev/input/mice"
+	Option	    "ZAxisMapping" "4 5 6 7"
+EndSection
+
+Section "Monitor"
+	Identifier   "Monitor0"
+	VendorName   "Monitor Vendor"
+	ModelName    "Monitor Model"
+EndSection
+
+Section "Device"
+        ### Available Driver options are:-
+        ### Values: <i>: integer, <f>: float, <bool>: "True"/"False",
+        ### <string>: "String", <freq>: "<f> Hz/kHz/MHz"
+        ### [arg]: arg optional
+	### this config is at 2016-11-11, archlinux on eeepc
+	### because intel video driver prolem that new driver will cause screen tear with sna accel method
+	### so use uxa, or remove entirely intel DDX, use modesetting
+        Option     "AccelMethod"        	"uxa"
+	#Option    "AccelMethod"                "sna"
+        Option     "DRI"                	"3"
+	#Option    "DRI"                        "2"
+        #Option     "ColorKey"           	# <i>
+        #Option     "VideoKey"           	# <i>
+        #Option     "FallbackDebug"      	# [<bool>]
+        #Option     "Tiling"             	# [<bool>]
+        #Option     "Shadow"             	# [<bool>]
+        Option     "SwapbuffersWait"    	"true"
+        Option     "TearFree"			"true"
+        #Option     "XvMC"               	# [<bool>]
+        #Option     "XvPreferOverlay"    	# [<bool>]
+        #Option     "DebugFlushBatches"  	# [<bool>]
+        #Option     "DebugFlushCaches"   	# [<bool>]
+        #Option     "DebugWait"          	# [<bool>]
+	Identifier  "Card0"
+	Driver      "intel"
+	VendorName  "Intel Corporation"
+	BoardName   "N10 Family Integrated Graphics Controller"
+	BusID       "PCI:0:2:0"
+EndSection
+
+Section "Screen"
+	Identifier "Screen0"
+	Device     "Card0"
+	Monitor    "Monitor0"
+	SubSection "Display"
+		Viewport   0 0
+		Depth     1
+	EndSubSection
+	SubSection "Display"
+		Viewport   0 0
+		Depth     4
+	EndSubSection
+	SubSection "Display"
+		Viewport   0 0
+		Depth     8
+	EndSubSection
+	SubSection "Display"
+		Viewport   0 0
+		Depth     15
+	EndSubSection
+	SubSection "Display"
+		Viewport   0 0
+		Depth     16
+	EndSubSection
+	SubSection "Display"
+		Viewport   0 0
+		Depth     24
+	EndSubSection
+EndSection
+
+Section "InputClass"
+	Identifier "touchpad"
+	Driver "synaptics"
+	MatchIsTouchpad "on"
+		Option "TapButton1" "1"
+		Option "TapButton2" "2"
+		Option "TapButton3" "3"
+		Option "VertEdgeScroll" "on"
+		Option "VertTwoFingerScroll" "on"
+		Option "HorizEdgeScroll" "on"
+		Option "HorizTwoFingerScroll" "on"
+		Option "CircularScrolling" "on"
+		Option "CircScrollTrigger" "2"
+		Option "EmulateTwoFingerMinZ" "40"
+		Option "EmulateTwoFingerMinW" "8"
+EndSection
