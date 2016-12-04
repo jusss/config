@@ -1,0 +1,26 @@
+### this is /etc/systemd/system/battery.notifier.service
+### and it must be in /etc/systemd/system/
+### if Type=forking then get an error when it start, and I don't why
+###
+### systemctl daemon-reload
+### systemctl enable battery.notifier.service
+### systemctl start battery.notifier.service
+### systemctl status battery.notifier.service
+### journalctl -u battery.notifier.service
+###
+### systemctl stop battery.notifier will stop it and it doesn't need ExecStop
+### but if there's ExecStop, systemctl stop will use it
+### the default file type is service not target, so you can use battery.notifier short for battery.notifier.service
+### systemd does not understand shell syntax, it means you can't use $() or & in ExecStart, and it must use absolute path
+
+[Unit]
+Description=Battery Notifier
+#After=sound.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/jusss/lab/battery.eeepc.py
+
+[Install]
+WantedBy=multi-user.target
+
