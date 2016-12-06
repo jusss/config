@@ -1,7 +1,9 @@
-### this is /etc/systemd/system/battery.notifier.service
+### http://www.jinbuguo.com/systemd/systemd.service.html
+### http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
+### https://zh.opensuse.org/openSUSE:How_to_write_a_systemd_service
+### if you need send C-c to terminal let it be done, that's not forkking Type, you should use simple Type
+### this file is /etc/systemd/system/battery.notifier.service
 ### and it must be in /etc/systemd/system/
-### if Type=forking then get an error when it start, and I don't why
-###
 ### systemctl daemon-reload
 ### systemctl enable battery.notifier.service
 ### systemctl start battery.notifier.service
@@ -15,11 +17,16 @@
 
 [Unit]
 Description=Battery Notifier
-#After=sound.target
+### run after dnsmasq, because when I open dnsmasq after Xorg by hand, and it needs Xorg
+After=dnsmasq.service
 
 [Service]
 Type=simple
+Environment="DISPLAY=:0"
 ExecStart=/usr/bin/python3 /home/jusss/lab/battery.eeepc.py
+# RestartSec=60
+# TimeoutStartSec=120
+Restart=no
 
 [Install]
 WantedBy=multi-user.target
