@@ -61,10 +61,17 @@
 
 ;;; set mail address as alias, to write alias me "x@x.org" into ~/.mailrc, and input me after
 ;;; To: on gnus and hit space , it will transform to x@x.org
+;;; display pictures in gnus with w3m https://norman.walsh.name/2011/03/10/w3m
 
 (setq-default
  user-mail-address "x@x.org"
- mm-text-html-renderer 'gnus-w3m
+ ;;;mm-text-html-renderer 'gnus-w3m will not display pictures
+ mm-text-html-renderer 'w3m
+ mm-w3m-safe-url-regexp nil
+ mm-inline-text-html-with-images t
+ ;;;gnus-inhibit-images nil
+ ;;;browse-url-browser-function 'w3m-browse-url
+ ;;;gnus-mime-display-multipart-related-as-mixed nil
  gnus-group-line-format "%M%S%5y/%R:%B%(%g%)\n"
  gnus-summary-line-format "%U%R%z %(%&user-date; %-15,15f %B%s%)\n"
  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
