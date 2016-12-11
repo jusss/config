@@ -15,6 +15,8 @@
 ### the default file type is service not target, so you can use battery.notifier short for battery.notifier.service
 ### systemd does not understand shell syntax, it means you can't use $() or & in ExecStart, and it must use absolute path
 
+# 1. $xhost +local: 2. Environment="DISPLAY=:0.0"  you can call gui script from systemd service
+
 [Unit]
 Description=Battery Notifier
 ### run after dnsmasq, because when I open dnsmasq after Xorg by hand, and it needs Xorg
@@ -22,7 +24,7 @@ After=dnsmasq.service
 
 [Service]
 Type=simple
-Environment="DISPLAY=:0"
+Environment="DISPLAY=:0.0"
 ExecStart=/usr/bin/python3 /home/jusss/lab/battery.eeepc.py
 # RestartSec=60
 # TimeoutStartSec=120
