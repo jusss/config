@@ -14,4 +14,5 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias suspend='echo mem|sudo tee /sys/power/state'
 alias hibernate='echo disk|sudo tee /sys/power/state'
+# systemctl hibernate and suspend will cause power loss
 
