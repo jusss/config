@@ -1,3 +1,5 @@
 fcitx &
-###exec ~/lab/battery.eeepc.py &  run it via systemd service, xhost +local: and env DISPLAY=:0.0, ENVIRONMENT="DISPLAY=:0.0" in Service Section of service file
+### give access of connecting X to local program, and should use env DISPLAY=:0.0 command
+xhost +local: &
+### window manager must be the last program to run, and no &
 exec fvwm2
