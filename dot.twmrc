@@ -1,0 +1,125 @@
+FramePadding        0
+BorderWidth        1
+NoHighlight
+RandomPlacement
+NoGrabServer
+AutoRelativeResize
+OpaqueMove
+
+UsePPosition        "on"
+NoSaveUnders
+#NoMenuShadows
+InterPolateMenuColors
+
+NoCaseSensitive
+ShowIconManager
+#SortIconManager
+IconManagerGeometry     "1280+0+0" 10
+IconManagerDontShow    { "xclock" }
+
+IconBorderWidth        1
+#East(=Right) West(=Left) South(=Buttom) North(=Top)
+IconRegion        "1280x700-0-0" South East 10 10
+ForceIcons
+IconDirectory        "~/"
+UnknownIcon        "t.xbm"
+Icons
+{
+    "xcalc"        "t.xbm"
+    "xterm"        "t.xbm"
+    "top"        "t.xbm"
+    "gqview"    "t.xbm"
+    "gimp"        "t.xbm"
+    "Bon Echo"    "t.xbm"
+    "thunar"    "t.xbm"
+    "mousepad"    "t.xbm"
+}
+
+Color
+{
+    TitleForeground    "#b46b3e"
+    TitleBackground    "#562a16"
+
+    MenuForeground    "#c5885b"
+    MenuBackground    "#844222"
+    MenuBorderColor    "#844222"
+
+    IconForeground    "#b46b3e"
+    IconBackground    "#23110d"
+    IconBorderColor    "#23110d"
+
+#    IconManagerHighlight    "#c5885b"
+    IconManagerForeground    "#b46b3e"
+    IconManagerBackground    "#23110d"
+    BorderColor    "#562a16" { "TWM Icon Manager" "#23110d" "xclock" "#23110d"}
+}
+
+Button1 = m     : w|i     : f.move
+Button1 = s    : w     : f.resize
+Button3 =     : r     : f.menu "RootMenu"
+Button3 = m     : w     : f.delete
+Button4 = m     : w     : f.fullzoom
+Button5 = m     : w     : f.iconify
+
+"Up"     = m     : w     : f.fullzoom
+"Down"     = m     : w     : f.iconify
+"Right" = c     : w     : f.delete
+
+
+menu "RootMenu"
+{
+    "  Xterm"    ! "xterm -sl 255 &"
+    "  Links"    ! "xterm -e links &"
+    "  OFFICE"    f.menu "OfficeMenu"
+    "  NETWORK"    f.menu "NetworkMenu"
+    "  SYSTEM"    f.menu "SystemMenu"
+    "  GAME"    f.menu "GameMenu"
+    "  Restart"    f.restart
+    "  Quit"    f.quit
+}
+
+menu "OfficeMenu"
+{
+    " Thunar"    ! "thunar &"
+    " GQview "    ! "gqview &"
+    " Xclac"    ! "xcalc &"
+}
+
+menu "NetworkMenu"
+{
+    " Firefox "    ! "firefox &"
+}
+
+menu "SystemMenu"
+{
+    " Top"        ! "xterm -e top &"
+    " Mousepad "    ! "mousepad &"
+}
+
+menu "GameMenu"
+{
+    " Uxterm "    ! "uxterm &"
+}
+
+Cursors
+{
+    Title        "left_ptr"
+    Frame        "left_ptr"
+    Menu        "left_ptr"
+    Icon        "left_ptr"
+    Iconmgr        "left_ptr"
+}
+
+NoTitle
+{
+    "thunar"
+    "gqview"
+    "gimp"
+    "Bon Echo"
+    "mousepad"
+    "xload"
+    "xclock"
+    "xcalc"
+    "xterm"
+    "TWM Icon Manager"
+}
