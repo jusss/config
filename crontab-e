@@ -1,0 +1,4 @@
+### use `crontabe -e` edit crontab, another way is /etc/cron.d/
+10,40 * * * * offlineimap&
+15,45 * * * * ~/lab/check-for-new-mail.py
+30,35 18,22 * * 0,3,6 env DISPLAY=:0.0 ~/lab/notifier.py "Game" "Game!" 
