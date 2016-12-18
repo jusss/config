@@ -15,11 +15,12 @@
 ### the default file type is service not target, so you can use battery.notifier short for battery.notifier.service
 ### systemd does not understand shell syntax, it means you can't use $() or & in ExecStart, and it must use absolute path
 
-# 1. $xhost +local: 2. Environment="DISPLAY=:0.0"  you can call gui script from systemd service
-
 [Unit]
 Description=Battery Notifier
 ### run after dnsmasq, because when I open dnsmasq after Xorg by hand, and it needs Xorg
+### it seems wrong way to do this, I set systemctl enable battery.notifier, and I don't set systemctl enable dnsmasq.service
+### and it still auto run, I set systemctl disable battery.notifier and I systemctl start dnsmasq.service, it don't auto run
+Requires=dnsmasq.service
 After=dnsmasq.service
 
 [Service]
