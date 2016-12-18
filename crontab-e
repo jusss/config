@@ -1,5 +1,10 @@
 ### use `crontabe -e` edit crontab, another way is /etc/cron.d/
+### minute hour day month week(0 is sunday) 
+### * means every, if it's in minute position then every minute, 
+### */5 means the numbers can be divided by 5, like 0 5 10 15 20 ...
+### 5-7 means 5 6 7
+### 5,6,7 means 5 6 7
 10,40 * * * * offlineimap&
-### 15,45 * * * * env DISPLAY=:0.0 ~/lab/check-for-new-mail.py
+### or use 15,37 * * * * env DISPLAY=:0.0 ~/lab/check-for-new-mail.py
 15,45 * * * * ~/lab/check-for-new-mail.py
 30,35 18,22 * * 0,3,6 env DISPLAY=:0.0 ~/lab/notifier.py "Game" "Game!" 
