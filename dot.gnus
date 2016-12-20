@@ -1,3 +1,4 @@
+;;; set alias in ~/.mailrc like `alias name name@where.org`
 ;;;change gnus to read mail from local folder created by offlineimap not server
 ;(setq gnus-select-method
 ;     '(nnimap "my mail"
@@ -39,11 +40,11 @@
   (setq message-default-mail-headers
 	"Bcc: x@x.com, x@x.com\n"))
  
-;;;Select automatically while replying 
+;;;Select automatically while replying , also set default send mailbox when no new mail
 (add-hook 'message-mode-hook
  	  '(lambda ()
- 	     (cond ((string-match "qq:" gnus-newsgroup-name) (setqq))
-		   (t (setjusss)))))
+ 	     (cond ((string-match "jusss:" gnus-newsgroup-name) (setjusss))
+		   (t (setqq)))))
  
 (setq message-sendmail-f-is-evil 't)
 (setq message-send-mail-function 'message-send-mail-with-sendmail)
@@ -67,8 +68,10 @@
  user-mail-address "x@x.org"
  ;;;mm-text-html-renderer 'gnus-w3m will not display pictures
  mm-text-html-renderer 'w3m
- mm-w3m-safe-url-regexp nil
- mm-inline-text-html-with-images t
+ mm-w3m-safe-url-regexp t
+ ;;;mm-w3m-safe-url-regexp nil
+ ;;;mm-inline-text-html-with-images t
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  ;;;gnus-inhibit-images nil
  ;;;browse-url-browser-function 'w3m-browse-url
  ;;;gnus-mime-display-multipart-related-as-mixed nil
