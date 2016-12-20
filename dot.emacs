@@ -175,7 +175,11 @@
 ;;; disable auto fill mode, if it enable, input like 'a b RET c', it maybe change to 'a RET b c', special when you're composing mail in gnus
 ;;; use C-h m or M-x describe-mode to get the name of major mode in current buffer
 ;;; and add hook to disable auto-fill-mode
-(add-hook 'message-mode-hook 'turn-off-auto-fill)
+;;;(add-hook 'message-mode-hook 'turn-off-auto-fill)
+;;;`C-q SPC' or `C-q LFD' (recall that a newline is really a linefeed).
+;;;Also, `C-o' inserts a newline without line breaking.
+;;;http://www.cs.cmu.edu/cgi-bin/info2www?(emacs)Auto%20Fill
+(add-hook 'message-mode-hook 'turn-on-auto-fill)
 
 ;;; elpa is emacs's package manager, use it to install like geiser slime elpy
 ;;;geiser is for scheme, slime is for common lisp, and elpy is for python
