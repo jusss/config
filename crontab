@@ -1,3 +1,5 @@
+### env EDITOR=/usr/bin/vim crontab -e   
+### or write `export EDITOR=/usr/bin/vim` into ~/.bashrc
 ### use `crontabe -e` edit crontab, another way is /etc/cron.d/
 ### minute hour day month week(0 is sunday) 
 ### * means every, if it's in minute position then every minute, 
