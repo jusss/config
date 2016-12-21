@@ -223,6 +223,16 @@
 	  (lambda()
 	    (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
 	    (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
+;;; set buffer's maximum line, 0 means no limit
+;;; (add-hook 'term-mode-hook
+;;;     (lambda ()
+;;;          (setq term-buffer-maximum-size 4096)))
+;;; you can turn off some minor mode (major mode, minor mode), put some function
+;;; into mode's hook to disable some function like (auto-fill-mode -1) disable auto-fill-mode in minor mode
+;;; (add-hook 'term-mode-hook
+;;;     (lambda ()
+;;;         (setq show-trailing-whitespace nil)
+;;;         (autopair-mode -1)))
 
 ;;; elscreen https://www.emacswiki.org/emacs/EmacsLispScreen
 ;;; git clone 'https://github.com/shosti/elscreen.git'
