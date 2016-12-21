@@ -211,7 +211,9 @@
 ;;;mkdir ~/multi-term
 ;;;copy https://www.emacswiki.org/emacs/download/multi-term.el to ~/multi-term/
 ;;;multi-term https://www.emacswiki.org/emacs/MultiTerm
-;;; also have term and ansi-term mode, C-c C-j turn to line that you can yank with C-y, C-c C-k turn to char just like normal termianl emulator
+;;; also have term and ansi-term mode, C-c C-j turn to line that you can yank with C-y
+;;; C-c C-k turn to char just like normal termianl emulator, but in multi-term you don't need that
+;;; just do whatever you want in multi-term like in emacs
 (add-to-list 'load-path "~/.emacs.d/multi-term")
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
