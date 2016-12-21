@@ -233,6 +233,9 @@
 ;;;     (lambda ()
 ;;;         (setq show-trailing-whitespace nil)
 ;;;         (autopair-mode -1)))
+;;; ("M-p" . term-send-up) ("M-n" . term-send-down) same like C-p C-n in normal terminal emulator
+;;; but fvwm2 use M-p M-n too, and fvwm2 use M-2 M-number to conflict with emacs's M-number C-n, fuck!
+;;; emacs use C-u number C-n to instead M-number C-n, and set ("C-c C-p" . term-send-up) in ~/.emacs.d/multi-term/multi-term.el
 
 ;;; elscreen https://www.emacswiki.org/emacs/EmacsLispScreen
 ;;; git clone 'https://github.com/shosti/elscreen.git'
@@ -246,6 +249,10 @@
 ;;; M-x elscreen-create to create new screen
 ;;; read the Readme.md from elscreen.git, C-z c create new screen, C-z n  next,
 ;;; C-z p previous, C-z T toggle display, C-z k kill
+;;; C-z C-f Create new screen and open file.
+;;; C-z C-r Create new screen and open file but don't allow changes.
+;;; C-z d Create new screen and run dired.
+
 
 ;;; emacs have melpa for package manager, similar to el-get
 ;;;M-x list-packages RET
