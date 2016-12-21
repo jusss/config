@@ -206,3 +206,37 @@
  
 (unless (file-exists-p erc-log-channels-directory)
   (mkdir erc-log-channels-directory t))
+
+;;; M-x describe-variable load-path or load-path C-j in *scratch* get the emacs load directory
+;;;mkdir ~/multi-term
+;;;copy https://www.emacswiki.org/emacs/download/multi-term.el to ~/multi-term/
+;;;multi-term https://www.emacswiki.org/emacs/MultiTerm
+(add-to-list 'load-path "~/.emacs.d/multi-term")
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+
+;;; elscreen https://www.emacswiki.org/emacs/EmacsLispScreen
+;;; git clone 'https://github.com/shosti/elscreen.git'
+;;; save it to ~/.emacs.d/elscreen/elscreen.el
+;;; or download from ftp://ftp.morishima.net/pub/morishima.net/naoto/ElScreen/
+(add-to-list 'load-path "~/.emacs.d/elscreen")
+(require 'elscreen)
+;;;(elscreen-start)
+;;; if you want auto run elscree then put (elscreen-start) in ~/.emacs
+;;; M-x elscreen-start to run elscreen
+;;; M-x elscreen-create to create new screen
+
+;;; emacs have melpa for package manager, similar to el-get
+;;;M-x list-packages RET
+;;; find what you need then move cursor to install and press enter
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+;;; git clone https://github.com/dimitri/el-get.git
+;;; cp it to ~/.emacs.d/
+;;; M-x el-get-install RET elscreen
+(add-to-list 'load-path "~/.emacs.d/el-get-master")
+(require 'el-get)
