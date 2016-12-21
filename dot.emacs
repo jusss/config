@@ -211,9 +211,16 @@
 ;;;mkdir ~/multi-term
 ;;;copy https://www.emacswiki.org/emacs/download/multi-term.el to ~/multi-term/
 ;;;multi-term https://www.emacswiki.org/emacs/MultiTerm
+;;; also have term and ansi-term mode, C-c C-j turn to line that you can yank with C-y, C-c C-k turn to char just like normal termianl emulator
 (add-to-list 'load-path "~/.emacs.d/multi-term")
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
+;;; set key to switch termianl buffers
+;;; http://blog.jobbole.com/51598/  more details see ~/.emacs.d/multi-term/multi-term.el
+(add-hook 'term-mode-hook
+	  (lambda()
+	    (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+	    (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
 
 ;;; elscreen https://www.emacswiki.org/emacs/EmacsLispScreen
 ;;; git clone 'https://github.com/shosti/elscreen.git'
@@ -221,10 +228,12 @@
 ;;; or download from ftp://ftp.morishima.net/pub/morishima.net/naoto/ElScreen/
 (add-to-list 'load-path "~/.emacs.d/elscreen")
 (require 'elscreen)
-;;;(elscreen-start)
+(elscreen-start)
 ;;; if you want auto run elscree then put (elscreen-start) in ~/.emacs
 ;;; M-x elscreen-start to run elscreen
 ;;; M-x elscreen-create to create new screen
+;;; read the Readme.md from elscreen.git, C-z c create new screen, C-z n  next,
+;;; C-z p previous, C-z T toggle display, C-z k kill
 
 ;;; emacs have melpa for package manager, similar to el-get
 ;;;M-x list-packages RET
