@@ -43,7 +43,7 @@
 
 (require `erc)
 (require `tls)
-(global-set-key (kbd "C-.")
+(global-set-key (kbd "C-x C-.")
 		(lambda ()
 		  "server ip can't be as variable's type"
 		  (interactive)
@@ -241,9 +241,13 @@
 ;;; git clone 'https://github.com/shosti/elscreen.git'
 ;;; save it to ~/.emacs.d/elscreen/elscreen.el
 ;;; or download from ftp://ftp.morishima.net/pub/morishima.net/naoto/ElScreen/
+;;;  change it by setting elscreen-prefix-key
+;;; (setq elscreen-prefix-key (kbd "C-."))
+;;; You must set this value before ElScreen is loaded otherwise use elscreen-set-prefix-key
 (add-to-list 'load-path "~/.emacs.d/elscreen")
 (require 'elscreen)
 (elscreen-start)
+(elscreen-set-prefix-key (kbd "C-."))
 ;;; if you want auto run elscree then put (elscreen-start) in ~/.emacs
 ;;; M-x elscreen-start to run elscreen
 ;;; M-x elscreen-create to create new screen
@@ -252,7 +256,6 @@
 ;;; C-z C-f Create new screen and open file.
 ;;; C-z C-r Create new screen and open file but don't allow changes.
 ;;; C-z d Create new screen and run dired.
-
 
 ;;; emacs have melpa for package manager, similar to el-get
 ;;;M-x list-packages RET
@@ -268,3 +271,4 @@
 ;;; M-x el-get-install RET elscreen
 (add-to-list 'load-path "~/.emacs.d/el-get-master")
 (require 'el-get)
+
