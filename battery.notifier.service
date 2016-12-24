@@ -20,14 +20,15 @@ Description=Battery Notifier
 ### run after dnsmasq, because when I open dnsmasq after Xorg by hand, and it needs Xorg
 ### it seems wrong way to do this, I set systemctl enable battery.notifier, and I don't set systemctl enable dnsmasq.service
 ### and it still auto run, I set systemctl disable battery.notifier and I systemctl start dnsmasq.service, it don't auto run
-### actually it still needs dnsmasq.service, if dnsmasq.service is not enable or start, it won't run, you can find it through pacman -Ql dnsmasq|grep service
 Requires=dnsmasq.service
 After=dnsmasq.service
 
 [Service]
 Type=simple
-Environment="DISPLAY=:0.0"
-ExecStart=/usr/bin/python3 /home/jusss/lab/battery.eeepc.py
+### Environment="DISPLAY=:0.0"
+### ExecStartPre run before ExecStart, and ExecStartPost run after ExecStart
+ExecStartPre=/usr/bin/sleep "10"
+ExecStart=/usr/bin/env "DISPLAY=:0.0" /usr/bin/python3 /home/jusss/lab/battery.eeepc.py
 # RestartSec=60
 # TimeoutStartSec=120
 Restart=no
