@@ -236,6 +236,8 @@
 ;;; ("M-p" . term-send-up) ("M-n" . term-send-down) same like C-p C-n in normal terminal emulator
 ;;; but fvwm2 use M-p M-n too, and fvwm2 use M-2 M-number to conflict with emacs's M-number C-n, fuck!
 ;;; emacs use C-u number C-n to instead M-number C-n, and set ("C-c C-p" . term-send-up) in ~/.emacs.d/multi-term/multi-term.el
+;;; not any more! I have changed key bind in fvwm2, window-p instead of M-p, window-number instead of M-number
+;;; use M-number C-n in emacs and M-p in multi-term
 
 ;;; elscreen https://www.emacswiki.org/emacs/EmacsLispScreen
 ;;; git clone 'https://github.com/shosti/elscreen.git'
