@@ -495,3 +495,36 @@ ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句, StickyIcon 让icon一直显示在所有page上
 Style "*"  NoTitle, NoHandles, StickyIcon
+
+### conky 桌面监控各种信息(cpu 磁盘), StrokeFunc 鼠标轨迹执行操作, FvwmTaskBar 任务栏
+### http://www.cnblogs.com/bu-wu-zheng-ye/p/4760919.html
+### http://www.ctex.org/documents/shredder/fvwm.html
+### 很多即时战略游戏都可以对士兵等进行分组 比如选定一组士兵后按 Ctrl-Alt-1，可以把一组士兵标记为第1小分队 以后按 Ctrl-1 就可以让这些士兵待命
+### Key 0 WI MC Key 0 A C WindowId $[w.id] WarpToWindow 50 50
+### Key 1 WI MC Key 1 A C WindowId $[w.id] WarpToWindow 50 50
+### 聚焦一个窗口后按 Ctrl-Alt-n, 就把它标记为n号。 以后不论什么时候按 Ctrl-n，就会回到这个窗口。
+
+#########################################    FvwmTaskBar Unfinished!  #######################################
+### Module FvwmTaskBar
+### Style FvwmTaskBar HandleWidth 0, BorderWidth 0
+### *FvwmTaskBar: UseSkipList
+### *FvwmTaskBar: AutoStick
+### *FvwmTaskBar: DeskOnly
+### *FvwmTaskBar: Action Click1 DeiconifyRaiseAndFocus
+### *FvwmTaskBar: Action Click2 Iconify On
+### *FvwmTaskBar: Action Click3 Lower
+### *FvwmTaskBar: MailCommand Exec exec rxvt -e mutt
+### *FvwmTaskBar: 3DFvwm
+### *FvwmTaskBar: StartName FVWM
+### *FvwmTaskBar: StartMenu RootMenu
+### ### *FvwmTaskBar: Font  -*-simsun-medium-r-*-*-14-*-*-*-*-*-*-*
+### ### *FvwmTaskBar: SelFont  -*-simsun-medium-r-*-*-14-*-*-*-*-*-*-*
+### *FvwmTaskBar: ShowTips
+### *FvwmTaskBar: ClockFormat 
+### *FvwmTaskBar: WindowButtonsRightMargin 20 
+### 
+### *FvwmTaskBar: Back seagreen
+### *FvwmTaskBar: Fore gold2
+### *FvwmTaskBar: FocusFore cornsilk
+### *FvwmTaskBar: IconBack darkgreen
+### *FvwmTaskBar: IconFore white
