@@ -466,8 +466,14 @@ Key 4 A C GotoDesk 0 3
 ### window-i iconify, window-o open out or called  max, window-m move  , k kill,   u uxterm, e emacs, s stick
 ### window-1 goto page 1, window-2 goto page 2
 ### window-n next focus, window-p previous focus
-Key p A 4 Prev Focus
-Key n A 4 Next Focus
+### !CurrentPage 不focus在当前page的其它的windows(默认是focus的), !Iconic不focus在iconic的windows上
+### !Overlapped 如果一个page上有多个重叠的windows,focus在最上面那个window上(而不管鼠标指针是否在这个window上,好像不用管是MouseFocus获取焦点)
+Key n A 4 Next (!CurrentPage, !Iconic, !Overlapped) Focus
+Key p A 4 Prev (!CurrentPage, !Iconic, !Overlapped) Focus
+Key p A 4S GotoPage prev
+### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
+### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
+### Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) Focus
 
 # Ctrl-Tab切换窗口时，鼠标总是自动跳到切换窗口的左上角，导致只能通过点击或数字键来切换窗口，加下面这句可让鼠标指针不再自动跳转到左上角，然后可以通过Tab键来切换窗口
 AddToFunc WindowListFunc
@@ -486,9 +492,6 @@ AddToFunc SwitchToWindow
 #Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
 Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50, "Prev SwitchToWindow"
-
-
-
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
@@ -545,3 +548,13 @@ Style "xclock" Sticky, StaysOnTop
 ### *FvwmTaskBar: FocusFore cornsilk
 ### *FvwmTaskBar: IconBack darkgreen
 ### *FvwmTaskBar: IconFore white
+
+################################################################################################################
+
+### GotoPage prev 上一个page, GotoPage +2p -1p 向右2个page,向上1个page
+### 但是这2个都没法用于page循环，比如按super-n依次循环所有排列的page, Next只能用于窗口循环，如果page上没有窗口呢？
+### $[page.nx] $[page.ny]  The current page numbers, by X and Y axes, starting from 0.
+### $[desk.pagesx] $[desk.pagesy] The number of total pages in a desk in x or y direction.
+### $0 to $9, 定义函数时的形式参数, $0是第一个参数, $1是第二个参数
+### 调试fvwm,  在tty2 $Xorg :1 vt2, 然后在Xorg :0里$xterm -display :1&,然后进tty2里fvwm2 -display :1
+### unfinished 1, page循环(包括没有window的page和任意排列的page) 2. 鼠标划过最底层穿越进最上层
