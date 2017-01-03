@@ -1,3 +1,5 @@
+### man systemd.service
+### https://wiki.archlinux.org/index.php/Systemd
 ### http://www.jinbuguo.com/systemd/systemd.service.html
 ### http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
 ### https://zh.opensuse.org/openSUSE:How_to_write_a_systemd_service
@@ -31,7 +33,9 @@ ExecStartPre=/usr/bin/sleep "10"
 ExecStart=/usr/bin/env "DISPLAY=:0.0" /usr/bin/python3 /home/jusss/lab/battery.eeepc.py
 # RestartSec=60
 # TimeoutStartSec=120
-Restart=no
+# Restart=no
+Restart=always
+RestartSec=300
 
 [Install]
 WantedBy=multi-user.target
