@@ -15,4 +15,7 @@ alias mv='mv -i'
 alias suspend='echo mem|sudo tee /sys/power/state'
 alias hibernate='echo disk|sudo tee /sys/power/state'
 # systemctl hibernate and suspend will cause power loss
-
+export EDITOR=/usr/bin/vim
+alias mpv='mpv --audio-display no' 
+### alias xclock='xclock -digital -twelve -face DejaVuSans -update 1 -strftime %H:%M:%S %a %Y %m %d'
+alias xclock='xclock -brief -twelve -digital -update 60 -face DejaVuSans'
