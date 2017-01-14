@@ -21,6 +21,19 @@
 12. batter status, workaround with https://github.com/zhaofengli/iwork8/blob/master/scripts/battery.sh, install libi2c-dev and compile test_power module
 13. sound card driver,https://github.com/burzumishi/linux-baytrail-flexx10/tree/master
     vim /etc/apt/source.list add non-free and contrib after your source, apt-get update, apt-get install firmware-intel-sound alsa-utils
+14. use usb sound card, chips C-Media HS-100B, buy UGREEN 30143 from jd.com, plug with otg, 
+    run `aplay -l` see card 1, device 0
+    vim ~/.asoundrc
+    pcm.!default{
+        type hw
+        card 1
+    }
+
+    ctl.!default{
+        type hw 
+        card 1
+    }
+    it works!
 
 reference:
 http://cn.bing.com/search?q=intel+baytrail+linux&qs=n&pq=intel+baytrail+linux&sc=1-19&sp=-1&sk=&cvid=8E1A95DC7C8E4B90B012A526559861CA&first=11&FORM=PORE
