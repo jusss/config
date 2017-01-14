@@ -38,6 +38,7 @@
     use `ip link` or `ifconfig -a` to get the interface name for wpa_supplicant -i option, if dmesg says 'load mt7601u firmware failed' then
     on debian install firmware-misc-nonfree, on archlinux install linux-firmware, make sure 1, kernel load the module by `lsmod|grep r8712u mt7601u`
     2, check if your router have MAC address filter 
+    CONFIG_RTL8XXXU=m  CONFIG_WL_MEDIATEK=y CONFIG_MT7601U=m   use make menuconfig then press / search 8xxx and mt7601
 
 reference:
 http://cn.bing.com/search?q=intel+baytrail+linux&qs=n&pq=intel+baytrail+linux&sc=1-19&sp=-1&sk=&cvid=8E1A95DC7C8E4B90B012A526559861CA&first=11&FORM=PORE
