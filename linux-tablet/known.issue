@@ -33,12 +33,14 @@
         type hw 
         card 1
     }
-    it works!
+    it works! add 
 15. use usb wifi card, netcore nw360 use driver r8712u and kernel contain it, or b-link bl-d88 use driver mt7601u, above kernel 4.2 contain it
     use `ip link` or `ifconfig -a` to get the interface name for wpa_supplicant -i option, if dmesg says 'load mt7601u firmware failed' then
     on debian install firmware-misc-nonfree, on archlinux install linux-firmware, make sure 1, kernel load the module by `lsmod|grep r8712u mt7601u`
     2, check if your router have MAC address filter 
     CONFIG_RTL8XXXU=m  CONFIG_WL_MEDIATEK=y CONFIG_MT7601U=m   use make menuconfig then press / search 8xxx and mt7601
+    disable rtl8723bs through grub `linux modprobe.blacklist=r8723bs,snd_soc_rt5640`  r8723bs is for wifi card, rt5640 is for sound card
+    b-link bl-d88 driver mt7601u can use wpa_supplicant -D nl80211, and netcore nw360 r8712u only use wpa_supplicant -D wext
 
 reference:
 http://cn.bing.com/search?q=intel+baytrail+linux&qs=n&pq=intel+baytrail+linux&sc=1-19&sp=-1&sk=&cvid=8E1A95DC7C8E4B90B012A526559861CA&first=11&FORM=PORE
