@@ -63,3 +63,14 @@ http://www.gossamer-threads.com/lists/linux/kernel/2091627
 https://github.com/zhaofengli/iwork8/blob/master/scripts/battery.sh
 https://github.com/Icenowy/axpd/blob/master/axpd.sh
 https://bugzilla.kernel.org/show_bug.cgi?id=88471#c31
+
+-------------------------------------------------------------------------------------------------------------------------------
+linuxium iso: http://linuxiumcomau.blogspot.com/2017/01/bleeding-edge-ubuntu-4100-57-kernel.html
+https://drive.google.com/file/d/0B99O3A0dDe67bThfZFZua3pOVFU/edit
+https://docs.google.com/uc?id=0B99O3A0dDe67MXhQV210RzNSbWM&export=download
+
+lubuntu-17.04-beta1-desktop-linuxium.iso
+use xrandr modify brightness
+xrandr --output eDP-1 --brightness 0.8 --rotate right
+
+
