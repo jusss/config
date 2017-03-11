@@ -73,4 +73,21 @@ lubuntu-17.04-beta1-desktop-linuxium.iso
 use xrandr modify brightness
 xrandr --output eDP-1 --brightness 0.8 --rotate right
 
+remove pulseaudio, and vim ~/.asoundrc
+pcm.!default{
+    type hw
+    card 1
+}
+ctl.!default{
+    type hw
+    card 1
+}
 
+the sound card works! speaker works fine!
+aplay -l display card 1 bytcrrt5640 device 1: Deep-Buffer Audio
+but the headphone doesn't work, speaker works, weird
+
+reboot works! but acpi don't
+
+cube i6 air, press esc , choose boot manager, get into windows or android or ubuntu, since grub have installed to mmcblk1
+or get into windows then choose android
