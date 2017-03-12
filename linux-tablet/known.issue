@@ -91,3 +91,7 @@ reboot works! but acpi don't
 
 cube i6 air, press esc , choose boot manager, get into windows or android or ubuntu, since grub have installed to mmcblk1
 or get into windows then choose android
+
+power button works! 
+cat /sys/class/backlight/intel_backlight/max_brightness is 104
+echo 90 > /sys/class/backlight/intel_backlight/brightness  with root
