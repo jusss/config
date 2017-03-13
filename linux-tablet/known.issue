@@ -99,6 +99,9 @@ cat /sys/class/backlight/intel_backlight/max_brightness is 104
 echo 90 > /sys/class/backlight/intel_backlight/brightness  with root
 
 bluteeth, acpi, don't work and headphone
+blutooth can recognize other blutooth device and connected, but it can't trans files
+
+anti-random-freeze works!
 
 the battery info only update once after boot time, so it always stays on one same number
 
@@ -110,3 +113,5 @@ then sudo depmod -a   add test_power.ko into boot up list
 
 so use another battery check, i2c-dev module is CONFIG_I2C_CHARDEV via vim drivers/i2c/Makefile and vim /boot/config-4.10.0-10-linuxium know it's y not m, so i2c-dev is already in kernel, then modprobe test_power  run the battery script and get the current percent number of battery
 see section 12
+https://github.com/linuxium
+
