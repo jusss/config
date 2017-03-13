@@ -88,6 +88,8 @@ aplay -l display card 1 bytcrrt5640 device 1: Deep-Buffer Audio
 but the headphone doesn't work, speaker works, weird
 
 reboot works! but acpi don't
+poweroff fucking works!
+screen saver works!
 
 cube i6 air, press esc , choose boot manager, get into windows or android or ubuntu, since grub have installed to mmcblk1
 or get into windows then choose android
@@ -95,3 +97,16 @@ or get into windows then choose android
 power button works! 
 cat /sys/class/backlight/intel_backlight/max_brightness is 104
 echo 90 > /sys/class/backlight/intel_backlight/brightness  with root
+
+bluteeth, acpi, don't work and headphone
+
+the battery info only update once after boot time, so it always stays on one same number
+
+lsmod|grep test_power and got it didn't be loaded,
+so modprobe test_power load it!
+and the kernel config is in /boot/config-4.10.0-10-linuxium when you run make oldconfig you will know it
+
+then sudo depmod -a   add test_power.ko into boot up list
+
+so use another battery check, i2c-dev module is CONFIG_I2C_CHARDEV via vim drivers/i2c/Makefile and vim /boot/config-4.10.0-10-linuxium know it's y not m, so i2c-dev is already in kernel, then modprobe test_power  run the battery script and get the current percent number of battery
+see section 12
