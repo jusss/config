@@ -115,3 +115,4 @@ so use another battery check, i2c-dev module is CONFIG_I2C_CHARDEV via vim drive
 see section 12
 https://github.com/linuxium
 
+lubuntu use lightdm, 'dm-tool lock' to lock screen
