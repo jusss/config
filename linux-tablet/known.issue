@@ -87,6 +87,13 @@ the sound card works! speaker works fine!
 aplay -l display card 1 bytcrrt5640 device 1: Deep-Buffer Audio
 but the headphone doesn't work, speaker works, weird
 
+vim /etc/asound.conf
+defaults.pcm.card 1
+defaults.pcm.device 1
+defaults.ctl.card 1
+
+mpv and chromium both work! but headphone still no luck
+
 reboot works! but acpi don't
 poweroff fucking works!
 screen saver works!
