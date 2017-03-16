@@ -134,3 +134,4 @@ the reason is you don't set ~/.asoundrc, just use /etc/asound.conf,  set ~/.asou
 "uxa" is good with "opengl"
 and fvwm is conflicted with lightdm about key binds, and fvwm need run twice if you want it works normal when you rotate your screen with 
 xrand --output eDP1 --rotate right, use fvwm -replace to run it again 
+set /etc/X11/xorg.conf , xbacklight works
