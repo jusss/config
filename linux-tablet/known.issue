@@ -123,3 +123,14 @@ see section 12
 https://github.com/linuxium
 
 lubuntu use lightdm, 'dm-tool lock' to lock screen
+
+if you don't set /etc/X11/xorg.conf , there is screen tear issue
+and if set /etc/X11/xorg.conf and use "sna" accelmethod then no screen tear but there's issue with playing video, too fast
+vga is intel atom processor z36xxx/zx series graphics & display
+if use "uxa" accelmethod, same with "sna"
+the reason is you don't set ~/.asoundrc, just use /etc/asound.conf,  set ~/.asoundrc and /etc/asound.conf both will be good
+
+"sna" still cause stuck with "opengl", but no issue with "xv" or "x11", no screen tear
+"uxa" is good with "opengl"
+and fvwm is conflicted with lightdm about key binds, and fvwm need run twice if you want it works normal when you rotate your screen with 
+xrand --output eDP1 --rotate right, use fvwm -replace to run it again 
