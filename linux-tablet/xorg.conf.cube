@@ -1,0 +1,86 @@
+Section "ServerLayout"
+	Identifier     "X.org Configured"
+	Screen      0  "Screen0" 0 0
+	InputDevice    "Mouse0" "CorePointer"
+	InputDevice    "Keyboard0" "CoreKeyboard"
+	Option	"StandbyTime"	"30"
+	Option	"SuspendTime"	"30"
+	Option	"BlankTime"	"30"
+EndSection
+
+Section "Files"
+	ModulePath   "/usr/lib/xorg/modules"
+EndSection
+
+Section "Module"
+	Load  "glx"
+EndSection
+
+Section "InputDevice"
+	Identifier  "Keyboard0"
+	Driver      "kbd"
+EndSection
+
+Section "InputDevice"
+	Identifier  "Mouse0"
+	Driver      "mouse"
+	Option	    "Protocol" "auto"
+	Option	    "Device" "/dev/input/mice"
+	Option	    "ZAxisMapping" "4 5 6 7"
+EndSection
+
+Section "Monitor"
+	Identifier   "Monitor0"
+	VendorName   "Monitor Vendor"
+	ModelName    "Monitor Model"
+	Option	"DPMS"	"true"
+EndSection
+
+
+
+Section "Device"
+        ### Available Driver options are:-
+        ### Values: <i>: integer, <f>: float, <bool>: "True"/"False",
+        ### <string>: "String", <freq>: "<f> Hz/kHz/MHz",
+        ### <percent>: "<f>%"
+        ### [arg]: arg optional
+        #Option     "NoAccel"           "false"
+        #Option     "AccelMethod"        "sna"	
+        Option     "AccelMethod"        "uxa"	
+        #Option     "Backlight"          "intel_backlight"
+        #Option     "DRI"                 "3"
+        #Option     "ColorKey"           	# <i>
+        #Option     "VideoKey"           	# <i>
+        #Option     "Tiling"             "true"
+        #Option     "LinearFramebuffer"  "true"
+        #Option     "SwapbuffersWait"    "true"
+        #Option     "TripleBuffer"       "true"
+        #Option     "XvPreferOverlay"    "true"
+        #Option     "HotPlug"            "true"	
+        #Option     "ReprobeOutputs"     "true"
+        #Option     "XvMC"               "true"
+        #Option     "ZaphodHeads"        	# <str>
+        Option     "TearFree"           "true"	
+        #Option     "PerCrtcPixmaps"     "true"
+        #Option     "FallbackDebug"      "true"
+        #Option     "DebugFlushBatches"  "true"
+        #Option     "DebugFlushCaches"   "true"
+        #Option     "DebugWait"          "true"	
+        #Option     "BufferCache"       	"true"
+	Identifier  "Card0"
+	Driver      "intel"
+	BusID       "PCI:0:2:0"
+EndSection
+
+
+
+Section "Screen"
+	Identifier "Screen0"
+	Device     "Card0"
+	Monitor    "Monitor0"
+	DefaultDepth 24
+	SubSection "Display"
+		Viewport   0 0
+		Depth     24
+	EndSubSection
+EndSection
