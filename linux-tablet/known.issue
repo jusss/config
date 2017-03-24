@@ -135,3 +135,10 @@ the reason is you don't set ~/.asoundrc, just use /etc/asound.conf,  set ~/.asou
 and fvwm is conflicted with lightdm about key binds, and fvwm need run twice if you want it works normal when you rotate your screen with 
 xrand --output eDP1 --rotate right, use fvwm -replace to run it again 
 set /etc/X11/xorg.conf , xbacklight works
+
+now, axp288 battery issue is solved in kernel 4.11-rc2, it's out of the box,
+also see https://github.com/burzumishi/linux-baytrail-flexx10/issues/12
+and RussianNeuroMancer give his kernel package with debian package style
+https://yadi.sk/d/pW1Fbl-VyVPoR
+maybe the random freeze issue is related with rtl8723bs driver from hadess
+it needs  SDIO/I2C related patches from Hans De Goede.
