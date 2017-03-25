@@ -13,9 +13,9 @@ XTerm.vt100.utf8Title:true
 XTerm.vt100.forcePackedFont:true
 XTerm.vt100.rightScrollBar:true
 !XTerm.vt100.faceName:Liberation Mono:size=13
-XTerm.vt100.faceName:DejaVu Sans Mono:size=25
-XTerm.vt100.faceNameDoublesize:WenQuanYi Zen Hei Mono:size=24
-!XTerm.vt100.geometry:127x35
+XTerm.vt100.faceName:DejaVu Sans Mono:size=24
+XTerm.vt100.faceNameDoublesize:WenQuanYi Zen Hei Mono:size=23
+!XTerm.vt100.geometry:85x29
 !XTerm.vt100.background:#000000
 !XTerm.vt100.foreground:#00FF00
 !XTerm.vt100.colorAttrMode:true

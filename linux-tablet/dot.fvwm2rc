@@ -369,7 +369,7 @@ Key i W 4 Iconify
 ### Key o W 4 Maximize-Focus-Raise
 Key o W 4 Maximize
 #Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
-Key u A 4 Exec  exec xterm
+Key u A 4 Exec  exec xterm 
 #Key  3 A 4 Exec-xterm
 # 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
 # PositionPlacement应该可以避免这种情况，但PositionPlacement UnderMouse会自动在鼠标指针所在位置打开窗口覆盖其它窗口，又因为指针在窗口上，根据SloppyFocus又会自动获得焦点，
@@ -514,7 +514,8 @@ ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/
 
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句, StickyIcon 让icon一直显示在所有page上
-Style "*"  NoTitle, NoHandles, StickyIcon
+#Style "*"  NoTitle, NoHandles, StickyIcon
+Style "lxpanel" NoTitle, NoHandles
 ### make xclock always show up and on top 
 ### StaysOnTop将会让这个视窗一直在其它视窗的上方。 StaysPut是正常的情况
 Style "xclock" Sticky, StaysOnTop
