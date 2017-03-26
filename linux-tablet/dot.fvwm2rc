@@ -369,7 +369,8 @@ Key i W 4 Iconify
 ### Key o W 4 Maximize-Focus-Raise
 Key o W 4 Maximize
 #Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
-Key u A 4 Exec  exec xterm 
+#Key u A 4 Exec  exec xterm
+Key u A 4 Exec  exec gnome-terminal
 #Key  3 A 4 Exec-xterm
 # 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
 # PositionPlacement应该可以避免这种情况，但PositionPlacement UnderMouse会自动在鼠标指针所在位置打开窗口覆盖其它窗口，又因为指针在窗口上，根据SloppyFocus又会自动获得焦点，
