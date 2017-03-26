@@ -142,3 +142,19 @@ and RussianNeuroMancer give his kernel package with debian package style
 https://yadi.sk/d/pW1Fbl-VyVPoR
 maybe the random freeze issue is related with rtl8723bs driver from hadess
 it needs  SDIO/I2C related patches from Hans De Goede.
+--------------------------------------------------------------------
+lots messages of dmesg
+[   50.255705] RTL8723BS: nolinked power save enter
+[   50.514230] RTL8723BS: nolinked power save leave
+[   50.832231] IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+
+try echo "on" > those files
+/sys/bus/platform/drivers/sdhci-acpi/80860F14\:00/power/control 
+on
+/sys/bus/platform/drivers/sdhci-acpi/80860F14\:02/power/control 
+on
+/sys/bus/platform/drivers/sdhci-acpi/INT33BB\:00/power/control 
+on
+
+and it doesn't work...
+
