@@ -1,0 +1,7 @@
+[Unit]
+Description=automount
+[Mount]
+What= /dev/mmcblk2p1
+Where=/mnt/john/
+[Install]
+WantedBy=multi-user.target
