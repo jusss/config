@@ -1,0 +1,12 @@
+[Unit]
+Description= dns proxy
+Requires= network.target
+After= network.target
+
+[Service]
+Type= simple
+ExecStart= /usr/bin/python3.4 /root/dns-proxy-server.py server-ip server-udp-prot dns-server-ip
+
+[Install]
+WantedBy=multi-user.target
+
