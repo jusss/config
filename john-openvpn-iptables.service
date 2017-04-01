@@ -1,0 +1,11 @@
+[Unit]
+Description= set iptables for openvpn
+Requires= openvpn.service
+After= openvpn.service
+
+[Service]
+Type= oneshot
+ExecStart= /bin/bash /root/openvpn.iptables.sh
+
+[Install]
+WantedBy=multi-user.target
