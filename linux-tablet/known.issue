@@ -193,5 +193,5 @@ opera browser can zoom in address-bar or tag same with pages, but chromium and f
 install opera on debian, recommend download tar package from opera.com
 if you write
 deb http://deb.opera.com/opera-beta/ stable non-free
-into /etc/apt/source.list
+into /etc/apt/sources.list
 apt install opera  maybe meet packages broken issue
