@@ -182,3 +182,9 @@ setxkbmap -layout us -option ctrl:nocaps
 ~/xcape/xcape
 
 and xcape from github.com/jusss/xcape.git
+-------------------------
+remember disable lightdm.service, if you don't want lxde stuff
+systemctl list-dependencies lightdm.service --reverse 
+see what services depend lightdm.service
+
+systemctl disable lightdm.service
