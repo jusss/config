@@ -164,3 +164,21 @@ new patched 4.11-rc4 kernel  https://yadi.sk/d/pW1Fbl-VyVPoR/Linux%204.11/Linux%
 more reference
 www.studioteabag.com/science/dell-venue-pro-linux/
 
+------------------------------------------------------------------------------
+~/.xinitrc solved screen rotate issue about fvwm, just run xrandr before fvwm
+
+~/.xinitrc
+xrandr --output eDP1 --rotate right
+fcitx &
+~/ctrl-swap-caps.sh&
+exec fvwm
+
+maybe you can set startx as a systemd service, instead of .xinitrc
+
+~/ctrl-swap-caps.sh
+#!/bin/bash
+#setxkbmap -option ctrl:swapcaps
+setxkbmap -layout us -option ctrl:nocaps
+~/xcape/xcape
+
+and xcape from github.com/jusss/xcape.git
