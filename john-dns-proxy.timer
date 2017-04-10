@@ -1,0 +1,7 @@
+[Unit]
+Description= dns proxy
+[Timer]
+OnBootSec=3min
+Unit= john-dns-proxy.service
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+[Unit]
+Description= run iptables after system boot
+
+[Timer]
+OnBootSec= 3min
+Unit= john-openvpn-iptables.service
+
+[Install]
+WantedBy=multi-user.target

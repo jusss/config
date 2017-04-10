@@ -135,3 +135,63 @@ the reason is you don't set ~/.asoundrc, just use /etc/asound.conf,  set ~/.asou
 and fvwm is conflicted with lightdm about key binds, and fvwm need run twice if you want it works normal when you rotate your screen with 
 xrand --output eDP1 --rotate right, use fvwm -replace to run it again 
 set /etc/X11/xorg.conf , xbacklight works
+
+now, axp288 battery issue is solved in kernel 4.11-rc2, it's out of the box,
+also see https://github.com/burzumishi/linux-baytrail-flexx10/issues/12
+and RussianNeuroMancer give his kernel package with debian package style
+https://yadi.sk/d/pW1Fbl-VyVPoR
+maybe the random freeze issue is related with rtl8723bs driver from hadess
+it needs  SDIO/I2C related patches from Hans De Goede.
+--------------------------------------------------------------------
+lots messages of dmesg
+[   50.255705] RTL8723BS: nolinked power save enter
+[   50.514230] RTL8723BS: nolinked power save leave
+[   50.832231] IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+
+try echo "on" > those files
+/sys/bus/platform/drivers/sdhci-acpi/80860F14\:00/power/control 
+on
+/sys/bus/platform/drivers/sdhci-acpi/80860F14\:02/power/control 
+on
+/sys/bus/platform/drivers/sdhci-acpi/INT33BB\:00/power/control 
+on
+
+and it doesn't work...
+
+random freeze may cause by rtl8723bs wifi driver
+new patched 4.11-rc4 kernel  https://yadi.sk/d/pW1Fbl-VyVPoR/Linux%204.11/Linux%204.11rc4/rev1
+ 
+more reference
+www.studioteabag.com/science/dell-venue-pro-linux/
+
+------------------------------------------------------------------------------
+~/.xinitrc solved screen rotate issue about fvwm, just run xrandr before fvwm
+
+~/.xinitrc
+xrandr --output eDP1 --rotate right
+fcitx &
+~/ctrl-swap-caps.sh&
+exec fvwm
+
+maybe you can set startx as a systemd service, instead of .xinitrc
+
+~/ctrl-swap-caps.sh
+#!/bin/bash
+#setxkbmap -option ctrl:swapcaps
+setxkbmap -layout us -option ctrl:nocaps
+~/xcape/xcape
+
+and xcape from github.com/jusss/xcape.git
+-------------------------
+remember disable lightdm.service, if you don't want lxde stuff
+systemctl list-dependencies lightdm.service --reverse 
+see what services depend lightdm.service
+
+systemctl disable lightdm.service
+--------------------------------------
+opera browser can zoom in address-bar or tag same with pages, but chromium and firefox only zoom in pages
+install opera on debian, recommend download tar package from opera.com
+if you write
+deb http://deb.opera.com/opera-beta/ stable non-free
+into /etc/apt/sources.list
+apt install opera  maybe meet packages broken issue

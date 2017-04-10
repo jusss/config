@@ -1,0 +1,13 @@
+[Unit]
+Description= set dns server
+After= network.target
+[Service]
+Type= oneshot
+### Environment="DISPLAY=:0.0"
+### ExecStartPre run before ExecStart, and ExecStartPost run after ExecStart
+### 如果要一次设置多个命令，那么可以使用分号(;)将多个命令行连接起来。 注意，仅在设置了 Type=oneshot 的前提下，才可以一次设置多个命令。 分号自身必须用 "\;" 表示。
+### systemd-analyze critical-chain , there's network.target
+ExecStart= /bin/cp /etc/resolv.conf.backup /etc/resolv.conf
+#RemainAfterExit=yes
+[Install]
+WantedBy= multi-user.target

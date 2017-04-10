@@ -1,0 +1,7 @@
+[Unit]
+Description= Run shadowsocks after system boot
+[Timer]
+OnBootSec=3min
+Unit= john-shadowsocks.service
+[Install]
+WantedBy=multi-user.target

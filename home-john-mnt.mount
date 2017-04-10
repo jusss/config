@@ -1,0 +1,8 @@
+[Unit]
+Description=automount
+[Mount]
+What= /dev/mmcblk2p1
+Where=/home/john/mnt
+DirectoryMode= 3757
+[Install]
+WantedBy=multi-user.target
