@@ -195,3 +195,6 @@ if you write
 deb http://deb.opera.com/opera-beta/ stable non-free
 into /etc/apt/sources.list
 apt install opera  maybe meet packages broken issue
+-------------------------------
+systemctl disable network.target
+systemctl stop network.target
