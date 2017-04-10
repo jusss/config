@@ -196,5 +196,16 @@ deb http://deb.opera.com/opera-beta/ stable non-free
 into /etc/apt/sources.list
 apt install opera  maybe meet packages broken issue
 -------------------------------
-systemctl disable network.target
-systemctl stop network.target
+sudo systemctl disable network.target
+sudo systemctl stop network.target
+sudo systemctl stop network.service
+sudo wpa_supplicant -i wlan0 -c ~/network/wifi.wpa -d
+sudo dhclient wlan0
+
+~/network/wifi.wpa
+network={
+ssid="your-wifi"
+scan_ssid=1
+psk="your-password"
+}
+
