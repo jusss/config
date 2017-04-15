@@ -1,0 +1,10 @@
+[Unit]
+Description= shadowsocks
+After= network.target
+
+[Service]
+Type= simple
+ExecStart= /usr/bin/python /usr/local/bin/ssserver -s server-ip -p server-port -k password -m method -t timeout
+
+[Install]
+WantedBy= multi-user.target
