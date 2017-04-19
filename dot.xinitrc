@@ -11,5 +11,8 @@ setxkbmap -layout us -option ctrl:nocaps
 ### xcape -e 'Control_L=Escape'
 xcape
 
+### network
+~/network/wifi.sh &
+
 ### window manager must be the last program to run, and no &
 exec fvwm2
