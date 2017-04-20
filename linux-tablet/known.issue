@@ -212,3 +212,5 @@ psk="your-password"
 
 or bash ~/network/wifi.sh
 
+------------------------------------------------
+pc, only speaker work, headphone don't, then `alsactl restore`
