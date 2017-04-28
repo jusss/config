@@ -278,5 +278,23 @@ sudo update-grub  or change in /boot/grub/grub.cfg
 但是不打网卡补丁，网卡补丁涉及mmc,但是现在4.11rc8因为mmc可以suspend了，怕打mmc补丁影响
 而且rtl8723bs网卡已经进4.12rc1了，就直接编译个模块算了，然后等马上出来的4.12rc1
 
-记得把当前系统的/lib/modules/$(uname -r)/build暂时指向编译目录, 这样好像不行，因为HostOS的内核不是4.11rc8
-还是把整个编译目录复制过去，然后make吧
+记得把当前系统的/lib/modules/$(uname -r)/build暂时指向编译目录, 这样是可以的！，尽管HostOS的内核不是4.11rc8
+
+[root@arch 4.2.5-1-ARCH]# ln -s /home/jusss/linux-4.11-rc8 ./build
+[root@arch 4.2.5-1-ARCH]# ls -l build
+lrwxrwxrwx 1 root root 26 Apr 25 23:59 build -> /home/jusss/linux-4.11-rc8
+
+编译出来r8723bs.ko,直接用insmod ./r8723bs.ko是可以插入4.11rc8里的, 直接make install把模块安装或者
+cp r8723bs.ko /lib/modules/4.11.0-rc8/kernel/drivers/net/wireless/
+depmod -a 4.11.0-rc8
+这样无线网卡驱动就装上了
+
+dmesg弹出大量信息Goodix-TS i2c-GDIX1001:00: i2c test failed attempt 2: -110
+Goodix-TS i2c-GDIX1001:00: I@C communication failure: -110
+i2c_designware 80860F41:03: timeout waiting for bus ready
+Goodix-TS i2c-GDIX1001:00: I2C transfer error :-110
+
+systemctl start lightdm 进xfce看看, 没Goodix错误在dmesg
+suspend,然后充电，再唤醒，就会出现Goddix信息在dmesg
+sudo rmmod goodix就不再弹信息在dmesg also触摸屏也不能用了
+单独suspend不弹这些信息，不suspend直接充电，不弹这些信息，suspend之后充电弹这些信息
