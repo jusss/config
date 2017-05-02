@@ -1,11 +1,11 @@
         debian jessie on intel baytrail z3735f tablet cube i6 air
 1. wifi, compile rtl8723bs module, download from github.com/hadess/rtl8723bs.git
-2. touch screen, compile gt9xx module, download from github.com/hadess/gt9xx.git
+2. touch screen, 4.11rc8已自带 GOODIX (compile gt9xx module, download from github.com/hadess/gt9xx.git)
 3. clocksource unstable, use 'clocksource=tsc tsc=reliable' in grub2.
 4. charge, set 'CONFIG_AXP288_FUEL_GAUGE=y' when compiling kernel.
 5. mmc, don't respond anything when writing mmc though downloading files, unsolved. maybe it's random freeze bug.
 6. soundcard, proper drivers not found, unsolved.
-7. apci, unsolved, use alias standby='xset dpms force standby' in .bashrc to keep screen sleep.
+7. apci, 4.11rc8已解决 开启AXP288所有选项 (unsolved, use alias standby='xset dpms force standby' in .bashrc to keep screen sleep.)
 8. random freeze,  give 'intel_idle.max_cstate=1' to linux line in grub2, it will not be random freeze. 
    DO NOT use 'irqpoll i915.modeset=1 threadirqs intel_iommu=igfx-off',
    if you use them, and it will still be random freeze.
@@ -15,7 +15,7 @@
     https://raw.githubusercontent.com/Manouchehri/vi8/master/Ubuntu_support_files/rfkill.patch
     then compile kernel and install https://github.com/lwfinger/rtl8723bs_bt and https://github.com/hadess/rtl8723bs 
     and patch https://github.com/hadess/rtl8723bs/tree/master/patches
-10. poweroff, 3.16.0 of debian jessie can poweroff and reboot normally. but 4.4.1 NOT
+10. poweroff, 4.11rc8开启AXP288已解决 (3.16.0 of debian jessie can poweroff and reboot normally. but 4.4.1 NOT)
     there's a patch about poweroff and reboot for old kernel, see https://github.com/jfwells/linux-asus-t100ta/tree/master/patches
 11. usb mouse, compile gt9xx modules, github.com/hadess/gt9xx.git
 12. batter status, workaround with https://github.com/zhaofengli/iwork8/blob/master/scripts/battery.sh, install libi2c-dev and compile test_power module
@@ -298,3 +298,36 @@ systemctl start lightdm 进xfce看看, 没Goodix错误在dmesg
 suspend,然后充电，再唤醒，就会出现Goddix信息在dmesg
 sudo rmmod goodix就不再弹信息在dmesg also触摸屏也不能用了
 单独suspend不弹这些信息，不suspend直接充电，不弹这些信息，suspend之后充电弹这些信息
+
+4.11rc8已自带goodix触摸屏驱动! TOUCHSCREEN_GOODIX
+
+make oldconfig 会从读取当前目录的.config或/boot/config
+
+I2C_DESIGNWARE_PCI
+I2C_HID
+
+debian用make-kpkg打包内核
+http://blog.chinaunix.net/uid-26826958-id-3282945.html
+普通用户需用fakeroot 
+apt install kernel-package fakeroot
+$fakeroot make-kpkg --revision john  kernel_headers  kernel_image 
+make-kpkg kernel_image kernel_headers 
+
+generate linux-headers.deb failed,
+install: cannot stat 'REPORTING-BUGS':No such file or directory
+debian/rules/targets/headers.mk:40 recipe for target 'debian/stamp/install/linux-headers-4.11.0-custom failed.
+
+so use `fakeroot make -j3 deb-pkg LOCALVERSION=-mytest KDEB_PKGVERSION=1
+it will generate linux-image.deb and linux-headers.deb 
+use dpkg -i *.deb then update-grub
+http://www.linuxquestions.org/questions/debian-26/vanilla-kernel-cannot-stat-%91reporting-bugs%92-no-such-file-or-directory-4175601088/
+
+第一种直接make ; make modules_install; make headers_install 
+第二种make-kpkg 或 make deb-pkg
+第三种download from PPA Ubuntu, use their scripts, debian/rules binary-headers binary-generic
+
+4.11 只要一suspend,然后dmesg就
+Goodix-TS i2c-GDIX1001:00: I@C communication failure: -110
+i2c_designware 80860F41:03: timeout waiting for bus ready
+Goodix-TS i2c-GDIX1001:00: I2C transfer error :-110
+从/etc/modprob.d/blacklist.conf里面blacklist goodix
