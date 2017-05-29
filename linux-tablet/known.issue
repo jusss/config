@@ -331,3 +331,16 @@ Goodix-TS i2c-GDIX1001:00: I@C communication failure: -110
 i2c_designware 80860F41:03: timeout waiting for bus ready
 Goodix-TS i2c-GDIX1001:00: I2C transfer error :-110
 从/etc/modprob.d/blacklist.conf里面blacklist goodix
+-----------------------------------------------------------------
+4.12-rc1 自带rtl8723bs网卡驱动
+把4.11rc8的.config复制到4.12rc1里面 make oldconfig
+make menuconfig    use / search 
+AXP288
+TEST_POWER
+MT7601U
+R8712U
+8723bs
+goodix
+
+fakeroot make -j3 deb-pkg LOCAL_VERSION=-john KDEB_PKGVERSION=1
+
