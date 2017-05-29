@@ -1,0 +1,12 @@
+[Unit]
+Description= "enable nvidia video card when shutdown and reboot"
+Before= shutdown.target
+
+[Service]
+ExecStart= /bin/true
+ExecStop= /home/jusss/lab/enable-nvidia-video-card.sh
+RemainAfterExit= yes
+
+[Install]
+WantedBy= multi-user.target
+
