@@ -1,0 +1,11 @@
+[Unit]
+Description= run something when shutdown and reboot
+Before= shutdown.target
+
+[Service]
+ExecStart= /bin/true
+ExecStop= /home/jusss/lab/my-shutdown.sh
+RemainAfterExit= yes
+
+[Install]
+WantedBy= multi-user.target
