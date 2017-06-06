@@ -11,8 +11,8 @@ setxkbmap -layout us -option ctrl:nocaps
 ### xcape -e 'Control_L=Escape'
 xcape
 
-### network
-~/network/wifi.sh &
+### network, if there's wpa_supplicant then don't run wifi.sh
+pgrep wpa_supplicant || ~/network/wifi.sh &
 
 ### window manager must be the last program to run, and no &
 exec fvwm2
