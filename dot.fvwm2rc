@@ -46,8 +46,11 @@ MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore g
 Colorset 20 fg black, bg #3c5468
 Colorset 25 fg black, bg #3c5468
 
-#图标排列 -1200距离左边-1200即距离右边1200, +0距离上边0, -1距离右边-1即距离左边1, -1是距离下边-1即距离上边1, 算了，根本搞不明白，不过现在是从上到下从右到左了，不管了
-Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
+### IconBox +0 +0 -0 -0 means IconBox will fill the entire screen, IconFill left bottom means left to right, bottom to top
+### https://wiki.archlinux.org/index.php/FVWM
+###Style * IconBox -1200 +0 -1 -1, IconFill top right, NoIconTitle
+###IconBox left top right bottom
+Style * IconBox +0 +0 -0 -0, IconFill top right, NoIconTitle
 
 # 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
 # 2如果程序有图标，即使设置Style "program-name" Icon xterm.xpm也是改变不了图标的，需要加上IconOverride选项才可以
@@ -425,7 +428,8 @@ AddToFunc Maximize-Icon
 ################Desktop and Page#####################
 # Desk and Page, DesktopSize set how many pages and to squence on one desk, page and desk are short for pager and desktop, I think
 # DeskTopSize 3x3   it's too big
-DeskTopSize 2x2
+# 水平4个page 竖直1个
+DeskTopSize 4x1
 ### window-i iconify, window-o open out or called  maximize, m move, k kill, u uxterm or xterm, e emacs
 ### window-1 goto page 1, window-2 goto page 2
 ### window-n next focus, window-p previous focus
@@ -434,8 +438,10 @@ DeskTopSize 2x2
 # A in the third position of Key means Anywhere, M means Meta also called Alt
 Key 1 A 4 GoToPage 0 0
 Key 2 A 4 GoToPage 1 0
-Key 3 A 4 GoToPage 0 1
-Key 4 A 4 GoToPage 1 1
+Key 3 A 4 GoToPage 2 0
+Key 4 A 4 GoToPage 3 0
+#Key 3 A 4 GoToPage 0 1
+#Key 4 A 4 GoToPage 1 1
 #Key 3 A M GoToPage 2 0
 #Key 4 A M GoToPage 0 1
 #Key 5 A M GoToPage 1 1
@@ -511,7 +517,7 @@ ImagePath /usr/local/share/images:/usr/local/share/icons:/usr/share/images:/usr/
 
 # this make all windows don't have title bar and fringe,but if it needs a resize fuction on fringe and other functions on title
 # 取消所有窗口的标题栏和边框，但因为要用标题栏上的按钮和边框去调整大小所以注释这句, StickyIcon 让icon一直显示在所有page上
-Style "*"  NoTitle, NoHandles, StickyIcon
+Style "*"  NoTitle, NoHandles
 ### make xclock always show up and on top 
 ### StaysOnTop将会让这个视窗一直在其它视窗的上方。 StaysPut是正常的情况
 Style "xclock" Sticky, StaysOnTop
@@ -558,3 +564,4 @@ Style "xclock" Sticky, StaysOnTop
 ### $0 to $9, 定义函数时的形式参数, $0是第一个参数, $1是第二个参数
 ### 调试fvwm,  在tty2 $Xorg :1 vt2, 然后在Xorg :0里$xterm -display :1&,然后进tty2里fvwm2 -display :1
 ### unfinished 1, page循环(包括没有window的page和任意排列的page) 2. 鼠标划过最底层穿越进最上层
+
