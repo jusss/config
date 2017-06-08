@@ -29,7 +29,7 @@ Description=Battery Notifier
 Type=simple
 ### Environment="DISPLAY=:0.0"
 ### ExecStartPre run before ExecStart, and ExecStartPost run after ExecStart
-ExecStartPre=/usr/bin/sleep "10"
+###ExecStartPre=/usr/bin/sleep "10"
 ExecStart=/usr/bin/env "DISPLAY=:0.0" /usr/bin/python3 /home/jusss/lab/battery.eeepc.py
 # RestartSec=60
 # TimeoutStartSec=120
