@@ -59,6 +59,8 @@ Colorset 25 fg black, bg #3c5468
 ### IconBox left top right bottom, StickyIcons change to StickyIcon in the latest version
 Style "*" IconBox +200 +0 -200 -50, IconFill left bottom, NoIconTitle, StickyIcon
 
+### if you use xwd for window dump instead of icon, you need set Style "*" NoIcon
+
 # 1如果程序本身没有图标如feh则iconify后什么也不显示，这时可以用Style "*" Icon xterm.xpm来为这些没有图标的提供图标，如果是Style "**" 怎是强制所有图标用同一个图标即使是有图标的
 # 2如果程序有图标，即使设置Style "program-name" Icon xterm.xpm也是改变不了图标的，需要加上IconOverride选项才可以
 # 找不到对应图标的程序Iconify后用xterm的图标代替, 窗口名区分大小写， Style "firefox"不是firefox窗口的名字，Style "Firefox"才是, 使用xprop可以查询窗口的名字，WM_CLASS后面跟的就是窗口名
@@ -125,13 +127,13 @@ Style * Colorset 41, HilightColorset 42 # to use fg and bg
 
 ################# 标题栏 按钮 背景图片###########################
 #打开fvwm2后自动执行指令设置桌面背景图片，也可加入其它指令执行
-# set wallpaper, use feh xloadimage xv  whatever, or write it into ~/.xinitrc
+# set wallpaper, use feh xloadimage xv  whatever, or write it into ~/.xinitrc, of course you need install xloadimage or feh first
 ### http://www.linuxquestions.org/questions/linux-desktop-74/how-can-make-fvwm-support-jpg-can%27t-make-jpg-as-my-wallpaper-657067/
 
 AddToFunc StartFunction
 #+ I Exec exec fvwm-root -r $[ICONS]/desktop.png
-#+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
-+ I Exec exec feh --bg-center $[ICONS]/img102.jpg
++ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
+#+ I Exec exec feh --bg-center $[ICONS]/Aurora.jpg
 
 #使用自己定义的MyDecor装饰标题栏
 Style * UseDecor MyDecor
