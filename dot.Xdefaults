@@ -17,34 +17,34 @@ XTerm.vt100.faceNameDoublesize:SimSun:size=10
 !XTerm.vt100.geometry:127x35
 !XTerm.vt100.background:#000000
 !XTerm.vt100.foreground:#00FF00
-XTerm.vt100.colorAttrMode:true
-XTerm.vt100.colorUL:#cd0000
-XTerm.vt100.highlightColor:#cd0000
+!XTerm.vt100.colorAttrMode:true
+!XTerm.vt100.colorUL:#cd0000
+!XTerm.vt100.highlightColor:#cd0000
 XTerm.vt100.inputMethod:fcitx
 XTerm.vt100.printAttributes:2
-*xterm*color0: #2e3436
-*xterm*color1: #cc0000
-*xterm*color2: #4e9a06
-*xterm*color3: #c4a000
-*xterm*color4: #6146b4
-!color4 set irssi title bar background
-*xterm*color5: #75507b
-!*xterm*color6: #ffff2f
-*xterm*color6: #4e9a06
-!color 6 set [] the number of act in bar leave msg channel name
-*xterm*color7: #ffffff
-!color 7 set text in title/bottom bar
-*xterm*color8:  #555753
-*xterm*color9:  #ef2929
-*xterm*color10: #8ae234
-*xterm*color11: #ff0000
-!color 11 set irssi hilight
-*xterm*color12: #729fcf
-*xterm*color13: #ad7fa8
-!*xterm*color14: #ffff2f
-*xterm*color14: #2e3436
-!color 14 set join msg
-*xterm*color15: #eeeeec
+!*xterm*color0: #2e3436
+!*xterm*color1: #cc0000
+!*xterm*color2: #4e9a06
+!*xterm*color3: #c4a000
+!*xterm*color4: #6146b4
+!!color4 set irssi title bar background
+!*xterm*color5: #75507b
+!!*xterm*color6: #ffff2f
+!*xterm*color6: #4e9a06
+!!color 6 set [] the number of act in bar leave msg channel name
+!*xterm*color7: #ffffff
+!!color 7 set text in title/bottom bar
+!*xterm*color8:  #555753
+!*xterm*color9:  #ef2929
+!*xterm*color10: #8ae234
+!*xterm*color11: #ff0000
+!!color 11 set irssi hilight
+!*xterm*color12: #729fcf
+!*xterm*color13: #ad7fa8
+!!*xterm*color14: #ffff2f
+!*xterm*color14: #2e3436
+!!color 14 set join msg
+!*xterm*color15: #eeeeec
 
 !set next/up page with page down/up
 !xterm*VT100.Translations: #override\n\
