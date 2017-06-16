@@ -6,6 +6,9 @@ After= network.target
 [Service]
 Type= simple
 ExecStart= /usr/bin/python3.4 /root/date-password.py
+Restart= on-failure
+RestartSec= "5min 20s"
+
 
 [Install]
 WantedBy=multi-user.target

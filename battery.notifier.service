@@ -34,7 +34,7 @@ ExecStart=/usr/bin/env "DISPLAY=:0.0" /usr/bin/python3 /home/jusss/lab/battery.e
 # RestartSec=60
 # TimeoutStartSec=120
 # Restart=no
-Restart=always
+Restart= on-failure
 RestartSec=300
 
 [Install]
