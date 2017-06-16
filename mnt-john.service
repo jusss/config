@@ -11,7 +11,7 @@ Type=simple
 ExecStart= /bin/chown -R john:john /mnt/john
 ExecStartPost= /bin/chmod 700 /mnt/john
 ### but I got /mnt/john drwx--S---, someone tell me it's setuid withoud execute permissions
-Restart=always
+Restart= on-failure
 RestartSec=300
 
 [Install]
