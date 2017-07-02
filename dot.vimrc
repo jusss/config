@@ -11,4 +11,5 @@ set fileformats=unix,dos
 set expandtab
 set shiftwidth=4
 set tabstop=4
+"this is for gvim +clipboard, set clipboard^=unnamed,unnamedplus, this will yank to clipboard of Xorg not just register of vim"
 "end"
