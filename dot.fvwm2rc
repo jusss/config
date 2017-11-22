@@ -52,9 +52,12 @@ AddToMenu MenuFvwmRoot    " Window "    Title
 MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
 # WindowList也会使用MenuStyle的配置
 # TitleColorset是窗口标题栏的背景和字体颜色,MenuColorset是窗口的背景和字体颜色,HilightBack是高亮时的背景色,ActiveFore是高亮时的字体颜色
-MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore green, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
-Colorset 20 fg black, bg white
-Colorset 25 fg black, bg white
+#MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore green, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
+#Colorset 20 fg black, bg white
+#Colorset 25 fg black, bg white
+MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore yellow, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
+Colorset 20 fg green, bg #3c5468
+Colorset 25 fg green, bg #3c5468
 
 ### IconBox +0 +0 -0 -0 means IconBox will fill the entire screen, if use IconBox none means disable IconBox, Icon will be placed at 
 ### the position of the top left corner of the window, IconFill left bottom means left to right, bottom to top
