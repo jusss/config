@@ -517,7 +517,8 @@ AddToFunc SwitchToWindow
 # 在xmodmap中取消Tab的映射或修改切换窗口的快捷键, 现在修改为Super键加Meta_L切换窗口,xmodmap映射Tab为按一下释放是Tab,按住组合其它键是Meta_L是为了M-v在emacs中，映射可用xcape实现
 # 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，因为还需要修改SelectOnRelease就不改了,只能修改xmodmap和xcape了，取消Tab键的映射
 #Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
-Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
+#Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
+Key Tab A M WindowList NoIcons, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50, "Prev SwitchToWindow"
 
 ###################################编译和位置#########################################################
