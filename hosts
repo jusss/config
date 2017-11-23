@@ -1,0 +1,22 @@
+#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>	<hostname.domain.org>	<hostname>
+127.0.0.1	localhost.localdomain	localhost
+::1		localhost.localdomain	localhost
+127.0.0.1	moon
+104.244.42.129	twitter.com
+104.244.42.65	twitter.com
+172.217.25.206	youtube.com
+172.217.25.206	google.com
+151.101.73.140	www.reddit.com
+172.217.25.4	www.google.com
+104.244.42.129 	www.twitter.com
+172.217.25.197 	mail.google.com
+139.162.85.206	subhd.com
+207.171.166.22	imdb.com
+124.239.159.104	mirrors.aliyun.com
+115.182.201.8 	movie.douban.com
+
+# End of file
