@@ -1,0 +1,8 @@
+#startdde
+xhost +local: &
+#pgrep wpa_supplicant || ~/network/wifi.sh &
+setxkbmap -layout us -option ctrl:nocaps
+xcape
+fcitx -rd&
+xss-lock -- xlock&
+exec fvwm
