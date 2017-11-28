@@ -13,7 +13,7 @@ remoterepository = jusss-remote
 status_backend = sqlite
 
 [Repository jusss-local]
-# mail type, there are two type mbox and maildir, store all mail in one file, that's mbox, in a lot of file, that's maildir
+# mail type, there are two type mbox and maildir, store all mail in one file, that's mbox, in a lot of file, that's maildir, actually offlineimap doesn't support mbox
 type = Maildir
 # where's mail stored, it's on ~/Mail folder
 # you should mkdir Mail before run offlineimap at the first time
