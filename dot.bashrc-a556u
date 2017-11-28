@@ -1,0 +1,26 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+#[[ $- != *i* ]] && return
+
+#alias ls='ls --color=auto'
+#PS1='[\u@\h \W]\$ '
+alias suspend='systemctl suspend'
+alias ls='ls --color=always -t'
+alias volume_control='pavucontrol'
+alias standby='sleep 1&&xset dpms force standby'
+alias mv='mv -i'
+alias cp='cp -i'
+PATH=$PATH:/usr/bin/v2ray/
+#alias 'mpv -s'='mpv --sub-file'
+export TLDR_COLOR_BLANK="white"
+export TLDR_COLOR_NAME="cyan"
+export TLDR_COLOR_DESCRIPTION="white"
+export TLDR_COLOR_EXAMPLE="green"
+export TLDR_COLOR_COMMAND="red"
+export TLDR_COLOR_PARAMETER="white"
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export MAIL=$MAIL/INBOX
