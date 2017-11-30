@@ -35,12 +35,13 @@ DestroyMenu MenuFvwmRoot
 AddToMenu MenuFvwmRoot    " Window "    Title
 +             " Chromium "  Exec exec chromium
 +             " Volume "    Exec exec pavucontrol
++             " System Info" Exec exec gnome-system-monitor
 +             " Terminal "  Exec exec xterm
 +			  " Resize"	     Resize
 +			  " Maximize"	     Maximize
 +			  " Iconify"	     Iconify
 +			  " Move"	     Move
-#+			  " Iconify Off"     Iconify Off
++			  " Iconify Off"     Iconify Off
 #+			  " Focus"	     Focus
 #+			  " Close"	     Close
 #+             " Stick"       Stick
@@ -73,13 +74,16 @@ Style "*" IconBox +200 +0 -200 -50, IconFill left bottom, NoIconTitle, StickyIco
 Style "*"       Icon  filled-xterm_48x48.xpm
 #Style "emacs"	 Color black/gray86
 #Style "xterm"   Icon $[ICONS]/xterm.png, IconOverride, Color black/gray86
-#Style "xterm"   Color black/gray86
+Style "xterm"   Icon   filled-xterm_48x48.xpm, IconOverride
+#Style "xterm"   Icon xterm.xpm
 #Style "mpv"	Color black/gray86, NoHandles
 #Style "mplayer"	 Color black/gray86, NoHandles
 #Style "Chromium"   Icon $[ICONS]/chrome.png, IconOverride, Color black/gray86, NoHandles, NoTitle
 Style "Chromium"  NoHandles, NoTitle
 Style "Firefox"    Color black/gray86, NoHandles, NoTitle
 Style "emacs"   NoTitle
+#Style "conky"	NoTitle, Sticky, StaysOnTop, NeverFocus
+Style "conky"	NoTitle, Sticky, NeverFocus
 
 # 关于Border边框做个标记 Lable 01,如果要修改边框就搜索01
 #BorderWidth 边框宽度和像素, MWMBorder和FvwmBorder的不同就是一个边框是2pixels一个边框是1pixels,FirmBorder是按下边框无陷下去的3d效果，对应的是DepressableBorder
@@ -137,8 +141,8 @@ Style * Colorset 41, HilightColorset 42 # to use fg and bg
 ### http://www.linuxquestions.org/questions/linux-desktop-74/how-can-make-fvwm-support-jpg-can%27t-make-jpg-as-my-wallpaper-657067/
 
 AddToFunc StartFunction
-#+ I Exec exec fvwm-root -r $[ICONS]/desktop.png
-+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
++ I Exec exec fvwm-root -r $[ICONS]/desktop.png
+#+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
 #+ I Exec exec feh --bg-center $[ICONS]/Aurora.jpg
 
 #使用自己定义的MyDecor装饰标题栏
@@ -498,8 +502,10 @@ Key 4 A C GotoDesk 0 3
 ### window-n next focus, window-p previous focus
 ### !CurrentPage 不focus在当前page的其它的windows(默认是focus的), !Iconic不focus在iconic的windows上
 ### !Overlapped 如果一个page上有多个重叠的windows,focus在最上面那个window上(而不管鼠标指针是否在这个window上,好像不用管是MouseFocus获取焦点)
-Key n A 4 Next (!Iconic) Focus
-Key p A 4 Prev (!Iconic) Focus
+### AcceptsFocus 忽略掉设置了NeverFocus的窗口，如conky
+### Visible是窗口部分可见，没有被完全覆盖
+Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky) Focus
+Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874

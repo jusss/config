@@ -5,4 +5,5 @@ setxkbmap -layout us -option ctrl:nocaps
 xcape
 fcitx -rd&
 xss-lock -- xlock&
+xcompmgr -c &
 exec fvwm

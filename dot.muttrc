@@ -1,0 +1,94 @@
+set editor="vim"
+set edit_headers=yes
+set sendmail_wait=-1
+set sendmail=/usr/bin/msmtp
+set move=no
+
+### $MAIL is set by system, it'll be /var/spool/mail/$USER
+set folder=/var/spool/mail/john
+
+### deleted mails by press d key in mutt and which have been read, move them to ~/Mail/QQ-Deleted
+### this directory must have three directory tmp cur and new, it will store 
+### in cur directory. and set move=yes, it it's no then this option won't work
+###set mbox="~/Mail/QQ-Deleted"
+
+### if you set delete flag on mail in mutt, then wait offlineimap sync it to server, and sync delete
+### move the deleted mails to where mbox point, if it's not INBOX, and move=yes,
+### it will be deleted from INBOX and it's not good when it sync to server
+### so just leave it in INBOX
+set mbox="+INBOX"
+
+### inbox will be /var/spool/mail/john/INBOX, + means "set folder=" setting
+set spoolfile="+INBOX"
+
+### sent box will be /var/spool/mail/john/Sent\ Messages
+set record="+Sent Messages"
+
+### Drafts
+set postponed="+Drafts"
+
+set mbox_type=Maildir
+set check_new=yes
+set timeout=60
+set mail_check=20
+my_hdr From:x@qq.com
+my_hdr Reply-TO:x@qq.com
+set envelope_from=yes
+set from=x@qq.com
+set realname=l
+set use_from=yes
+charset-hook !UTF-8 gb2312
+set rfc2047_parameters=yes
+set charset="utf-8"
+set send_charset="utf-8"
+set mime_forward=yes
+set mime_forward_rest=yes
+unalternative_order *
+alternative_order text/html text/plain
+set index_format="%4C %Z %{!%b %d %Y} %-18.18F [%4c]%?X?*& ? %s"
+set status_on_top=yes
+auto_view application/msword application/pdf application/vnd.oasis.opendocument.text text/html
+set include=yes
+set resolve=yes
+set pager_stop=yes
+set menu_scroll=yes
+set pager_index_lines=6
+set forward_format="Fwd: %s"
+set tilde=yes
+set sort=reverse-threads
+set sort_aux=last-date-sent
+# ---------------------Color theme-----------------------------------
+color normal green default
+color attachment magenta default
+color hdrdefault cyan default
+color indicator brightblack green
+color markers blue default
+color signature cyan default
+color status green black
+color tilde blue default
+color tree red default
+color quoted green default
+color quoted1 yellow default
+color quoted2 red default
+color hdrdefault cyan default
+color header default magenta .*
+color header brightgreen blue ^(From|To|Cc|Subject):
+color signature cyan default
+color index green default ~p # To me
+color index blue default ~P # From me
+color index brightyellow default ~N # New
+color index brightgreen default "~N ~p" # New to me
+color index brightcyan default ~T # Tagged
+color index magenta default ~D # Deleted
+color index brightyellow blue ~F # Flaged
+color body red default "[!?]{3,}" # exclamation
+color body green default "^ *[-+*o] +" # list item
+color body brightgreen black "[;:]-*[)>(<|PD]" # :-) etc...
+color body red default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email
+color body brightred default "(^| )[*_]+[-&[:alnum:]]+[*_]( |$)" # bold/underline
+color body yellow default "(ftp|http|https)://[\-\.\,/+=&%~_:?\#a-zA-Z0-9]+" # URL
+color body cyan default "[0-9]{1,2}:[0-9]{2}(:[0-9]{2})?( ?(AM|PM|am|pm))?( +[+-][0-9]{4})?"
+color body cyan default "(\(19|20\)?[0-9]{2}/[01]?[0-9]/[0123]?[0-9]|[0123]?[0-9][/.][01]?[0-9][/.]\(19|20\)?[0-9]{2})(( at)? +[0-9]{1,2}:[0-9]{2}(:[0-9]{2})?( ?(AM|PM|am|pm))?( +[+-][0-9]{4})?)?"
+color body cyan default "((Sun(day)?|Mon(day)?|Tue(sday)?|Wed(nesday)?|Thu(sday)?|Fri(day)?|Sat(urday)?),? +)?(Jan(uary)?|Feb(rary)?|Mar(ch)?|Apr(il)?|May|June?|July?|Aug(ust)?|Sep(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)[ .]+[0-9]{1,2}(st|nd|rd|th)?,?( +(19|20)[0-9]{2}(,?( at)? [0-9]{1,2}:[0-9]{2}(:[0-9]{2})?( ?(AM|PM|am|pm))?( +[+-][0-9]{4})?)?)?"
+color body cyan default "((Sun(day)?|Mon(day)?|Tue(sday)?|Wed(nesday)?|Thu(sday)?|Fri(day)?|Sat(urday)?),? +)?[0-9]{1,2}(st|nd|rd|th)?[ .]+(Jan(uary)?|Feb(rary)?|Mar(ch)?|Apr(il)?|May|June?|July?|Aug(ust)?|Sep(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?),?( +(19|20)?[0-9]{2})?(( at)? [0-9]{1,2}:[0-9]{2}(:[0-9]{2})?( ?(AM|PM|am|pm))?( +[+-][0-9]{4})?)?"
+
