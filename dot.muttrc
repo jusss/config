@@ -7,6 +7,10 @@ set move=no
 ### $MAIL is set by system, it'll be /var/spool/mail/$USER
 set folder=/var/spool/mail/john
 
+### only show unread mails when you run mutt
+### if you want all mailbox do this, use . instead of "+INBOX"
+folder-hook "+INBOX" 'push <limit>~N<enter>'
+
 ### deleted mails by press d key in mutt and which have been read, move them to ~/Mail/QQ-Deleted
 ### this directory must have three directory tmp cur and new, it will store 
 ### in cur directory. and set move=yes, it it's no then this option won't work
@@ -19,6 +23,8 @@ set folder=/var/spool/mail/john
 set mbox="+INBOX"
 
 ### inbox will be /var/spool/mail/john/INBOX, + means "set folder=" setting
+### if set folder=/var/spool/mail/john then "+INBOX" is /var/spool/mail/john/INBOX
+### mutt will open the mailbox which spoolfile point
 set spoolfile="+INBOX"
 
 ### sent box will be /var/spool/mail/john/Sent\ Messages
