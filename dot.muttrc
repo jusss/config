@@ -1,6 +1,8 @@
 set editor="vim"
 set edit_headers=yes
-set sendmail_wait=-1
+# don't wait for sending, but this may trigger a bug for offlinemap when it
+# sync the sent mails
+# set sendmail_wait=-1
 set sendmail=/usr/bin/msmtp
 set move=no
 
@@ -28,10 +30,15 @@ set mbox="+INBOX"
 set spoolfile="+INBOX"
 
 ### sent box will be /var/spool/mail/john/Sent\ Messages
-set record="+Sent Messages"
+### this may cause offlineimap sync error, 'smtp already have it',just wait for server sync
+### disable this, mutt will make ~/sent/ mailbox directory for sent mails
+###set record="+Sent Messages"
+##在.muttrc里不要设置set record= and set postponed= 
+##mutt会把它们保存本地，然后同步到服务器上，但是当smtp时服务器上已经有了
+##所以会同步失败,等服务器同步到本地
 
 ### Drafts
-set postponed="+Drafts"
+#set postponed="+Drafts"
 
 set mbox_type=Maildir
 set check_new=yes
