@@ -1,0 +1,46 @@
+### it should be ~/.config/conky/conky.conf alignment = bottom_middle, can set the conky position or  conky -c conky.conf -x 0 -y -1
+conky.config = {
+    background = false,
+    border_width = 1,
+    cpu_avg_samples = 2,
+	default_color = 'black',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    double_buffer = true,
+    use_xft = true,
+    font = 'DejaVu Sans Mono:size=12',
+    gap_x = 5,
+    gap_y = 60,
+    minimum_height = 5,
+	minimum_width = 5,
+    net_avg_samples = 2,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    own_window = true,
+    own_window_argb_visual = true,
+    own_window_transparent = true,
+    stippled_borders = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'none',
+    show_graph_scale = false,
+    show_graph_range = false
+}
+
+conky.text = [[
+${color black}Time:$color ${time %H:%M:%S} \
+${color black}Battery:$color ${battery BAT0} \
+${color black}Temp:$color ${acpitemp}°C \
+${color black}RAM:$color $memperc% \
+${color black}CPU:$color $cpu% \
+### new_mails will check maildir directory, there must be new tmp cur under the directory
+### new_mails only check INBOX/new, and mails will check INBOX/cur
+${color black} new mail:$color ${new_mails $MAIL/INBOX 60s} \
+${color black} Down:$color ${downspeed wlp3s0} ${color black} Up:$color ${upspeed wlp3s0} ${color black} \
+Total $color ${totaldown wlp3s0} $color ${totalup wlp3s0} \
+]]
