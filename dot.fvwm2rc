@@ -82,8 +82,9 @@ Style "xterm"   Icon   filled-xterm_48x48.xpm, IconOverride
 Style "Chromium"  NoHandles, NoTitle
 Style "Firefox"    Color black/gray86, NoHandles, NoTitle
 Style "emacs"   NoTitle
+Style "deepin-terminal" NoTitle, NoHandles
 #Style "conky"	NoTitle, Sticky, StaysOnTop, NeverFocus
-Style "conky"	NoTitle, Sticky, NeverFocus
+Style "conky"	NoTitle, NeverFocus, Sticky
 
 # 关于Border边框做个标记 Lable 01,如果要修改边框就搜索01
 #BorderWidth 边框宽度和像素, MWMBorder和FvwmBorder的不同就是一个边框是2pixels一个边框是1pixels,FirmBorder是按下边框无陷下去的3d效果，对应的是DepressableBorder
@@ -141,7 +142,7 @@ Style * Colorset 41, HilightColorset 42 # to use fg and bg
 ### http://www.linuxquestions.org/questions/linux-desktop-74/how-can-make-fvwm-support-jpg-can%27t-make-jpg-as-my-wallpaper-657067/
 
 AddToFunc StartFunction
-+ I Exec exec fvwm-root -r $[ICONS]/desktop.png
++ I Exec exec fvwm-root -r $[ICONS]/Aurora.png
 #+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
 #+ I Exec exec feh --bg-center $[ICONS]/Aurora.jpg
 
@@ -321,9 +322,9 @@ Inactive (Pixmap $[ICONS]/maximize.svg -- Flat)
 # ClickToFocus, FocusFollowsMouse, SloppyFocus, NeverFocus, 默认的是MouseFocus (or its alias FocusFollowsMouse)
 
 #Style * ClickToFocus
-Style * SloppyFocus
+#Style * SloppyFocus
 #Style * MouseFocus
-#Style * MouseFocusClickRaises 
+Style * MouseFocusClickRaises 
 #Style * FocusFollowsMouse
 #Module FvwmAuto 100
 # FvwmAuto模块的位置需要写进ModulePath里，具体位置见下面的编译和位置,这个可以写ModulePath里使用,不像按钮图标文件位置写进ImagePath里无效
@@ -527,7 +528,7 @@ AddToFunc SwitchToWindow
 # 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，因为还需要修改SelectOnRelease就不改了,只能修改xmodmap和xcape了，取消Tab键的映射
 #Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
-Key Tab A M WindowList NoIcons, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
+Key Tab A M WindowList NoIcons, NoSticky, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50, "Prev SwitchToWindow"
 
 ###################################编译和位置#########################################################
