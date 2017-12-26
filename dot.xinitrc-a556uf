@@ -4,6 +4,9 @@ xhost +local: &
 setxkbmap -layout us -option ctrl:nocaps
 xcape
 fcitx -rd&
+#ibus-daemon -rdx&
 xss-lock -- xlock&
 xcompmgr -c &
+### blank the scren after a half hour
+xset dpms 1800 1800 1800
 exec fvwm
