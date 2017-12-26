@@ -34,13 +34,14 @@ SetEnv ICONS /home/john/icons
 DestroyMenu MenuFvwmRoot
 AddToMenu MenuFvwmRoot    " Window "    Title
 +             " Chromium "  Exec exec chromium
++             " Firefox "   Exec exec firefox
 +             " Volume "    Exec exec pavucontrol
 +             " System Info" Exec exec gnome-system-monitor
-+             " Terminal "  Exec exec xterm
-+			  " Resize"	     Resize
-+			  " Maximize"	     Maximize
++             " Terminal "  Exec exec xfce4-terminal
+#+			  " Resize"	     Resize
+#+			  " Maximize"	     Maximize
 +			  " Iconify"	     Iconify
-+			  " Move"	     Move
+#+			  " Move"	     Move
 +			  " Iconify Off"     Iconify Off
 #+			  " Focus"	     Focus
 #+			  " Close"	     Close
@@ -399,7 +400,7 @@ Key i W 4 Iconify
 ### Key o W 4 Maximize-Focus-Raise
 Key o W 4 Maximize
 #Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
-Key u A 4 Exec  exec xterm
+Key u A 4 Exec  exec xfce4-terminal
 #Key u A 4 Exec  exec gnome-terminal
 #Key  3 A 4 Exec-xterm
 # 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
