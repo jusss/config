@@ -24,3 +24,15 @@ export TLDR_COLOR_PARAMETER="white"
 export TLDR_CACHE_ENABLED=1
 export TLDR_CACHE_MAX_AGE=720
 #export MAIL=$MAIL/INBOX
+mkill() { kill "$(pidof -x "$1")" ;}
+alias netoff='sudo killall wpa_supplicant'
+alias reboot='killall -u john;reboot'
+mp(){ 
+if [ $# -gt 1 ]
+then
+    if [[ $2 == *.srt || $2 == *.ass ]]
+    then
+        mpv $1 --sub-file $2
+    fi
+fi
+}
