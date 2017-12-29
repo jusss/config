@@ -27,12 +27,25 @@ export TLDR_CACHE_MAX_AGE=720
 mkill() { kill "$(pidof -x "$1")" ;}
 alias netoff='sudo killall wpa_supplicant'
 alias reboot='killall -u john;reboot'
-mp(){ 
-if [ $# -gt 1 ]
-then
-    if [[ $2 == *.srt || $2 == *.ass ]]
+#alias mpv='impv'
+impv(){ 
+P_LIST=( "$@" )
+#echo "the number of parameter is $#"
+for ((i=0; i<$#; i+=2))
+do
+    if [[ $# -gt 1 ]]
     then
-        mpv $1 --sub-file $2
+        #echo "this is the first parameter: ${P_LIST[0]}"
+        if [[ "${P_LIST[$i+1]}" == *.srt || "${P_LIST[$i+1]}" == *.ass ]]
+        then
+            mpv "${P_LIST[$i]}" --sub-file "${P_LIST[$i+1]}"
+        else impv_music "$@"; break
+        fi
+    else mpv "$@"
     fi
-fi
+done
+}
+
+impv_music(){
+mpv "$@"
 }
