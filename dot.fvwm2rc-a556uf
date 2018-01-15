@@ -33,25 +33,33 @@ SetEnv ICONS /home/john/icons
 
 DestroyMenu MenuFvwmRoot
 AddToMenu MenuFvwmRoot    " Window "    Title
-+			  " Resize"	     Resize
-+			  " Maximize"	     Maximize
++             " Chromium "  Exec exec chromium
++             " Firefox "   Exec exec firefox
++             " Volume "    Exec exec pavucontrol
++             " System Info" Exec exec gnome-system-monitor
++             " Terminal "  Exec exec xfce4-terminal
+#+			  " Resize"	     Resize
+#+			  " Maximize"	     Maximize
 +			  " Iconify"	     Iconify
-+			  " Move"	     Move
-#+			  " Iconify Off"     Iconify Off
+#+			  " Move"	     Move
++			  " Iconify Off"     Iconify Off
 #+			  " Focus"	     Focus
 #+			  " Close"	     Close
 #+             " Stick"       Stick
 #+			  " Raise"	     Raise
 #+             " Lower"       Lower
 #+             " Raise Lower" RaiseLower
-+             " Chromium "  Exec exec chromium
++             " -------- "
 +             " Suspend "   Exec exec systemctl suspend
 MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
 # WindowList也会使用MenuStyle的配置
 # TitleColorset是窗口标题栏的背景和字体颜色,MenuColorset是窗口的背景和字体颜色,HilightBack是高亮时的背景色,ActiveFore是高亮时的字体颜色
-MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore green, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
-Colorset 20 fg black, bg #3c5468
-Colorset 25 fg black, bg #3c5468
+#MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore green, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
+#Colorset 20 fg black, bg white
+#Colorset 25 fg black, bg white
+MenuStyle * TitleColorset 20, MenuColorset 25, HilightBack #3c5468, ActiveFore yellow, BorderWidth 0, TitleUnderlines0, Hilight3DThickness -2
+Colorset 20 fg green, bg #3c5468
+Colorset 25 fg green, bg #3c5468
 
 ### IconBox +0 +0 -0 -0 means IconBox will fill the entire screen, if use IconBox none means disable IconBox, Icon will be placed at 
 ### the position of the top left corner of the window, IconFill left bottom means left to right, bottom to top
@@ -67,13 +75,17 @@ Style "*" IconBox +200 +0 -200 -50, IconFill left bottom, NoIconTitle, StickyIco
 Style "*"       Icon  filled-xterm_48x48.xpm
 #Style "emacs"	 Color black/gray86
 #Style "xterm"   Icon $[ICONS]/xterm.png, IconOverride, Color black/gray86
-#Style "xterm"   Color black/gray86
+Style "xterm"   Icon   filled-xterm_48x48.xpm, IconOverride
+#Style "xterm"   Icon xterm.xpm
 #Style "mpv"	Color black/gray86, NoHandles
 #Style "mplayer"	 Color black/gray86, NoHandles
 #Style "Chromium"   Icon $[ICONS]/chrome.png, IconOverride, Color black/gray86, NoHandles, NoTitle
 Style "Chromium"  NoHandles, NoTitle
 Style "Firefox"    Color black/gray86, NoHandles, NoTitle
 Style "emacs"   NoTitle
+Style "deepin-terminal" NoTitle, NoHandles
+#Style "conky"	NoTitle, Sticky, StaysOnTop, NeverFocus
+Style "conky"	NoTitle, NeverFocus, Sticky
 
 # 关于Border边框做个标记 Lable 01,如果要修改边框就搜索01
 #BorderWidth 边框宽度和像素, MWMBorder和FvwmBorder的不同就是一个边框是2pixels一个边框是1pixels,FirmBorder是按下边框无陷下去的3d效果，对应的是DepressableBorder
@@ -131,8 +143,8 @@ Style * Colorset 41, HilightColorset 42 # to use fg and bg
 ### http://www.linuxquestions.org/questions/linux-desktop-74/how-can-make-fvwm-support-jpg-can%27t-make-jpg-as-my-wallpaper-657067/
 
 AddToFunc StartFunction
-#+ I Exec exec fvwm-root -r $[ICONS]/desktop.png
-+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
++ I Exec exec fvwm-root -r $[ICONS]/Aurora.png
+#+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
 #+ I Exec exec feh --bg-center $[ICONS]/Aurora.jpg
 
 #使用自己定义的MyDecor装饰标题栏
@@ -313,7 +325,8 @@ Inactive (Pixmap $[ICONS]/maximize.svg -- Flat)
 #Style * ClickToFocus
 #Style * SloppyFocus
 Style * MouseFocus
-Style * MouseFocusClickRaises 
+#Style * MouseFocusClickRaises 
+#Style * FocusFollowsMouse
 #Module FvwmAuto 100
 # FvwmAuto模块的位置需要写进ModulePath里，具体位置见下面的编译和位置,这个可以写ModulePath里使用,不像按钮图标文件位置写进ImagePath里无效
 
@@ -387,7 +400,7 @@ Key i W 4 Iconify
 ### Key o W 4 Maximize-Focus-Raise
 Key o W 4 Maximize
 #Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
-Key u A 4 Exec  exec xterm
+Key u A 4 Exec  exec xfce4-terminal
 #Key u A 4 Exec  exec gnome-terminal
 #Key  3 A 4 Exec-xterm
 # 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
@@ -491,8 +504,10 @@ Key 4 A C GotoDesk 0 3
 ### window-n next focus, window-p previous focus
 ### !CurrentPage 不focus在当前page的其它的windows(默认是focus的), !Iconic不focus在iconic的windows上
 ### !Overlapped 如果一个page上有多个重叠的windows,focus在最上面那个window上(而不管鼠标指针是否在这个window上,好像不用管是MouseFocus获取焦点)
-Key n A 4 Next (!CurrentPage, !Iconic, !Overlapped) Focus
-Key p A 4 Prev (!CurrentPage, !Iconic, !Overlapped) Focus
+### AcceptsFocus 忽略掉设置了NeverFocus的窗口，如conky
+### Visible是窗口部分可见，没有被完全覆盖
+Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky) Focus
+Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
@@ -513,7 +528,8 @@ AddToFunc SwitchToWindow
 # 在xmodmap中取消Tab的映射或修改切换窗口的快捷键, 现在修改为Super键加Meta_L切换窗口,xmodmap映射Tab为按一下释放是Tab,按住组合其它键是Meta_L是为了M-v在emacs中，映射可用xcape实现
 # 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，因为还需要修改SelectOnRelease就不改了,只能修改xmodmap和xcape了，取消Tab键的映射
 #Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
-Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
+#Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
+Key Tab A M WindowList NoIcons, NoSticky, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50, "Prev SwitchToWindow"
 
 ###################################编译和位置#########################################################
