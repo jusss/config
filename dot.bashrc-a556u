@@ -26,7 +26,8 @@ export TLDR_CACHE_MAX_AGE=720
 #export MAIL=$MAIL/INBOX
 mkill() { kill "$(pidof -x "$1")" ;}
 alias netoff='sudo killall wpa_supplicant'
-alias reboot='killall -u john;reboot'
+alias reboot='sudo dhcpcd -x wlp3s0;reboot'
+alias poweroff='sudo dhcpcd -x wlp3s0;poweroff'
 #alias mpv='impv'
 impv(){ 
 P_LIST=( "$@" )
