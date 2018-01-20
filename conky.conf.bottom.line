@@ -26,7 +26,7 @@ conky.config = {
     own_window_argb_visual = true,
     own_window_transparent = true,
     stippled_borders = 0,
-    update_interval = 1.0,
+    update_interval = 5.0,
     uppercase = false,
     use_spacer = 'none',
     show_graph_scale = false,
@@ -34,14 +34,16 @@ conky.config = {
 }
 
 conky.text = [[
-${color black}Time:$color ${time %H:%M:%S} \
-${color black}Battery:$color ${battery BAT0} \
-${color black}Temp:$color ${acpitemp}°C \
-${color black}RAM:$color $memperc% \
-${color black}CPU:$color $cpu% \
+#${color black}Time:$color ${time %H:%M:%S} \
+#
+${color black}Time:$color${time %H:%M,%A,%m.%d} \
+${color black}Battery:$color${battery BAT0} \
+${color black}Temp:$color${acpitemp}°C \
+${color black}RAM:$color$memperc% \
+${color black}CPU:$color$cpu% \
 ### new_mails will check maildir directory, there must be new tmp cur under the directory
 ### new_mails only check INBOX/new, and mails will check INBOX/cur
-${color black} new mail:$color ${new_mails $MAIL/INBOX 60s} \
-${color black} Down:$color ${downspeed wlp3s0} ${color black} Up:$color ${upspeed wlp3s0} ${color black} \
-Total $color ${totaldown wlp3s0} $color ${totalup wlp3s0} \
+${color black}Mail:$color${new_mails $MAIL/INBOX 60s} \
+${color black}Down:$color${downspeed wlp3s0}/s ${color black}Up:$color${upspeed wlp3s0}/s ${color black}\
+Total:$color${totaldown wlp3s0} $color${totalup wlp3s0} \
 ]]
