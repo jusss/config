@@ -1,3 +1,79 @@
+发现无限卡在登录页面，输入密码登录后又出现登录页面，在登录页面那个齿轮图标选'ubuntu'也就是wayland也是这样,
+选'ubuntu on Xorg'也是这样，后来搜了下发现~/.Xauthority是属于root的，删了，发现还是这样
+直接journalctl发现不能打开~/.ICEauthority导致了Xorg的启动失败，删掉~/.ICEauthority能进系统了
+---------------------------------------
+gnome3自带的on-screen keyboard是caribou,但默认没ctrl esc tab shift键
+可以关掉通过安装一个gnome插件，https://github.com/schuhumi/gnome-shell-extension-slide-for-keyboard
+或者也可以修改caribou的layout来添加ctrl esc, 也是安装gnome插件
+https://extensions.gnome.org/extension/1024/caribou-resize-workspace/
+我发现17.10和18.04上的gnome3不论是Xorg还是Wayland都能自动适应屏幕大小和分辨率然后显示
+合适的图标和文字大小，而不像其它KDE LXDE XFCE那样因为屏幕太小而分辨率太大，显示字体图标特别小
+-----------------------------------------------------------------------------
+ubuntu 18.04 gnome wayland,在登录页面点那个齿轮可以选择'ubuntu'即wayland,'ubuntu on Xorg'即Xorg
+ 怪不得vlc和florence都打不开，原来用的是wayland而不是Xorg
+但是wayland有一个好处就是调整屏幕大小http://www.omgubuntu.co.uk/2017/09/enable-fractional-scaling-gnome-linux
+this setting is hidden, experimental and only works with Wayland. There are no guarantees that it will keep working. If you’re using the Ubuntu Xorg or GNOME Xorg sessions you can enable the setting above but you won’t see scaling options in Settings — so don’t file a bug!
+16.04 gnome xorg, 自带的on-screen键盘是onboard
+ubuntu 18.04 gnome wayland, vlc florence both don't work
+-----------------------------------
+florence本来运行失败，后来安装了xfce4,然后systemctl stop gdm
+startxfce4发现没权限打开/dev/tty0
+然后startx不知道打开的是什么桌面，florence可以运行了
+---------------------------------------------
+touchscreen issue 可能解决方法
+http://4pda.ru/forum/index.php?showtopic=650808&st=1380#entry63749724
+take the TouchSetting.gt from C: / Windows / INF (if it is there), convert it with
+https://github.com/blocksonic/gt9xx/blob/device-tree/goodix-generate-fw.sh
+name the resulting file goodix_911_cfg.bin /goodix_9271_cfg.bin/etc. (as recommended here ) to throw it in / lib / firmware, and hope that it will work without edits of the original config
+
+sound issue:
+https://ubuntuforums.org/showthread.php?t=2374383
+http://linuxiumcomau.blogspot.com/2017/06/customizing-ubuntu-isos-documentation.html
+下载这个脚本　https://drive.google.com/file/d/0B99O3A0dDe67VUNMV2xfVjJKeVk/edit
+运行,然后删掉/var/lib/alsa/asound.state
+aplay -l 找到rt5640的声卡号，比如是1
+vim ~/.asoundrc
+pcm.!default{
+        type hw
+        card 1
+}
+
+ctl.!default{
+        type hw 
+        card 1
+}
+这样声卡就能工作了，但是喇叭工作了，耳机好像还是不工作
+mplayer播放视频正常　mpv直接崩溃，画面时快时慢声音刺啦
+
+sound issue solve!
+https://github.com/burzumishi/linux-baytrail-flexx10/tree/master/sound
+You need UCM files from https://github.com/plbossart/UCM/tree/master/bytcr-rt5640
+follow instructions there (notice the bytcr-rt5640 folder - that is what you need)
+also hdmi might be messing with pulseaudio, so blacklist it (but it might not :P - please test it for your device)
+echo 'blacklist snd_hdmi_lpe_audio' >> /etc/modprobe.d/50-block-hdmi-audio.conf
+然后就能用pavucontrol来选择headphone playback，耳机输出
+ao选择pulse就可以了
+
+linuxium的脚本制作ubuntu 18.04 iso, power button works, also suspend to ram works,
+touch screen works, bluetooth still not work, sound works, wifi works, put c-state for random freeze
+
+--------------------------------------
+holy shit! ubuntu 18.04貌似解决触摸屏的驱动问题了
+ubuntu 18.04貌似支持平板触摸驱动了！我以前编译goodix驱动几乎不能使用，用linuxium的脚本搞了ubuntu 18.04发现支持触摸了，还有触摸输入法了，但是官方iso还是有大量驱动问题　电池　网卡　声卡　蓝牙，还是得自己编译内核打补丁重来一般。。。不过最重要的是触摸驱动终于可以用了！
+http://linuxiumcomau.blogspot.com/2017/12/linux-on-minix-neo-z83-4-and-z83-4-pro.html
+下isorespin.sh然后下ubuntu 18.04.iso然后运行那个脚本不带参数，选择这个iso就生成新的iso了
+dd进u盘
+linuxium的脚本说明　http://linuxiumcomau.blogspot.com/2017/06/customizing-ubuntu-isos-documentation.html
+ubuntu 18.04下载地址　http://cdimage.ubuntu.com/cdimage/daily-live/current/bionic-desktop-amd64.iso
+fix-isorespin-deepin.sh下载地址　https://drive.google.com/file/d/0B99O3A0dDe67akxBVXd3NlRSYk0/edit  
+下载fix-isorespin-deepin.sh然后运行./fix-isorespin-deepin.sh
+在运行./deepin-isorespin.sh -i bionic-desktop-amd64.iso --atom -u
+--atom包含了一堆文件补丁比如网卡rtl8723bs.deb等等，开启这个选项，这个脚本会自动从网上下载那些补丁
+-u是从ubuntu下最新内核
+因为各个发行版平台crul返回信息Local和local的不同，isorespin.sh会报错，还是用fix-isorespin-deepin.sh运行后用deepin-isorenspin.sh来替代isorenspin.sh
+我是在qemu的ubuntu 18.04虚拟机里生成的iso
+在qemu里开启-net nic,...参数，host os ip是10.0.2.2,在guest os里用scp传递文件
+-----------------------------------------------------------------
         debian jessie on intel baytrail z3735f tablet cube i6 air
 1. wifi, compile rtl8723bs module, download from github.com/hadess/rtl8723bs.git
 2. touch screen, 4.11rc8已自带 GOODIX (compile gt9xx module, download from github.com/hadess/gt9xx.git)
