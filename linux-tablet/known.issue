@@ -1,3 +1,9 @@
+KDE也能把图标和文字变大，通过scale the desktop，但是它处理不了屏幕旋转和旋转后的触摸，
+但是gnome3.2.6可以处理旋转后的屏幕触摸，而且默认自动显示合适的图标和文字
+ubuntu有个显示服务器，Xorg和Xwayland
+折腾了两天还是把caribou禁了，用的gnome的扩展block-caribou尝试了florence和onboard,没试xvkbd和maliit, florence只能在Xorg上跑，onboard能在Xorg和Xwayland上跑，但是Xwayland上总是自动跑到屏幕顶端。。。
+gnome3.2.6触摸屏幕，一个手指按住不动，另一个手指点击，就是右键
+--------------------------
 发现无限卡在登录页面，输入密码登录后又出现登录页面，在登录页面那个齿轮图标选'ubuntu'也就是wayland也是这样,
 选'ubuntu on Xorg'也是这样，后来搜了下发现~/.Xauthority是属于root的，删了，发现还是这样
 直接journalctl发现不能打开~/.ICEauthority导致了Xorg的启动失败，删掉~/.ICEauthority能进系统了
@@ -6,6 +12,14 @@ gnome3自带的on-screen keyboard是caribou,但默认没ctrl esc tab shift键
 可以关掉通过安装一个gnome插件，https://github.com/schuhumi/gnome-shell-extension-slide-for-keyboard
 或者也可以修改caribou的layout来添加ctrl esc, 也是安装gnome插件
 https://extensions.gnome.org/extension/1024/caribou-resize-workspace/
+先用firefox安装网页上提示的扩展插件，然后在firefox里打开插件，再用apt install chrome-gnome-shell,再刷新页面发现有个on-off按钮，推到on安装插件，然后根据网页上写的在终端里运行
+gsettings set org.gnome.shell.keyboard keyboard-type tablet
+然后随便打开个可以输入的页面，从屏幕下方向上滑动就会弹出修改键盘布局之后的caribou了
+发现重启之后这个layout上的ctrl不能使用了，WTF,
+用gsettings reset org.gnome.shell.keyboard keyboard-type重置回原始布局
+
+florence只能运行在Xorg上，不能运行在wayland上
+
 我发现17.10和18.04上的gnome3不论是Xorg还是Wayland都能自动适应屏幕大小和分辨率然后显示
 合适的图标和文字大小，而不像其它KDE LXDE XFCE那样因为屏幕太小而分辨率太大，显示字体图标特别小
 -----------------------------------------------------------------------------
