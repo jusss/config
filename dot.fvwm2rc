@@ -324,8 +324,8 @@ Inactive (Pixmap $[ICONS]/maximize.svg -- Flat)
 
 #Style * ClickToFocus
 #Style * SloppyFocus
-#Style * MouseFocus
-Style * MouseFocusClickRaises 
+Style * MouseFocus
+#Style * MouseFocusClickRaises 
 #Style * FocusFollowsMouse
 #Module FvwmAuto 100
 # FvwmAuto模块的位置需要写进ModulePath里，具体位置见下面的编译和位置,这个可以写ModulePath里使用,不像按钮图标文件位置写进ImagePath里无效
@@ -416,7 +416,8 @@ Key f W 4 Focus
 Key s W 4 Stick-Raise
 ### Key r W 4 Raise
 Key r W 4 Resize
-Key l W 4 RaiseLower
+### Key l W 4 RaiseLower
+Key l W 4 Lower
 
 AddToFunc Stick-Raise
 + I Stick
@@ -506,8 +507,8 @@ Key 4 A C GotoDesk 0 3
 ### !Overlapped 如果一个page上有多个重叠的windows,focus在最上面那个window上(而不管鼠标指针是否在这个window上,好像不用管是MouseFocus获取焦点)
 ### AcceptsFocus 忽略掉设置了NeverFocus的窗口，如conky
 ### Visible是窗口部分可见，没有被完全覆盖
-Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky) Focus
-Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky) Focus
+Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
+Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
