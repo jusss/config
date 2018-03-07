@@ -1,3 +1,12 @@
+声卡能正常使用后，右面的调整大小音量的按钮也能使用了，在gnome环境下，而且还可以设置屏幕超时和电源按钮在gnome的设置里
+------------------
+caribou ctrl and shift don't work
+sudo sed -i 's|\x43\x61\x72\x69\x62\x6f\x75\x2e\x44\x69\x73\x70\x6c\x61\x79\x41|\x2f\x2f\x72\x69\x62\x6f\x75\x2e\x44\x69\x73\x70\x6c\x61\x79\x41|g' /usr/lib/gnome-shell/libgnome-shell.so
+sudo sed -i "s|#WaylandEnable=false|WaylandEnable=false|g" /etc/gdm3/custom.conf
+then restart ubuntu
+https://askubuntu.com/questions/983666/caribou-on-screen-keyboard-shift-key-not-working
+
+-----------------------------------------------------
 KDE也能把图标和文字变大，通过scale the desktop，但是它处理不了屏幕旋转和旋转后的触摸，
 但是gnome3.2.6可以处理旋转后的屏幕触摸，而且默认自动显示合适的图标和文字
 ubuntu有个显示服务器，Xorg和Xwayland
