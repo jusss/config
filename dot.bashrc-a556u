@@ -6,7 +6,6 @@
 #[[ $- != *i* ]] && return
 
 #alias ls='ls --color=auto'
-#PS1='[\u@\h \W]\$ '
 alias suspend='systemctl suspend'
 alias ls='ls --color=always -t'
 alias volume_control='pavucontrol'
@@ -25,9 +24,10 @@ export TLDR_CACHE_ENABLED=1
 export TLDR_CACHE_MAX_AGE=720
 #export MAIL=$MAIL/INBOX
 mkill() { kill "$(pidof -x "$1")" ;}
-alias netoff='sudo killall wpa_supplicant'
-alias reboot='sudo dhcpcd -x wlp3s0;reboot'
-alias poweroff='sudo dhcpcd -x wlp3s0;poweroff'
+alias netoff='sudo killall wpa_supplicant;sudo killall dhcpcd;killall stunnel'
+alias reboot='sudo killall dhcpcd;reboot'
+alias poweroff='sudo killall dhcpcd;poweroff'
+alias rewin='sudo grub-reboot "Windows 10";reboot'
 #alias mpv='impv'
 impv(){ 
 P_LIST=( "$@" )
