@@ -1,3 +1,40 @@
+如果wifi不能用了就重新加载网卡模块
+sudo killall wpa_supplicant
+sudo modprobe -r r8723bs
+sudo modprobe r8723bs
+---------------------
+onboard　xinput和gtk都可以，但是键盘theme要选择nightshade,选其它会出现按键延迟错误出现奇怪字符
+florence -c可以设置florence, florence最大的问题就是按下ctrl之后，再按别的键，ctrl还是在按着，需要手动再按2次ctrl才能弹起来，
+onboard默认长按不是repeat而是弹国际字符，需要修改, 
+Modifier behavior: Latch, then lock  这个选项是管ctrl按完后是否自动释放
+onboard还有个delete键在enter上面
+Dock to screen edge - dock to monitor:Primary Monitor without Shrink workarea
+Generl - Start Onboard hidden
+Keyboard Input Options touch input: multi-touch , input event source: Xinput, Long 
+press action: Key-repeat, Modifier behavior: Latch,then lock
+------------------------------------
+replace caribou with onboard integration 
+https://extensions.gnome.org/extension/992/onboard-integration/
+
+block caribou扩展可以禁止caribou，但是需要输入登录密码或wifi密码时还是需要caribou
+slide for keyboard好像不能在18.04上使用
+onboard integration是可以在18.04上使用的，用于替代caribou
+不要开block caribou,因为输入密码要使用，只开onboard integration
+----------------------
+ubuntu 18.04 /sbin/plymouthd crashed with SIGSEGV in script_obj_deref_direct()
+sudo chown john:john /sbin/plymouthd
+https://askubuntu.com/questions/407131/why-is-plymouthd-crashing-on-startup
+-------------------------
+https://help.gnome.org/users/gnome-help/stable/a11y-slowkeys.html.en
+一定要关闭slow key功能，如果开启这个功能，虚拟键盘打一个字会一直重复
+-------------------------------
+去掉gnome的登录密码,这样可以禁用caribou而用其它的输入法onboard florence等等，
+If you want to bypass the password prompt in GDM then simply add the following line on the first line of /etc/pam.d/gdm-password:
+auth sufficient pam_succeed_if.so user ingroup nopasswdlogin
+sudo groupadd nopasswdlogin
+sudo gpasswd -a john nopasswdlogin
+https://wiki.archlinux.org/index.php/GDM#Passwordless_login
+----------------------------------
 声卡能正常使用后，右面的调整大小音量的按钮也能使用了，在gnome环境下，而且还可以设置屏幕超时和电源按钮在gnome的设置里
 ------------------
 caribou ctrl and shift don't work
