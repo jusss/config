@@ -6,10 +6,16 @@
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,utf-8-bom,ucs-bom,cp936,big5,gbk,utf-16,utf-16le
-set termencoding=utf-8,cp936
+set termencoding=utf-8
 set fileformats=unix,dos
 set expandtab
 set shiftwidth=4
 set tabstop=4
-"this is for gvim +clipboard, set clipboard^=unnamed,unnamedplus, this will yank to clipboard of Xorg not just register of vim"
+set clipboard^=unnamed,unnamedplus
+colorscheme github
+"colorscheme jellybeans"
+filetype plugin indent on
+syntax on
+set hidden
+
 "end"

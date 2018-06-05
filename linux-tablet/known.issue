@@ -1,3 +1,6 @@
+gnome hi-dpi screen https://askubuntu.com/questions/668749/how-to-set-up-gnome-interface-for-hidpi-screen
+gsettings set org.gnome.desktop.interface scaling-factor 2
+--------------------------------------
 如果wifi不能用了就重新加载网卡模块
 sudo killall wpa_supplicant
 sudo modprobe -r r8723bs
