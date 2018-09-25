@@ -1,3 +1,8 @@
+latest linuxium iso
+https://mega.nz/#!KKBTALQD!z2BgpFQfU-pkGo_VvvjNMGyAp3b7EQM2I0pvwKN63pM
+http://linuxiumcomau.blogspot.com/2018/06/first-look-at-ubuntu-1810-cosmic.html
+http://linuxiumcomau.blogspot.com/
+-------------------------------------------
 gnome hi-dpi screen https://askubuntu.com/questions/668749/how-to-set-up-gnome-interface-for-hidpi-screen
 gsettings set org.gnome.desktop.interface scaling-factor 2
 --------------------------------------
@@ -120,6 +125,12 @@ ao选择pulse就可以了
 linuxium的脚本制作ubuntu 18.04 iso, power button works, also suspend to ram works,
 touch screen works, bluetooth still not work, sound works, wifi works, put c-state for random freeze
 
+linuxium's respiniso.sh only works on ubuntu bionic!
+
+http://linuxiumcomau.blogspot.com/2017/06/customizing-ubuntu-isos-documentation.html
+ sudo apt -y install p7zip-full bc curl klibc-utils iproute2 genisoimage dosfstools  
+        sudo apt -y install squashfs-tools rsync unzip wget findutils xorriso
+  isorespin.sh -i ubuntu-16.04.3-desktop-amd64.iso --atom
 --------------------------------------
 holy shit! ubuntu 18.04貌似解决触摸屏的驱动问题了
 ubuntu 18.04貌似支持平板触摸驱动了！我以前编译goodix驱动几乎不能使用，用linuxium的脚本搞了ubuntu 18.04发现支持触摸了，还有触摸输入法了，但是官方iso还是有大量驱动问题　电池　网卡　声卡　蓝牙，还是得自己编译内核打补丁重来一般。。。不过最重要的是触摸驱动终于可以用了！
