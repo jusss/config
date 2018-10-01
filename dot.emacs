@@ -20,10 +20,12 @@
 ;		    :family "SimSun"
 ;		    :height 100)
 (setq confirm-nonexistent-file-or-buffer nil)
-(transient-mark-mode -1)
+;;;(transient-mark-mode -1)
 (ido-mode t)
 (global-set-key (kbd "C-,") 'ido-switch-buffer)
 (global-set-key (kbd "C-;") 'set-mark-command)
+;;; C-x r t will put characters into every line's start
+(global-set-key (kbd "C-x r e") 'replace-regexp)
 ;;; emacs -nw in screen, C-; doesn't work, so set M-; as set-mark-command
 ;;;M-; runs the command comment-dwim, which is an interactive compiled
 ;;;Lisp function in `newcomment.el'.
@@ -49,7 +51,7 @@
 		  (interactive)
 		  (erc-ssl :server "irc.freenode.net" 
 			   :port 7000 
-			   :nick "x" 
+			   :nick "jusss" 
 			   :full-name "x" 
 			   :password "x")
 		  (setq erc-autojoin-channels-alist '(("freenode.net"
@@ -67,7 +69,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(gnutls-min-prime-bits 2048))
+ '(gnutls-min-prime-bits 2048)
+ '(package-selected-packages (quote (python-mode racket-mode auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -141,14 +144,15 @@
 				      "topic set by"
 				      "You are now identified for "
 				      "is now your hidden host"
-				      "unaffiliated/jusss"
+				      "unaffiliated/john"
 				      ))
 			message)
     (start-process "erc-notify"
 		   "erc-notify"
 		   "/usr/bin/env"
 		   "DISPLAY=:0.0"
-		   "/home/jusss/lab/erc-notifier.py"
+		   ;;;"/home/john/lab2/erc-notifier.py"
+		   "/home/john/lab2/erc-notifier.sh"
 		   "erc"
 		   message)))
 ;;;if it run at Xorg :1, then change DISPLAY environment, or just comment env and DISPLAY lines
@@ -191,7 +195,7 @@
 ;;; no cursor jump back to the mark position when use M-w
 (global-set-key (kbd "M-w") 'copy-region-as-kill)
 
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;;;(load (expand-file-name "~/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program "sbcl")
 
@@ -215,7 +219,7 @@
 ;;; C-c C-k turn to char just like normal termianl emulator, but in multi-term you don't need that
 ;;; just do whatever you want in multi-term like in emacs
 (add-to-list 'load-path "~/.emacs.d/multi-term")
-(require 'multi-term)
+;;;(require 'multi-term)
 (setq multi-term-program "/bin/bash")
 ;;; set key to switch termianl buffers
 ;;; http://blog.jobbole.com/51598/  more details see ~/.emacs.d/multi-term/multi-term.el
@@ -247,9 +251,9 @@
 ;;; (setq elscreen-prefix-key (kbd "C-."))
 ;;; You must set this value before ElScreen is loaded otherwise use elscreen-set-prefix-key
 (add-to-list 'load-path "~/.emacs.d/elscreen")
-(require 'elscreen)
-(elscreen-start)
-(elscreen-set-prefix-key (kbd "C-."))
+;;;(require 'elscreen)
+;;;(elscreen-start)
+;;;(elscreen-set-prefix-key (kbd "C-."))
 ;;; if you want auto run elscree then put (elscreen-start) in ~/.emacs
 ;;; M-x elscreen-start to run elscreen
 ;;; M-x elscreen-create to create new screen
@@ -271,13 +275,29 @@
 ;;; git clone https://github.com/dimitri/el-get.git
 ;;; cp it to ~/.emacs.d/
 ;;; M-x el-get-install RET elscreen
-(add-to-list 'load-path "~/.emacs.d/el-get-master")
-(require 'el-get)
+;;(add-to-list 'load-path "~/.emacs.d/el-get-master")
+;;(require 'el-get)
 
 ;;; ignore mouse
-(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]    
-             [mouse-2] [down-mouse-2] [drag-mouse-2] [double-mouse-2] [triple-mouse-2]  
-             [mouse-3] [down-mouse-3] [drag-mouse-3] [double-mouse-3] [triple-mouse-3]  
-             [mouse-4] [down-mouse-4] [drag-mouse-4] [double-mouse-4] [triple-mouse-4]  
-             [mouse-5] [down-mouse-5] [drag-mouse-5] [double-mouse-5] [triple-mouse-5]))  
-  (global-unset-key k))  
+;;;(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]    
+;;;             [mouse-2] [down-mouse-2] [drag-mouse-2] [double-mouse-2] [triple-mouse-2]  
+;;;             [mouse-3] [down-mouse-3] [drag-mouse-3] [double-mouse-3] [triple-mouse-3]  
+;;;             [mouse-4] [down-mouse-4] [drag-mouse-4] [double-mouse-4] [triple-mouse-4]  
+;;;             [mouse-5] [down-mouse-5] [drag-mouse-5] [double-mouse-5] [triple-mouse-5]))  
+;;;  (global-unset-key k))  
+;;;
+;;;https://github.com/auto-complete/auto-complete
+;;;M-x package-install RET auto-complete RET
+;;; if there're other errors like ac-update-greedy, try re-instal popup with package-install and yasnippet
+(require 'auto-complete)
+(add-to-list 'ac-modes 'javascript-mode)
+(add-to-list 'ac-modes 'html-mode)
+(add-to-list 'ac-modes 'css-mode)
+(add-to-list 'ac-modes 'python-mode)
+(add-to-list 'ac-modes 'racket-mode)
+(add-to-list 'ac-modes 'scheme-mode)
+(ac-config-default)
+
+
+;;; M-x desktop-save ; desktop-save-mode only save all buffers that have file names, re-open via M-x desktop-read
+(desktop-save-mode 1)
