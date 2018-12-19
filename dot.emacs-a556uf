@@ -374,3 +374,20 @@
                 css-mode-hook 
 		c-mode-common-hook))
   (add-hook hook (lambda () (linum-mode t))))
+
+
+;;;(set-default-font "DejaVu Sans Mono-12")
+(set-fontset-font "fontset-default" 'gb18030' ("微软雅黑" . "unicode-bmp"))
+
+
+;;; python-mode will not eval python buffer if there is threading code
+(defun my-python-compile ()
+  (interactive)
+  (setq tmp-file (concat (buffer-file-name) ".tmp"))
+  (write-region (point-min) (point-max) tmp-file)
+  (compile (concat "python " tmp-file)))
+
+(add-hook 'python-mode-hook
+          (lambda () (local-set-key (kbd "<f5>") 'my-python-compile)))
+
+(setq compilation-save-buffers-predicate '(lambda () nil))
