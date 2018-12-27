@@ -373,7 +373,7 @@
                 html-mode-hook
                 css-mode-hook 
 		c-mode-common-hook))
-  (add-hook hook (lambda () (linum-mode t))))
+  (add-hook hook (lambda () (display-line-numbers-mode t))))
 
 
 ;;;(set-default-font "DejaVu Sans Mono-12")
@@ -391,3 +391,4 @@
           (lambda () (local-set-key (kbd "<f5>") 'my-python-compile)))
 
 (setq compilation-save-buffers-predicate '(lambda () nil))
+(setq compilation-always-kill t)
