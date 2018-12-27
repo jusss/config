@@ -1,0 +1,136 @@
+﻿(ido-mode t)
+(global-set-key (kbd "C-,") 'ido-switch-buffer)
+(global-set-key (kbd "C-;") 'set-mark-command)
+(global-set-key (kbd "C-x C-;") 'pop-global-mark)
+
+;;;for auto-complete (ac-config-default)
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(require 'auto-complete)
+;(require 'ac-slime)
+(add-to-list 'ac-modes 'javascript-mode) 
+(add-to-list 'ac-modes 'html-mode)
+(add-to-list 'ac-modes 'css-mode)
+(add-to-list 'ac-modes 'python-mode)
+;(add-to-list 'ac-modes 'slime-mode)
+(add-to-list 'ac-modes 'scheme-mode)
+(add-to-list 'ac-modes 'mhtml-mode)
+(add-to-list 'ac-modes 'js-mode)
+(ac-config-default)
+;(add-hook 'slime-mode-hook 'set-up-slime-ac)
+;(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+;(eval-after-load "auto-complete"
+ ;'(add-to-list 'ac-modes 'slime-repl-mode))
+
+ (show-paren-mode t)
+ (setq completion-ignore-case t)
+ (setq confirm-nonexistent-file-or-buffer nil)
+ (setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
+(menu-bar-mode -1)
+
+(cd "C:/Users/admin/Desktop")
+
+;;; solve C-v cause page down is stuck 'cause font scan
+;;;(set-face-attribute 'default nil :family "SimSun" :height 100)
+;;; ;; Setting Chinese Font
+;;;(dolist (charset '(kana han symbol cjk-misc bopomofo))
+ ;;; (set-fontset-font (frame-parameter nil 'font)
+  ;;          charset
+  ;;          (font-spec :family "Microsoft Yahei " :size 14)))
+
+(set-default-font "Microsoft YaHei UI Bold-10")
+(set-fontset-font "fontset-default"  
+                  'gb18030' ("Microsoft YaHei UI Bold" . "unicode-bmp"))
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (unicode-fonts tabbar ## twittering-mode ac-slime))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(require 'tabbar)
+(tabbar-mode 1)
+(global-set-key [(meta p)] 'tabbar-backward)
+(global-set-key [(meta n)] 'tabbar-forward)
+(setq tabbar-use-images nil)
+
+;;; group all buffers into 3 groups, ERC, * and use buffer
+(defun tabbar-buffer-groups ()
+  (list
+   (cond
+    ((string-equal "*" (substring (buffer-name) 0 1))
+     "Emacs Buffer"
+     )
+    ((eq major-mode 'erc-mode)
+     "ERC"
+     )
+    (t
+     "User Buffer"
+     )
+    ))) 
+
+(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
+;;;<b> erc-mode . You can tell for yourself if you're using erc: go into an
+;;; erc buffer and C-h v major-mode RET
+
+(set-face-attribute 'tabbar-default nil
+		    :family "SimSun"
+		    :height 106
+		    :background "grey80"
+		    :foreground "purple")
+
+(set-face-attribute 'tabbar-selected nil
+		    :inherit 'tabbar-default
+		    :foreground "blue"
+		    :background "grey80")
+			
+(setq erc-header-line-format nil)
+
+;;; show line number
+;;;display-line-numbers-mode instead of linum-mode since 26.1
+;;; https://www.masteringemacs.org/article/whats-new-in-emacs-26-1
+;;;M-g g 35
+;;; like 35G in vim
+(global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (kbd "C-x g") 'goto-line)
+;;; like ma in vim
+(global-set-key (kbd "C-x p")  'point-to-register)
+;;; like 'a in vim
+(global-set-key (kbd "C-x j") 'jump-to-register)
+;;;like :s/whatever/you-want
+(global-set-key (kbd "C-x c") 'replace-regexp)
+;;; make linum-mode hook python-mode
+(dolist (hook '(python-mode-hook
+                javascript-mode-hook
+                html-mode-hook
+                css-mode-hook
+                js-mode
+				mhtml-mode
+		c-mode-common-hook))
+(add-hook hook (lambda () (display-line-numbers-mode t))))
+
+;;; python-mode will not eval python buffer if there is threading code
+(defun my-python-compile ()
+  (interactive)
+  (setq tmp-file (concat (buffer-file-name) ".tmp"))
+  (write-region (point-min) (point-max) tmp-file)
+  (compile (concat "python " tmp-file)))
+
+(add-hook 'python-mode-hook
+	  (lambda () (local-set-key (kbd "<f5>") 'my-python-compile)))
+
+(setq compilation-save-buffers-predicate '(lambda () nil))
+(setq compilation-always-kill t)
