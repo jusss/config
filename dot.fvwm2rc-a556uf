@@ -36,6 +36,7 @@ AddToMenu MenuFvwmRoot    " Window "    Title
 +             " Chromium "  Exec exec chromium
 +             " Firefox "   Exec exec firefox
 +             " Volume "    Exec exec pavucontrol
++             " ScreenShot " Exec exec scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/'
 +             " System Info" Exec exec gnome-system-monitor
 +             " Terminal "  Exec exec xfce4-terminal
 #+			  " Resize"	     Resize
@@ -417,6 +418,7 @@ Key s W 4 Stick-Raise
 ### Key r W 4 Raise
 Key r W 4 Resize
 Key l W 4 RaiseLower
+#Key l W 4 Lower
 
 AddToFunc Stick-Raise
 + I Stick
@@ -506,8 +508,10 @@ Key 4 A C GotoDesk 0 3
 ### !Overlapped 如果一个page上有多个重叠的windows,focus在最上面那个window上(而不管鼠标指针是否在这个window上,好像不用管是MouseFocus获取焦点)
 ### AcceptsFocus 忽略掉设置了NeverFocus的窗口，如conky
 ### Visible是窗口部分可见，没有被完全覆盖
-Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky) Focus
-Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky) Focus
+#Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
+#Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
+Key n A 4 Next (AcceptsFocus, !Iconic, !Sticky, Visible, CurrentPage) Focus
+Key n A 4 Prev (AcceptsFocus, !Iconic, !Sticky, Visible, Focused) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
@@ -529,8 +533,10 @@ AddToFunc SwitchToWindow
 # 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，因为还需要修改SelectOnRelease就不改了,只能修改xmodmap和xcape了，取消Tab键的映射
 #Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
-Key Tab A M WindowList NoIcons, NoSticky, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
+#Key Tab A M WindowList NoIcons, NoSticky, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50, "Prev SwitchToWindow"
+#OnlyNormal means no sticky, ontop, iconic
+Key Tab A M WindowList Root c c NoGeometry, NoDeskNum, OnlyNormal, CurrentAtEnd
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
