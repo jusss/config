@@ -392,3 +392,12 @@
 
 (setq compilation-save-buffers-predicate '(lambda () nil))
 (setq compilation-always-kill t)
+;;; erc and tabbar both use header-line
+(setq erc-header-line-uses-tabbar-p t)
+
+;;; emacs or erc over socks5 proxy
+;;;https://www.emacswiki.org/emacs/ErcProxy
+;;;(setq socks-override-functions 1)
+;;; (setq socks-noproxy '("localhost"))
+;;; (require 'socks)
+;;;(setq socks-server (list "My socks server" "localhost" 7070 5))
