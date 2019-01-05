@@ -511,7 +511,7 @@ Key 4 A C GotoDesk 0 3
 #Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
 #Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
 Key n A 4 Next (AcceptsFocus, !Iconic, !Sticky, Visible, CurrentPage) Focus
-Key n A 4 Prev (AcceptsFocus, !Iconic, !Sticky, Visible, Focused) Focus
+Key p A 4 Prev (AcceptsFocus, !Iconic, !Sticky, Visible, Focused) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
