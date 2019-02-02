@@ -6,7 +6,12 @@ xcape
 fcitx -rd&
 #ibus-daemon -rdx&
 xss-lock -- xlock -timeout 1800 &
-xcompmgr &
+#disable xcompmgr, it will be more smooth, but conky will not be background transparent
+#xcompmgr &
 ### blank the scren after a half hour
 xset dpms 1800 1800 1800
+xset s 1800
+xinput set-prop 'Elan Touchpad' "libinput Natural Scrolling Enabled" 1
 exec fvwm
+#export GDK_BACKEND=x11
+#exec gnome-session
