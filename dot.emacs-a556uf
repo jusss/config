@@ -426,3 +426,6 @@
 
 ;;; use spaces instead of tabs, https://www.emacswiki.org/emacs/NoTab
 (setq-default indent-tabs-mode nil)
+
+;;; auto-complete perfer upper case, but I want lower case, so ignore case
+(setq ac-ignore-case nil)
