@@ -423,3 +423,6 @@
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'haskell-indent-mode)
 (add-hook 'haskell-mode-hook 'haskell-doc-mode)
+
+;;; use spaces instead of tabs, https://www.emacswiki.org/emacs/NoTab
+(setq-default indent-tabs-mode nil)
