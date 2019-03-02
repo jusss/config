@@ -301,6 +301,8 @@
 (add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'racket-mode)
 (add-to-list 'ac-modes 'scheme-mode)
+(add-to-list 'ac-modes 'haskell-mode)
+(add-to-list 'ac-modes 'mhtml-mode)
 (ac-config-default)
 
 ;;; M-x desktop-save ; desktop-save-mode only save all buffers that have file names, re-open via M-x desktop-read
@@ -417,3 +419,7 @@
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 
+;;; M-x package-install haskell-mode     C-c C-l will eval code in interpreter
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'haskell-indent-mode)
+(add-hook 'haskell-mode-hook 'haskell-doc-mode)
