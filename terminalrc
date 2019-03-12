@@ -25,5 +25,7 @@ MiscDefaultWorkingDir=~
 MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
-FontName=新宋体 15
+FontName=宋体 Bold 15
+MiscShowRelaunchDialog=TRUE
+MiscNewTabAdjacent=FALSE
 
