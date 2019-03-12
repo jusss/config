@@ -1,0 +1,14 @@
+
+account qq
+tls on
+tls_starttls off
+tls_certcheck off
+host smtp.qq.com
+port 465
+from x
+auth on
+user x
+password x
+
+
+account default : qq

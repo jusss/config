@@ -1,0 +1,37 @@
+pacman -S cronie
+systemctl start cronie
+systemctl enable cronie
+crontab -e 
+*/5 * * * * offlineimap
+
+
+$MAIL is point to /var/spool/mail/john
+set $MAIL on .bashrc
+export MAIL=/var/spool/mail/$USER
+and qq mail is /var/spool/mail/john/qq/INBOX/cur new tmp
+
+
+offlineimap is too dangerous!
+
+pamcan -S mpop
+man mpop 
+"delivery maildir directory
+                     Deliver the mails to the given maildir  directory.  The  directory
+                     must  exist  and it must have the maildir subdirectories cur, new,
+                     and tmp; mpop will not create directories. This delivery type only
+                     works on file systems that support hard links.
+"
+you have to create those directories  mkdir /var/spool/mail/john/qq/INBOX/new cur tmp
+
+crontab -e
+*/15 * * * * mpop
+
+about maildir and mbox, mbox is just one file, and maildir is a directory
+
+those are maildir
+INBOX/new cur tmp
+Sent/
+Trash/
+
+$MAIL/qq/INBOX/new cur tmp       /var/spool/mail/john/qq/INBOX/new cur tmp
+$MAIL/qq/Sent

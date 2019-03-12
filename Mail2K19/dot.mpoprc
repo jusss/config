@@ -1,0 +1,16 @@
+account qq
+tls on
+tls_certcheck off
+tls_starttls off
+delivery maildir /var/spool/mail/john/qq/INBOX
+host pop.qq.com
+user x
+password x
+port 995
+auth on
+keep on
+only_new on
+uidls_file ~/.local/share/xatqq.com
+
+account default : qq
+
