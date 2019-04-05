@@ -61,8 +61,8 @@
 			   :full-name "x" 
 			   :password "x")
 		  (setq erc-autojoin-channels-alist '(("freenode.net"
-						       "#archlinux"
-						       "#emacs")))))
+						       "#x"
+						       "#x")))))
 ;;;		  (setq erc-autojoin-timing 'ident)))
 ;;; waiting for identify, then join channel
 
@@ -75,7 +75,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(gnutls-min-prime-bits 2048)
- '(package-selected-packages (quote (tabbar python-mode racket-mode auto-complete))))
+ '(package-selected-packages
+   (quote
+    (ace-window switch-window web-mode haskell-mode w3m elm-mode tabbar python-mode racket-mode auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -99,10 +101,10 @@
  '(mode-line ((t (:background "snow" :foreground "forest green" :box (:line-width -1 :style released-button)))))
  '(mode-line-buffer-id ((t nil)))
  '(widget-button ((t nil))))
-(set-background-color "#e7f4fe")
-(set-foreground-color "#004e00")
-(set-face-foreground 'fringe "#e7f4fe")
-(set-face-background 'fringe "#e7f4fe")
+;;;(set-background-color "#e7f4fe")
+;;;(set-foreground-color "#004e00")
+;;;(set-face-foreground 'fringe "#e7f4fe")
+;;;(set-face-background 'fringe "#e7f4fe")
 ;;; remove erc header-line
 (setq erc-header-line-format nil)
 (setq gnus-asynchronous t)
@@ -179,7 +181,7 @@
 
 ;; display time on mode bar
 (display-time-mode 1)
-(require 'w3m-load)
+;;(require 'w3m-load)
 
 ;;; disable auto fill mode, if it enable, input like 'a b RET c', it maybe change to 'a RET b c', special when you're composing mail in gnus
 ;;; use C-h m or M-x describe-mode to get the name of major mode in current buffer
@@ -296,17 +298,20 @@
 ;;; if there're other errors like ac-update-greedy, try re-instal popup with package-install and yasnippet
 (require 'auto-complete)
 (add-to-list 'ac-modes 'javascript-mode)
+(add-to-list 'ac-modes 'elm-mode)
 (add-to-list 'ac-modes 'html-mode)
 (add-to-list 'ac-modes 'css-mode)
 (add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'racket-mode)
 (add-to-list 'ac-modes 'scheme-mode)
-(add-to-list 'ac-modes 'haskell-mode)
+(add-to-list 'ac-modes 'js-mode)
 (add-to-list 'ac-modes 'mhtml-mode)
+(add-to-list 'ac-modes 'haskell-mode)
+(add-to-list 'ac-modes 'web-mode)
 (ac-config-default)
 
 ;;; M-x desktop-save ; desktop-save-mode only save all buffers that have file names, re-open via M-x desktop-read
-(desktop-save-mode 1)
+;;;(desktop-save-mode 1)
 ;;;M-x package-install tabbar
 
 ;; https://www.emacswiki.org/emacs/TabBarMode
@@ -370,13 +375,18 @@
 ;;;like :s/whatever/you-want
 (global-set-key (kbd "C-x c") 'replace-regexp)
 ;;; make linum-mode hook python-mode
+;;; since 26.1 display-line-numbers-mode replace linum-mode
 (dolist (hook '(python-mode-hook
                 javascript-mode-hook
                 html-mode-hook
-                css-mode-hook 
+                mhtml-mode-hook
+                css-mode-hook
+                haskell-mode-hook
 		c-mode-common-hook))
   (add-hook hook (lambda () (display-line-numbers-mode t))))
 
+;;; specify the major mode when open specific file
+(add-to-list 'auto-mode-alist '("\\.html\\'" . mhtml-mode))
 
 ;;;(set-default-font "DejaVu Sans Mono-12")
 (set-fontset-font "fontset-default" 'gb18030' ("微软雅黑" . "unicode-bmp"))
@@ -394,6 +404,7 @@
 
 (setq compilation-save-buffers-predicate '(lambda () nil))
 (setq compilation-always-kill t)
+
 ;;; erc and tabbar both use header-line
 (setq erc-header-line-uses-tabbar-p t)
 
@@ -429,3 +440,6 @@
 
 ;;; auto-complete perfer upper case, but I want lower case, so ignore case
 (setq ac-ignore-case nil)
+
+;;; switch-window ace-window
+(global-set-key (kbd "C-x o") 'ace-window)
