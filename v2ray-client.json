@@ -1,0 +1,43 @@
+
+{
+  "port": 1080,
+  "log": {
+    "access": ""
+  },
+  "inbound": {
+    "protocol": "socks",
+    "settings": {
+      "auth": "noauth",
+      "udp": false,
+      "ip": "127.0.0.1"
+    }
+  },
+  "outbound": {
+    "protocol": "vmess",
+    "settings": {
+      "vnext": [
+        {
+          "address": "your-v2ray-server-address",
+          "port": 11111,
+          "users": [
+            {
+              "id": "your-unique-id",
+              "alterId": 55 
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "network": "kcp",
+      "security": "none"
+     }
+  },
+  "outboundDetour": [
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    }
+  ]
+}
