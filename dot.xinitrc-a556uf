@@ -1,8 +1,9 @@
 #startdde
 xhost +local: &
 #pgrep wpa_supplicant || ~/network/wifi.sh &
-setxkbmap -layout us -option ctrl:nocaps
-xcape
+#key bindings don't work, blame on setxkbmap or xcape? try .Xmodmap first
+#setxkbmap -layout us -option ctrl:nocaps
+#xcape
 fcitx -rd&
 #ibus-daemon -rdx&
 xss-lock -- xlock -timeout 1800 &
