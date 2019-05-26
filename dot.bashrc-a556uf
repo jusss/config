@@ -23,10 +23,11 @@ export TLDR_COLOR_PARAMETER="white"
 export TLDR_CACHE_ENABLED=1
 export TLDR_CACHE_MAX_AGE=720
 #export MAIL=$MAIL/INBOX
+export HISTSIZE=10000
 mkill() { kill "$(pidof -x "$1")" ;}
 alias netoff='sudo killall wpa_supplicant;sudo killall dhcpcd;killall stunnel'
 alias reboot='sudo killall dhcpcd;reboot'
-alias poweroff='sudo killall dhcpcd;poweroff'
+alias poweroff='sudo killall dhcpcd;sudo systemctl poweroff'
 alias rewin='sudo grub-reboot "Windows 10";reboot'
 #alias mpv='impv'
 impv(){ 
