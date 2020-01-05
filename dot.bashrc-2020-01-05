@@ -1,0 +1,56 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+#[[ $- != *i* ]] && return
+
+#alias ls='ls --color=auto'
+alias suspend='systemctl suspend'
+alias ls='ls --color=always -t'
+alias volume_control='pavucontrol'
+alias standby='sleep 1&&xset dpms force standby'
+alias mv='mv -i'
+alias cp='cp -i'
+PATH=$PATH:/usr/bin/v2ray/
+#alias 'mpv -s'='mpv --sub-file'
+export TLDR_COLOR_BLANK="white"
+export TLDR_COLOR_NAME="cyan"
+export TLDR_COLOR_DESCRIPTION="white"
+export TLDR_COLOR_EXAMPLE="green"
+export TLDR_COLOR_COMMAND="red"
+export TLDR_COLOR_PARAMETER="white"
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+#export MAIL=$MAIL/INBOX
+export HISTSIZE=10000
+mkill() { kill "$(pidof -x "$1")" ;}
+alias netup='sudo wpa_supplicant -iwlp3s0 -c network/ziru.conf -Dnl80211 -B;sudo dhclient -4'
+alias neton='sudo wpa_supplicant -iwlp3s0 -c network/ziru.conf -Dnl80211 -B;sudo dhclient -4'
+alias netdown='sudo killall wpa_supplicant;sudo killall dhcpcd; sudo killall dhclient'
+alias netoff='sudo killall wpa_supplicant;sudo killall dhcpcd; sudo killall dhclient'
+alias reboot='sudo killall dhcpcd; sudo killall dhclient; reboot'
+alias poweroff='sudo killall dhcpcd;sudo killall dhclient; sudo systemctl poweroff'
+alias rewin='sudo grub-reboot "Windows 10";reboot'
+#alias mpv='impv'
+impv(){ 
+P_LIST=( "$@" )
+#echo "the number of parameter is $#"
+for ((i=0; i<$#; i+=2))
+do
+    if [[ $# -gt 1 ]]
+    then
+        #echo "this is the first parameter: ${P_LIST[0]}"
+        if [[ "${P_LIST[$i+1]}" == *.srt || "${P_LIST[$i+1]}" == *.ass ]]
+        then
+            mpv "${P_LIST[$i]}" --sub-file "${P_LIST[$i+1]}"
+        else impv_music "$@"; break
+        fi
+    else mpv "$@"
+    fi
+done
+}
+
+impv_music(){
+mpv "$@"
+}
