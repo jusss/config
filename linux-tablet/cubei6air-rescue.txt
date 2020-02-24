@@ -1,0 +1,6 @@
+1. 设置 - 更新和安全 - 恢复 - 重置此电脑 - 开始 - 只删除个人配置文件，不重置所有驱动器, 重置之后，页面不再一帧一帧的显示
+2. 点右下角的图标选择显示所有应用，点工具栏android系统切换，切换到android,因为grub接管了启动项，所以还是启动windows 10, 但是此时触摸屏可以用了,
+   但此时grub被win10覆盖了，所以如果想进ubuntu就在开机时esc进bios setup,然后手动选择ubuntu启动项进入
+3. Rapoo 9300M可以直接在平板上使用，把接收器连接到OTG线，直接可以使用，不需要安装驱动！如果是蓝牙，就连接Rapoo BT 3.0KB, Rapoo BT 3.0 Mouse
+
+download files with chrome for iphone, then open it with Nutstore, pass them to the cloud, then download them with browser.
