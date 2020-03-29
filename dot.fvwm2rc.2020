@@ -618,10 +618,10 @@ Style FvwmPager    StaysOnTop, NoHandles, BorderWidth 0
 DestroyModuleConfig FvwmPager: *
 *FvwmPager: Geometry 80x25-0-0
 *FvwmPager: MiniIcons
-*FvwmPager: Colorset * 70
-*FvwmPager: HilightColorset * 72
-*FvwmPager: WindowColorsets 71 71
-*FvwmPager: BalloonColorset * 63
+*FvwmPager: Colorset * 42
+*FvwmPager: HilightColorset * 81
+*FvwmPager: WindowColorsets 42 81
+*FvwmPager: BalloonColorset * 42
 *FvwmPager: Font none
 *FvwmPager: SmallFont none
 *FvwmPager: Balloons All
@@ -642,3 +642,8 @@ Colorset 70 fg black, bg grey, NoShape, RootTransparent buffer, Tint white 10
 Colorset 71 fg black, bg grey, NoShape, RootTransparent buffer, Tint white 20
 Colorset 72 fg black, bg Khakil, Plain, NoShape
 Colorset 73 RootTransparent Buffer, Tint #4A516A 50, fg white, bg black 
+Colorset 77 fg blue, bg green
+Colorset 79 fg white, bg blue
+Colorset 80 fg black, bg white
+Colorset 81 fg black, bg orange
+Colorset 83 fg black, bg lime
