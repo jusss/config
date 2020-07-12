@@ -1,3 +1,58 @@
+you may need to boot it manually,
+Boot From File -> choose EFI/Android/bootia32.efi to get into grub2
+then you may can't find the grub.cfg after you installed it
+when you installing phoenix, you can use `configfile (hd0,4)/efi/boot/grub2.cfg` for installing, but when it's done, there's no such file anymore
+you have to do it by youself
+
+insmod part_gpt
+insmod ext2
+set root=(hd0,gpt2)
+linux /PhoenixOS/kernel root=/dev/ram0 quiet androidboot.selinux=permissive
+initrd /PhoenixOS/initrd.img
+boot
+
+the grub.cfg comes with Phoenix.iso is
+
+set timeout=6
+
+menuentry 'Run Phoenix OS without Installation' --class android-x86 {
+	search --set=root --file /kernel
+	linux /kernel quiet root=/dev/ram0 androidboot.hardware=android_x86 SRC=/ vga=788
+	initrd /initrd.img
+}
+
+menuentry 'Install Phoenix OS to Harddisk' --class android-x86 {
+	search --set=root --file /kernel
+	linux /kernel quiet root=/dev/ram0 androidboot.selinux=permissive buildvariant=userdebug INSTALL=1 DEBUG=
+	initrd /initrd.img
+}
+
+---------------------------
+phoenix os, 7.1, ultroiso it to usb-stick,
+get into grub2, 
+insmod fat
+insmod ext2
+insmod part_gpt
+set root=(hd0,msdos4)
+configfile /efi/boot/grub.cfg
+
+install, mmblk1p2
+-----------------------------------------------------
+it's weird, it may stuck in system initial
+
+phoenix os system initializing please wait
+https://forum.xda-developers.com/phoenix-os/phoenix-os-news-qa--development/root-phoenix-os-x64-v2-0-6-26-rooted-t3613938
+
+after install, keep usb-stick plug in, then run phoenix not reboot for first initial,
+when you get into it, then restart
+
+
+-------------------------------
+power button, got blank after sleep
+https://groups.google.com/forum/#!topic/android-x86/_vU8nNLKicI
+when boot from file with bootia32.efi, you can get into grub by press c
+then add linux parameter sleep.state=none
+
 
 
 after installed android-x86 on (hd0,2), the tablet still init to windows 10, 
@@ -7,9 +62,10 @@ so use the live usb-stick to edit that grub config like this
 menuentry "Android-x86" {
 insmod part_gpt
 insmod ext2
-set root='(hd0,5)'
-linux /android-8.1-r5/kernel root=/dev/ram0 quiet androidboot.selinux=permissive
-initrd /android-8.1-r5/initrd.img}
+set root='(hd0,2)'
+linux /android-8.1-r5/kernel root=/dev/ram0 quiet androidboot.selinux=permissive sleep.state=none
+initrd /android-8.1-r5/initrd.img
+boot}
 
 
 or 
