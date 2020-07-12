@@ -1,3 +1,55 @@
+
+
+after installed android-x86 on (hd0,2), the tablet still init to windows 10, 
+and there's no new option in boot manager,
+so use the live usb-stick to edit that grub config like this
+
+menuentry "Android-x86" {
+insmod part_gpt
+insmod ext2
+set root='(hd0,5)'
+linux /android-8.1-r5/kernel root=/dev/ram0 quiet androidboot.selinux=permissive
+initrd /android-8.1-r5/initrd.img}
+
+
+or 
+ESC -> Boot From File -> ESP/EFI/Android/bootia32.efi
+
+you can chage the default display standard to large get a better virtual button
+
+--------------------------------
+https://osdn.net/projects/android-x86/downloads/69704/android-x86_64-8.1-r5.iso/
+-----------------------------------------------------
+android-x86.org
+android-x86-4.4-r5.iso battery not working, but very smooth
+android-x86-6.0-r3.iso touchscreen battery both not working
+cm-x86-14.1-r4.iso (android 7.1) power button not working, not smooth, touchscreen not smooth, power button working
+android-x86-9.0-r2.iso recent key not working, power button working by press 3 sec
+cm-x86_64-13.0-r1.iso touch screen not working
+
+
+android-x86_64-7.1-r4-k419.iso, everything working except auto rotate and sound card,
+very smooth, touch screen, power button, recent key all work well
+
+android-x86_64-8.1-r5-k49.iso, sound, ok, bluetooth and rotate not, power button shutdown directly, or hold 3 sec choose poweroff, not smooth on touch screen
+
+android-x86_64-9.0-r2-k49.iso , loop in init
+
+cm-x86_64-14.1-r4-k419.iso, same as 7.1-k419
+
+android-x86_64-8.1-r5.iso, same as 7.1-k419 but sound ok
+
+
+
+there're also remixOS, phoenixOS, PrimeOS,
+there's a version of cube i6 air remixOS
+
+only 7.1+ has k419 kernel
+--------------------------------------
+cube i6 air https://forum.xda-developers.com/android/help/guide-how-to-update-efi-bios-to-version-t3250217
+https://forum.xda-developers.com/android/general/guide-how-to-install-android-4-4-4-t3299762
+https://forum.xda-developers.com/android/general/guide-how-to-install-windows-10-t3252042
+-------------------------------------
 latest linuxium iso
 https://mega.nz/#!KKBTALQD!z2BgpFQfU-pkGo_VvvjNMGyAp3b7EQM2I0pvwKN63pM
 http://linuxiumcomau.blogspot.com/2018/06/first-look-at-ubuntu-1810-cosmic.html
