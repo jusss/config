@@ -50,10 +50,8 @@ when you get into it, then restart
 -------------------------------
 power button, got blank after sleep
 https://groups.google.com/forum/#!topic/android-x86/_vU8nNLKicI
-when boot from file with bootia32.efi, you can get into grub by press c
-then add linux parameter sleep.state=none
-
-
+remount /system as read/write
+add `sleep.state=none` to /system/build.prop
 
 after installed android-x86 on (hd0,2), the tablet still init to windows 10, 
 and there's no new option in boot manager,
