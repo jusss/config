@@ -1,3 +1,5 @@
+turn bluetooth on, hold Fn + 2 on Rapoo keyboard for 3 sec, then connect
+----------------------------------
 android-x86 8.1-r5, speaker and headphone jack both working at the same time,
 use `alsa_amixer set Speaker 100 mute` to mute speaker
 use `alsa_amixer set Speaker 100 unmute` to unmute speaker

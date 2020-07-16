@@ -1,3 +1,7 @@
+/system/usr/keylaylout/Generic.kl
+key 58 CTRL_LEFT # change caps_lock to control
+Rapoo E9100M, bluetooth can work with android-x86 8.1-r5
+-------------------------------
 you may need to boot it manually,
 Boot From File -> choose EFI/Android/bootia32.efi to get into grub2
 then you may can't find the grub.cfg after you installed it
