@@ -1,5 +1,5 @@
-turn bluetooth on, hold Fn + 2 on Rapoo keyboard for 3 sec, then connect
-----------------------------------
+
+--------------------------------------------------
 android-x86 8.1-r5, speaker and headphone jack both working at the same time,
 use `alsa_amixer set Speaker 100 mute` to mute speaker
 use `alsa_amixer set Speaker 100 unmute` to unmute speaker
@@ -7,7 +7,26 @@ use `alsa_amixer set Speaker 100 unmute` to unmute speaker
 or install alsamixer app on android
 
 wifi reconnection fail issue, try `pkill wpa_supplicant` in chroot
+or
+in android emulator
+su
+rmmod r8723bs
+modprobe r8723bs
 
+toggle bluetooth may affect wifi 
+
+/sdcard/mute.sh
+/system/bin/alsa_amixer set Speaker 100 mute
+
+#sh mute.sh
+
+wifi.sh
+rmmod r8723bs
+modprobe r8723bs
+
+#sh wifi.sh
+-------------------------------------------------------------
+turn bluetooth on, hold Fn + 2 on Rapoo keyboard for 3 sec, then connect, or reload r8723bs module
 -------------------------------------------------------------
 about sdcard, you may choose UHS card to instead of SDHC card, and make it as internal storage
 ---------------------------------------------------
