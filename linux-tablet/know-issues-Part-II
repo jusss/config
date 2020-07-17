@@ -1,4 +1,7 @@
-
+open wifi first, then
+pair RAPOO BLE KB in bluetooth, when it shows "connecting" then hold on Fn + 2 for 3 sec, it will be connected
+-----------------------------------
+you need enable `enable native bridge` in settings for download some apps from Google Play
 --------------------------------------------------
 android-x86 8.1-r5, speaker and headphone jack both working at the same time,
 use `alsa_amixer set Speaker 100 mute` to mute speaker
