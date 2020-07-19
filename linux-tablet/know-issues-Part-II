@@ -1,3 +1,19 @@
+you can change C-States in BIOS, intel baytrail c-state cause random freeze issue,
+`intel_idle.max_cstate=1` is a solution as linux kernel parameter
+but it can be disable or set c1 as max c-states in BIOS's power module
+or just disable C-States, Power -> Advanced CPU Control -> C-States
+
+Advanced -> Boot Configuration ->
+PMIC Xpowers
+Audio Realtek ALC5642
+WiFi Realtek RGN RTL8723BS
+Bluetooth
+Rear Camera Lite-On 13P2BA829
+Front Camera Lite-On 13P2SF221
+ALS Sensor Capella CM32181
+Accel/Compass Sensor Bosch BMC150
+
+--------------------
 running debian linux on android natively
 https://medium.com/@quantvc/running-debian-on-android-device-natively-73545c9b0757
 --------------------------------------
