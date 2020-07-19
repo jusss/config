@@ -1,5 +1,16 @@
+running debian linux on android natively
+https://medium.com/@quantvc/running-debian-on-android-device-natively-73545c9b0757
+--------------------------------------
+firefox, about:config, new string key "general.useragent.override" and value is "fuckyou"
+this will visit website with desktop site
+------------------------------------
 open wifi first, then
 pair RAPOO BLE KB in bluetooth, when it shows "connecting" then hold on Fn + 2 for 3 sec, it will be connected
+
+or use `Bluetooth Pair` or `Bluetooth Scanner` apps, install from Google Play
+
+and remember, r8723 contain bs and bt, wifi and bluetooth on one chip,
+so when they don't work, just `rmmod r8723bs; modprobe r8723bs`
 -----------------------------------
 you need enable `enable native bridge` in settings for download some apps from Google Play
 --------------------------------------------------
