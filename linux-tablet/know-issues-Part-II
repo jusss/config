@@ -1,3 +1,25 @@
+
+
+disable C-States and Turbo Mode in BIOS
+
+xubuntu, lubuntu, ubuntu are out of the box,
+
+--------------------------------------------------
+
+write xubuntu into usb-sick, it won't detected by BIOS as bootable
+so put bootia32.efi into EFI/BOOT/
+then in BIOS -> Boot Manager -> USB Devices can boot from this usb stick
+
+
+ubuntu 20.04 only release amd64 iso file, it require 4GB RAM and 32GB disk space
+ubuntu use modesetting as default driver to instead of intel i915 driver,
+and this benifit is proper icon and font display on a HiDPI screen,
+also there's `ubuntu safe graphics` with is pass `nomodeset` to kernel parameter,
+then font and icon will display very small on a HiDPI screen
+
+
+--------------------------------------------------
+
 you can change C-States in BIOS, intel baytrail c-state cause random freeze issue,
 `intel_idle.max_cstate=1` is a solution as linux kernel parameter
 but it can be disable or set c1 as max c-states in BIOS's power module
