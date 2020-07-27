@@ -1,4 +1,100 @@
+Don't change unknown settings in BIOS, it may cause the screen blank!
 
+I did that, and I use "restore defaults" to reset that bios settings by other pictures of american megatrends bios
+
+Continue    Boot Manager      Device Management
+Boot From File   Secure Boot Option      SCU
+
+in SCU
+Main Advanced Security Power Boot Exit
+
+in Exit
+Exit Saving Changes
+Save Change Without Exit
+Exit Discarding Changes
+Load Optimal Defaults
+Load Custom Defaults
+Save Custom Defaults
+Discard Changes
+
+when do "Load Optimal Defaults" then "yes" then "Exit Saving Changes" will restore the bios settings
+
+Default OS Selection <Windows> in Advanced
+disable "Quick Boot" in Boot
+Timeout set [5] in Boot
+
+in Boot From File
+ESP -> 
+EFI
+<System Volume Information>     # default option
+<boot>
+
+EFI ->
+<.> #default option
+<..>
+<BOOT>
+<Intel>
+<Microsoft>
+<ubuntu>
+<Android>
+
+<Android> ->
+<.> #default option
+<..>
+BOOTx64.EFI
+bootia32.efi
+grubx64.efi
+---------------------------------------
+
+2.47 G partition for swap on android
+fdisk /dev/block/mmcb1k1 # know that partition is number 5
+1 64M ESP
+2 6.5G Android
+3 16M microsoft reserved 
+4 19.6G windows 10
+5 2537M windows disk e:
+6 450M windows recovery
+
+free -h # know swap was 0 before
+mkswap /dev/block/mmcblk1p5
+swapon /dev/block/mmcblk1p5
+free -h # now there's 2.4G swap 
+
+disable swap
+swapoff /dev/block/mmcblk1p5
+
+also you can make a swap file for that
+swap on that file, that file should be on ext4 partition
+https://forum.xda-developers.com/showthread.php?t=1800695
+
+auto mount by default when system boots
+https://www.droidviews.com/speed-up-android-devices-using-swap-part-1/
+
+Swappiness is a Linux kernel parameter that controls the relative weight given to swapping out of run-time memory
+Swappiness can be set to values between 0 and 100 inclusive. 
+A low value causes the Linux kernel to avoid swapping, 
+while a higher value causes the kernel to use swap space more aggressively. 
+The default value on Android is 60.
+
+sysctl -w vm.swappiness=value
+
+replacing the value with a number between 0 and 100. 
+This change will not persist after a reboot, but you can find an init.d script to automatically change it at boot
+---------------------------------------
+android x86   
+solve that after sleep by power button, you can't get back
+
+These are properties, not kernel cmdline.
+You may add them to /system/build.prop. 
+You can just set the property: sleep.state=none 
+
+https://groups.google.com/forum/#!topic/Android-x86/CVbQm8lq4Fo
+https://groups.google.com/forum/#!topic/android-x86/_vU8nNLKicI
+https://groups.google.com/forum/#!topic/android-x86/OOdwiY9XRKU
+
+only android-x86_64-8.1-r5.iso solved sound issue,
+alsa_amixer could check states
+-------------------------------------------------------------
 
 disable C-States and Turbo Mode in BIOS
 
@@ -55,6 +151,8 @@ you need enable `enable native bridge` in settings for download some apps from G
 android-x86 8.1-r5, speaker and headphone jack both working at the same time,
 use `alsa_amixer set Speaker 100 mute` to mute speaker
 use `alsa_amixer set Speaker 100 unmute` to unmute speaker
+
+https://stackoverflow.com/questions/11037254/no-audio-in-android-x86
 
 or install alsamixer app on android
 
