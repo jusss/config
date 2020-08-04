@@ -1,3 +1,7 @@
+suspend with 
+`echo 'mem' > /sys/power/state`
+and make sure `sleep.state=none` in /system/build.prop
+-------------------------------------------
 Don't change unknown settings in BIOS, it may cause the screen blank!
 
 I did that, and I use "restore defaults" to reset that bios settings by other pictures of american megatrends bios
@@ -22,11 +26,13 @@ when do "Load Optimal Defaults" then "yes" then "Exit Saving Changes" will resto
 Default OS Selection <Windows> in Advanced
 disable "Quick Boot" in Boot
 Timeout set [5] in Boot
+set C-States to C1
+reduce Video buffer cache in bios settings
 
 in Boot From File
 ESP -> 
-EFI
-<System Volume Information>     # default option
+EFI # default option
+<System Volume Information>
 <boot>
 
 EFI ->
