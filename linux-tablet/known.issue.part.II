@@ -1,6 +1,16 @@
 suspend with 
 `echo 'mem' > /sys/power/state`
 and make sure `sleep.state=none` in /system/build.prop
+
+sh suspend.sh
+rmmod r8723bs
+echo 'mem' > /sys/power/state
+
+sh wifi.sh
+rmmod r8723bs
+modprobe r8723bs
+
+https://forum.xda-developers.com/remix/remix-os/wake-sleep-mode-t3303008
 -------------------------------------------
 Don't change unknown settings in BIOS, it may cause the screen blank!
 
