@@ -1,3 +1,56 @@
+disable camera, contacts and google app in apps & notifications
+disable CState in BIOS Power - advanced cpu control - C-States Disable
+#grub2
+mount -t vfat /dev/block/mmcblk1p1 /sdcard/debian #mount esp to change grub
+add `clocksource=tsc tsc=reliable` in EFI/Android/android.cfg linux line
+umount /sdcard/debian/
+after reboot, dmesg|grep tsc to check
+or cat /sys/bus/clocksource/devices/clocksource0/current_clocksource
+cat /sys/bus/clocksource/devices/clocksource0/available_clocksouce
+
+there're tsc, acpi_pm, hpet and refined-jiffies
+except tsc, the others are too slow to run android
+
+cd /sdcard/script
+sh on.sh
+mkswap /dev/block/mmcblk1p5 # get it from fdisk /dev/block/mmcblk1, compress C disk in windows 10 and create one new partition then use it as swap partition
+swapon /dev/block/mmcblk1p5
+chmod 777 /dev/block/mmcblk1p5
+
+sh swappiness.sh
+sysctl -w vm.swappiness=70
+
+free -h
+sh off.sh
+swapoff /dev/block/mmcblk1p5
+
+sh clear.sh
+sync; echo 3 > /proc/sys/vm/drop_caches
+
+sh mem.sh
+echo 'mem' > /sys/power/state
+
+sh wifi.sh
+rmmod r8723bs
+modprobe r8723bs
+
+sh mute.sh
+alsa_amixer set Speaker 100 mute
+ 
+sh unmute.sh
+alsa_amixer set Speaker 100 unmute
+-----------------------------
+RemixOS download from sourceforge.net
+missing i386-efi mod
+
+dd if=/dev/zero of=./test.iso bs=512k count=100
+mkfs.vfat ./test.iso
+mount -o loop ./test.iso /mnt
+mkdir -p /mnt/boot/efi
+grub-install --efi-directory /mnt/boot/efi --boot-directory /boot --target i386-efi
+then you can copy all the mod from /mnt/boot/grub/i386-efi/
+
+---------------------------------
 suspend with 
 `echo 'mem' > /sys/power/state`
 and make sure `sleep.state=none` in /system/build.prop
@@ -196,8 +249,9 @@ turn bluetooth on, hold Fn + 2 on Rapoo keyboard for 3 sec, then connect, or rel
 -------------------------------------------------------------
 about sdcard, you may choose UHS card to instead of SDHC card, and make it as internal storage
 ---------------------------------------------------
+#grub2
 mount -t vfat /dev/block/mmcblk1p1 /sdcard/debian #mount esp to change grub
-add `androidboot.selinux=permissive intel_idle.max_cstate=1` in EFI/Android/android.cfg linux line
+add `androidboot.selinux=permissive intel_idle.max_cstate=1 clocksource=tsc tsc=reliable` in EFI/Android/android.cfg linux line
 umount /sdcard/debian/
 after reboot, dmesg|grep idle to check
 ---------------------------------------------------------------
