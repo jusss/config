@@ -1,3 +1,10 @@
+
+download code-server from https://github.com/cdr/code-server  release
+choose amd64.deb, then dpkg -i amd64.deb
+and run `code-server --auth none` in chroot, then visit 127.0.0.1:8080 via the browser
+------------------------------
+export TERM=linux in Termux after chroot into debian environment
+-----------------------------
 disable camera, contacts and google app in apps & notifications
 disable CState in BIOS Power - advanced cpu control - C-States Disable
 #grub2
