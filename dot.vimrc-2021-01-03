@@ -32,4 +32,10 @@ inoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
 "comment"
 map <F3> :s/^/--/<CR>
 map <F4> :s/^--/<CR>
+":vsplit, :hsplit"
+"move in split windows with C-l"
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 "end"
