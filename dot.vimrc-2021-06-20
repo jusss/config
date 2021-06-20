@@ -1,0 +1,44 @@
+"autocomplete supertab, indent tab, highlight build-in, comment keybind, F5-run keybind"
+set nocompatible
+filetype off
+filetype plugin indent on
+"there's no space in options or parameters, otherwise, it will be errors"
+"encoding error, set fileencoding and reload, not set encoding"
+"vim character override issue, caught by default ~/.bashrc, delete it and touch new ~/.bashrc will be fine"
+set number
+"set cursorline"
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,utf-8-bom,ucs-bom,cp936,big5,gbk,utf-16,utf-16le
+set termencoding=utf-8
+set fileformats=unix,dos
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set clipboard^=unnamed,unnamedplus
+"colorscheme happy_hacking"
+"colorscheme github"
+filetype plugin indent on
+syntax on
+set hidden
+"disable macro recording"
+map q <Nop>
+"F5 run"
+nnoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
+inoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
+"nnoremap <F5> <esc>:w<enter>:!python %:p<enter>"
+"inoremap <F5> <esc>:w<enter>:!python %:p<enter>"
+"install supertab for auto-complete"
+"comment"
+map <F3> :s/^/-- /<CR>
+map <F4> :s/^-- /<CR>
+":vsplit, :hsplit"
+"move in split windows with C-l"
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+let g:AutoComplPopDontSelectFirst = 1
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabCrMapping = 0
+"end"
