@@ -103,6 +103,22 @@ there're also remixOS, phoenixOS, PrimeOS,
 there's a version of cube i6 air remixOS
 
 only 7.1+ has k419 kernel
+
+android-x86_64-8.1-r6.iso, sound card work, power button work
+android-x86_64-7.1-r5.iso, not smooth
+android-x86_64-7.1-r5-k419.iso, not smooth
+
+
+
+cm-x86-14.1-r5-k419.iso, very smooth, lineage OS 14.1, android 7.1, sound not work need alsa config, bluetooth work, shutdown stuck
+android-x86-8.1-r6.iso, very smooth, sound work
+cm-x86-14.1-r5.iso, not smooth, no sound
+
+
+
+make sure when you install this iso into /dev/mmblk1p2, and make sure install /system as read/write, so it can edit 
+`sleep.state=none` to /system/build.prop
+
 --------------------------------------
 cube i6 air https://forum.xda-developers.com/android/help/guide-how-to-update-efi-bios-to-version-t3250217
 https://forum.xda-developers.com/android/general/guide-how-to-install-android-4-4-4-t3299762
