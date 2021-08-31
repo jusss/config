@@ -1,0 +1,3 @@
+cp bytcrrt5640.state-2 /system/etc/alsa/bytcrrt5640.state
+alsa_aplay -l
+alsa_amixer -c 1
