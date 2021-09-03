@@ -30,17 +30,16 @@ inoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
 "avoid Press ENTER or type command to continue"
 set shortmess+=F
 
-"vim scp://root@localhost:1991//root/a.hs"
-"nnoremap <F6> <esc>:w<enter>:!ssh -p 1991 root@localhost runghc /root/%:t<enter>"
-"inoremap <F6> <esc>:w<enter>:!ssh -p 1991 root@localhost runghc /root/%:t<enter>"
+"vim scp://root@moon//root/a.hs"
+"nnoremap <F6> <esc>:w<enter>:!ssh root@moon runghc /root/%:t<enter>"
+"inoremap <F6> <esc>:w<enter>:!ssh root@moon runghc /root/%:t<enter>"
 
-"vim scp://hask@localhost:1991/~/a.hs"
-nnoremap <F6> <esc>:w<enter>:!ssh -p 1991 hask@localhost runghc /home/hask/%:t<enter>
-inoremap <F6> <esc>:w<enter>:!ssh -p 1991 hask@localhost runghc /home/hask/%:t<enter>
+"vim scp://leo@moon/~/a.hs"
+nnoremap <F6> <esc>:w<enter>:!ssh leo@moon runghc /home/leo/%:t<enter>
+inoremap <F6> <esc>:w<enter>:!ssh leo@moon runghc /home/leo/%:t<enter>
 
 "write this into ~/.ssh/config"
 "ServerAliveInterval 120"
-"Host localhost"
 "ControlPersist yes"
 "ControlMaster auto"
 "ControlPath ~/.ssh/master-%r@%h:%p"
