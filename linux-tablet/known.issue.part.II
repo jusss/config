@@ -1,4 +1,6 @@
-
+sh wifi.sh
+killall wpa_supplicant
+--------------------------------
 download code-server from https://github.com/cdr/code-server  release
 choose amd64.deb, then dpkg -i amd64.deb
 and run `code-server --auth none` in chroot, then visit 127.0.0.1:8080 via the browser
