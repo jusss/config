@@ -1,4 +1,10 @@
+sh mem.sh
+rmmod r8723bs
+killall wpa_supplicant
+echo 'mem' > /sys/power/state
+--------------------
 sh wifi.sh
+modprobe r8723bs
 killall wpa_supplicant
 --------------------------------
 download code-server from https://github.com/cdr/code-server  release
