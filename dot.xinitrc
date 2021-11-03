@@ -1,18 +1,34 @@
-fcitx &
-
-### give access of connecting X to local program, and should use env DISPLAY=:0.0 command
+#startdde
 xhost +local: &
+#pgrep wpa_supplicant || ~/network/wifi.sh &
+#key bindings don't work, blame on setxkbmap or xcape? try .Xmodmap first
+#setxkbmap -layout us -option ctrl:nocaps
+#xcape
+fcitx -rd&
+#ibus-daemon -rdx&
+#xss-lock -- xlock -timeout 1800 &
+#disable xcompmgr, it will be more smooth, but conky will not be background transparent
+#xcompmgr &
+### blank the scren after a half hour
+xset dpms 1800 1800 1800
+xset s 1800
+export GDK_BACKEND=x11
+xinput set-prop 'Elan Touchpad' "libinput Natural Scrolling Enabled" 1
 
-#setxkbmap -option ctrl:swapcaps
-setxkbmap -layout us -option ctrl:nocaps
+# notify daemon
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-### xcape -e 'Control_L=Escape;Meta_L=Tab'
-### because fvwm2 only use C-Tab to switch window, so don't change Tab to Meta_L in  xmodmap, and don't change Tab on xcape
-### xcape -e 'Control_L=Escape'
-xcape
-
-### network, if there's wpa_supplicant then don't run wifi.sh
-pgrep wpa_supplicant || ~/network/wifi.sh &
-
-### window manager must be the last program to run, and no &
-exec fvwm2
+[[ -f ~/.xmodmaprc ]] && xmodmap ~/.xmodmaprc #I dont know why this wont work
+xmodmap ~/dot.Xmodmap& 
+exec fvwm
+#exec xmonad
+#exec gnome-session
+#exec startdde
+#exec startxfce4
+#
+#after Xorg, 
+#1. xmodmap ~/.Xmodmap
+#2. neton
+#3. conky
+#4. stunnel stunnel.conf
+#5. cd kcptun; ./kcpclient.sh; ./ssh.sh
