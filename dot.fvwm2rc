@@ -1,3 +1,5 @@
+#Make Sure Path Is Correct!
+#ModulePath /usr/lib/fvwm/2.6.9/
 ####################################### 操作方式和所需 #########################
 # archlinux, fvwm2.6.1从fvwm.org下源码编译,使用源码包自带的configure生成Makefile时用./configure --prefix=/usr/local指定安装位置为/usr/local/bin/fvwm2,模块位置为
 # /usr/local/libexec/fvwm/2.6.1/,可以用ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/添加模块位置
@@ -36,19 +38,20 @@ AddToMenu MenuFvwmRoot    " Window "    Title
 +             " Chromium "  Exec exec chromium
 +             " Firefox "   Exec exec firefox
 +             " Volume "    Exec exec pavucontrol
-+             " System Info" Exec exec gnome-system-monitor
++             " ScreenShot " Exec exec scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/'
+#+             " System Info" Exec exec gnome-system-monitor
 +             " Terminal "  Exec exec xfce4-terminal
-#+			  " Resize"	     Resize
++			  " Resize"	     Resize
 #+			  " Maximize"	     Maximize
 +			  " Iconify"	     Iconify
-#+			  " Move"	     Move
++			  " Move"	     Move
 +			  " Iconify Off"     Iconify Off
 #+			  " Focus"	     Focus
-#+			  " Close"	     Close
++			  " Close"	     Close
 #+             " Stick"       Stick
 #+			  " Raise"	     Raise
 #+             " Lower"       Lower
-#+             " Raise Lower" RaiseLower
++             " Raise Lower" RaiseLower
 +             " -------- "
 +             " Suspend "   Exec exec systemctl suspend
 MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
@@ -80,12 +83,14 @@ Style "xterm"   Icon   filled-xterm_48x48.xpm, IconOverride
 #Style "mpv"	Color black/gray86, NoHandles
 #Style "mplayer"	 Color black/gray86, NoHandles
 #Style "Chromium"   Icon $[ICONS]/chrome.png, IconOverride, Color black/gray86, NoHandles, NoTitle
-Style "Chromium"  NoHandles, NoTitle
-Style "Firefox"    Color black/gray86, NoHandles, NoTitle
+Style "chromium"  NoHandles, NoTitle, !Borders
+#Style "firefox"    Color black/gray86, NoHandles, NoTitle
+Style "firefox"   NoHandles, NoTitle, !Borders
 Style "emacs"   NoTitle
 Style "deepin-terminal" NoTitle, NoHandles
 #Style "conky"	NoTitle, Sticky, StaysOnTop, NeverFocus
 Style "conky"	NoTitle, NeverFocus, Sticky
+Style "xfce4-terminal" Icon filled-xterm_48x48.xpm, IconOverride
 
 # 关于Border边框做个标记 Lable 01,如果要修改边框就搜索01
 #BorderWidth 边框宽度和像素, MWMBorder和FvwmBorder的不同就是一个边框是2pixels一个边框是1pixels,FirmBorder是按下边框无陷下去的3d效果，对应的是DepressableBorder
@@ -143,7 +148,8 @@ Style * Colorset 41, HilightColorset 42 # to use fg and bg
 ### http://www.linuxquestions.org/questions/linux-desktop-74/how-can-make-fvwm-support-jpg-can%27t-make-jpg-as-my-wallpaper-657067/
 
 AddToFunc StartFunction
-+ I Exec exec fvwm-root -r $[ICONS]/Aurora.png
++ I Module      FvwmPager *
++ I Exec exec fvwm-root -r $[ICONS]/desktop.png
 #+ I Exec exec xloadimage -onroot -fullscreen $[ICONS]/Aurora.jpg
 #+ I Exec exec feh --bg-center $[ICONS]/Aurora.jpg
 
@@ -397,10 +403,15 @@ AddToFunc Iconify-off-or-Maximize-or-Move
 ### window-n next focus, window-p previous focus
 # W means Window, 4 means super key or call windows key
 Key i W 4 Iconify
+Key i W MC Iconify
 ### Key o W 4 Maximize-Focus-Raise
 Key o W 4 Maximize
+Key o W MC Maximize
 #Key 3 A 4 Exec  exec xterm -geometry 151x42+0+0
+#Key u A 4 Exec  exec xfce4-terminal
 Key u A 4 Exec  exec xfce4-terminal
+Key u A MC Exec  exec xfce4-terminal
+Key t A MC Exec  exec xfce4-terminal
 #Key u A 4 Exec  exec gnome-terminal
 #Key  3 A 4 Exec-xterm
 # 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
@@ -409,15 +420,22 @@ Key u A 4 Exec  exec xfce4-terminal
 #Key 4 A 4 Exec  exec emacs --geometry 169x48+0+0
 #Key  4 A 4 Exec-emacs
 Key e A 4 Exec exec emacs
+Key e A MC Exec exec emacs
 ### Key m W 4 Move-Focus-Raise
 Key m W 4 Move
+Key m W MC Move
 Key k W 4 Close
+Key k W MC Close
 Key f W 4 Focus
+Key f W MC Focus
 Key s W 4 Stick-Raise
+Key s W MC Stick-Raise
 ### Key r W 4 Raise
 Key r W 4 Resize
-### Key l W 4 RaiseLower
-Key l W 4 Lower
+Key r W MC Resize
+Key l W 4 RaiseLower
+Key l W MC RaiseLower
+#Key l W 4 Lower
 
 AddToFunc Stick-Raise
 + I Stick
@@ -492,7 +510,7 @@ Key 1 A C GotoDesk 0 0
 Key 2 A C GotoDesk 0 1
 Key 3 A C GotoDesk 0 2
 Key 4 A C GotoDesk 0 3
-#Key 0 A C Quit
+Key 0 A CS Quit
 
 # prev and next, Prev Focus切换到上一个窗口, Next Focus切换到下一个窗口，但是以窗口的打开的顺序切换，而不是焦点停留过的窗口的顺序切换,C-Tab也不难按焦点停留
 # 过的窗口顺序切换，但C-Tab能切换同一page里的2个窗口 I mean just one hint when I press C-Tab
@@ -507,8 +525,10 @@ Key 4 A C GotoDesk 0 3
 ### !Overlapped 如果一个page上有多个重叠的windows,focus在最上面那个window上(而不管鼠标指针是否在这个window上,好像不用管是MouseFocus获取焦点)
 ### AcceptsFocus 忽略掉设置了NeverFocus的窗口，如conky
 ### Visible是窗口部分可见，没有被完全覆盖
-Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
-Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
+#Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
+#Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
+Key n A 4 Next (AcceptsFocus, !Iconic, !Sticky, Visible, CurrentPage) Focus
+Key p A 4 Prev (AcceptsFocus, !Iconic, !Sticky, Visible, Focused) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
@@ -530,12 +550,15 @@ AddToFunc SwitchToWindow
 # 修改后发现只能是M-Tab按Tab才能切换窗口其它组合键都没发连续切，因为还需要修改SelectOnRelease就不改了,只能修改xmodmap和xcape了，取消Tab键的映射
 #Key Tab A M WindowList ShowPage, NoGeometryWithInfo, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, ShowPageX, ShowPageY, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , CurrentAtEnd, IconifiedAtEnd, "Prev SwitchToWindow"
-Key Tab A M WindowList NoIcons, NoSticky, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
+#Key Tab A M WindowList NoIcons, NoSticky, ShowScreen, NoLayer, NoDeskNum, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50 , "Prev SwitchToWindow"
 #Key Tab A M WindowList Alphabetic, NoLayer, NoDeskNum, UseIconName, NoNumInDeskTitle, NoCurrentDeskTitle, MaxLabelWidth 50, "Prev SwitchToWindow"
+#OnlyNormal means no sticky, ontop, iconic
+Key Tab A M WindowList Root c c NoGeometry, NoDeskNum, OnlyNormal, CurrentAtEnd
 
 ###################################编译和位置#########################################################
 # when it's compiled, ./configure --prefix=/usr/local, that mean fvwm2 install on /usr/local/bin, and module on /usr/local/libexec/fvwm/2.6.1
-ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
+# ModulePath /usr/lib/fvwm:/usr/local/libexec/fvwm/2.6.1/
+ModulePath /usr/lib/fvwm/2.6.9/
 
 # write $[ICONS] on the ImagePath, use the icon.svg directly in the ButtonStyle, and it doesn't work, it still can't find it even write path on ImagePath
 # so you can only use absolute path in the ButtonStyle
@@ -599,3 +622,40 @@ Style "xclock" Sticky, StaysOnTop
 ### $0 to $9, 定义函数时的形式参数, $0是第一个参数, $1是第二个参数
 ### 调试fvwm,  在tty2 $Xorg :1 vt2, 然后在Xorg :0里$xterm -display :1&,然后进tty2里fvwm2 -display :1
 ### unfinished 1, page循环(包括没有window的page和任意排列的page) 2. 鼠标划过最底层穿越进最上层
+#
+#Module FvwmPager *
+Style FvwmPager    NoTitle,  Sticky, WindowListSkip, CirculateSkipIcon, CirculateSkip
+#Style FvwmPager    StaysOnBottom, NoHandles, BorderWidth 0 
+Style FvwmPager    StaysOnTop, NoHandles, BorderWidth 0 
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry 80x25-0-0
+*FvwmPager: MiniIcons
+*FvwmPager: Colorset * 42
+*FvwmPager: HilightColorset * 81
+*FvwmPager: WindowColorsets 42 81
+*FvwmPager: BalloonColorset * 42
+*FvwmPager: Font none
+*FvwmPager: SmallFont none
+*FvwmPager: Balloons All
+*FvwmPager: BalloonFont "Shadow=1 1 SE:xft:sans:bold:pixelsize=10:minspace=True"
+*FvwmPager: BalloonYOffset +2
+*FvwmPager: BalloonBorderWidth 1
+*FvwmPager: UseSkipList
+*FvwmPager: MoveThreshold 0
+*FvwmPager: SolidSeparators
+*FvwmPager: WindowBorderWidth 1 
+
+#### Pager Colorset
+Colorset 60 fg white, bg black, RootTransparent, Tint black 5
+Colorset 61 fg white, bg black, Noshape, RootTransparent, Tint #101f36 70
+Colorset 62 fg white, bg black, RootTransparent, Tint #466696 50
+Colorset 63 fg white, bg black, Noshape, RootTransparent, Tint #101f36 50
+Colorset 70 fg black, bg grey, NoShape, RootTransparent buffer, Tint white 10
+Colorset 71 fg black, bg grey, NoShape, RootTransparent buffer, Tint white 20
+Colorset 72 fg black, bg Khakil, Plain, NoShape
+Colorset 73 RootTransparent Buffer, Tint #4A516A 50, fg white, bg black 
+Colorset 77 fg blue, bg green
+Colorset 79 fg white, bg blue
+Colorset 80 fg black, bg white
+Colorset 81 fg black, bg orange
+Colorset 83 fg black, bg lime
