@@ -488,9 +488,13 @@ DeskTopSize 2x2
 
 # A in the third position of Key means Anywhere, M means Meta also called Alt
 Key 1 A 4 GoToPage 0 0
+Key 1 A MC GoToPage 0 0
 Key 2 A 4 GoToPage 1 0
+Key 2 A MC GoToPage 1 0
 Key 3 A 4 GoToPage 0 1
+Key 3 A MC GoToPage 0 1
 Key 4 A 4 GoToPage 1 1
+Key 4 A MC GoToPage 1 1
 #Key 3 A M GoToPage 2 0
 #Key 4 A M GoToPage 0 1
 #Key 5 A M GoToPage 1 1
@@ -528,7 +532,9 @@ Key 0 A CS Quit
 #Key n A 4 Next (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
 #Key p A 4 Prev (!Iconic, AcceptsFocus, !Sticky, Visible, !Overlapped) Focus
 Key n A 4 Next (AcceptsFocus, !Iconic, !Sticky, Visible, CurrentPage) Focus
+Key n A MC Next (AcceptsFocus, !Iconic, !Sticky, Visible, CurrentPage) Focus
 Key p A 4 Prev (AcceptsFocus, !Iconic, !Sticky, Visible, Focused) Focus
+Key p A MC Prev (AcceptsFocus, !Iconic, !Sticky, Visible, Focused) Focus
 Key p A 4S GotoPage prev
 ### or Key P A 4 GotoPage prev? I don't think fvwm have low case sensitive, more options see man fvwm and search Next
 ### reference: http://www.fvwmforums.org/phpBB3/viewtopic.php?t=2874
