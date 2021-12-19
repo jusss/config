@@ -52,8 +52,8 @@ inoremap <F6> <esc>:w<enter>:!ssh leo@moon runghc /home/leo/%:t<enter>
 "inoremap <F5> <esc>:w<enter>:!python %:p<enter>"
 "install supertab for auto-complete"
 "comment"
-map <F3> :s/^/-- /<CR>
-map <F4> :s/^-- /<CR>
+"map <F3> :s/^/-- /<CR>"
+"map <F4> :s/^-- /<CR>"
 ":vsplit, :hsplit"
 "move in split windows with C-l"
 nmap <C-h> <C-w>h
@@ -67,7 +67,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 0
 " when pop menu, candidate is the first, press Enter will not complete and just newline, selected == 0 is the first candidate, -1 is not choose, complete_info need vim8.2"
 " pumvisible is true if there is a pop up menu"
-:inoremap <expr> <CR> pumvisible() ? (complete_info().selected == -1 ? '<C-e><CR>' : '<CR>') : '<CR>'
+inoremap <expr> <CR> pumvisible() ? (complete_info().selected == -1 ? '<C-e><CR>' : '<CR>') : '<CR>'
 
 set undofile
 set undodir=$HOME/.cache/vim/undo/
@@ -84,4 +84,17 @@ else
     vmap <C-_> <leader>c<Space>
 endif
 
+" use :%s/\<old\>/new/g to replace variable, g mean multiple in one line"
+" c mean confirm if come with g, % mean all line, \<old\> start and end only with old"
+" or on the old, press * will fully match, :%s//new/g"
+" // will replace the last search by * # or /"
+" or V/old:s//new/g, search old in a block then replace"
+" vimrc use . to concate string"
+function! Rename()
+  let new = input('New name: ')
+  execute '%s//'.new.'/g'
+endfunction
+
+" use * match variable, press F3 to rename them all"
+nnoremap <F3> :call Rename()<CR>
 "end"
