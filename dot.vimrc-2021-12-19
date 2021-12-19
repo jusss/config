@@ -25,8 +25,16 @@ set hidden
 "disable macro recording"
 map q <Nop>
 "F5 run"
-nnoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
-inoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
+let current_filename = expand('%:t')
+if stridx(current_filename,'.hs') > 0
+    nnoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
+    inoremap <F5> <esc>:w<enter>:!runghc %:p<enter>
+elseif stridx(current_filename, '.py') > 0
+    nnoremap <F5> <esc>:w<enter>:!python %:p<enter>
+    inoremap <F5> <esc>:w<enter>:!python %:p<enter>
+"else
+    "echom 'unsupport'
+endif
 
 "nnoremap <C-r> <esc>:w<enter>:!runghc %:p<enter>"
 "inoremap <C-r> <esc>:w<enter>:!runghc %:p<enter>"
@@ -48,8 +56,6 @@ inoremap <F6> <esc>:w<enter>:!ssh leo@moon runghc /home/leo/%:t<enter>
 "ControlMaster auto"
 "ControlPath ~/.ssh/master-%r@%h:%p"
 
-"nnoremap <F5> <esc>:w<enter>:!python %:p<enter>"
-"inoremap <F5> <esc>:w<enter>:!python %:p<enter>"
 "install supertab for auto-complete"
 "comment"
 "map <F3> :s/^/-- /<CR>"
