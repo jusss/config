@@ -112,10 +112,14 @@ if has("autocmd")
 endif
 set showmatch
 set hlsearch
-" ctags for jump to funtion definition"
+" vim ~/.ctags, -python-kinds=-i"
+" ctags -R -o ~/.vim/python-tags ~/project"
+" use C-] to jump, and C-t jump back"
 set tags=~/.vim/python-tags
 
-" C-v then Alt-n to insert ^[n for key mapping to tabnext, :tabnew new-tab"
+" C-v then Alt-n to insert ^[n for key mapping to tabnext"
+" :tabnew new-tab, open new file"
+" vim -p file1 file2 will open multiple tabs"
 nnoremap n :tabnext<CR>
 inoremap n :tabnext<CR>
 nnoremap p :tabprevious<CR>
