@@ -182,6 +182,8 @@ let g:ale_linters ={'haskell': ['hlint', 'hdevtools', 'hfmt'],}
 let g:apc_enable_ft = {'*':1}
 set cpt=.,k,w,b
 set completeopt=menu,menuone,preview,noselect,noinsert
+" C-x C-o will call omni in a split window, disable this window
+set completeopt-=preview
 "set shortmess+=c
 
 "end"
