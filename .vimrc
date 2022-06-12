@@ -40,7 +40,7 @@ endif
 "inoremap <C-r> <esc>:w<enter>:!runghc %:p<enter>"
 
 "avoid Press ENTER or type command to continue"
-set shortmess+=F
+" set shortmess+=F
 
 "vim scp://root@moon:22//root/a.hs"
 "if the only one slash, it means $HOME path"
@@ -82,11 +82,9 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" unused
 "AcpDisable to disable autocomplpop"
 "let g:AutoComplPopDontSelectFirst = 1
-
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabCrMapping = 0
 
 " when pop menu, candidate is the first, press Enter will not complete and just newline, selected == 0 is the first candidate, -1 is not choose, complete_info need vim8.2"
 " pumvisible is true if there is a pop up menu"
@@ -165,10 +163,9 @@ execute pathogen#infect()
 " ale linter to ignore hlint is not installed 
 let g:ale_linters ={'haskell': ['hlint', 'hdevtools', 'hfmt'],}
 "let g:ale_completion_enabled=1
-"set omnifunc=syntaxcomplete#Complete
 "set omnifunc=ale#completion#OmniFunc
 
-" syntastic linter
+" syntastic linter, unused
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
@@ -177,13 +174,46 @@ let g:ale_linters ={'haskell': ['hlint', 'hdevtools', 'hfmt'],}
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-
 " https://github.com/skywind3000/vim-auto-popmenu "
 let g:apc_enable_ft = {'*':1}
-set cpt=.,k,w,b
-set completeopt=menu,menuone,preview,noselect,noinsert
+" let g:apc_enable_ft = {'txt':1}
+" set cpt=.,k,w,b
+" set completeopt=menu,menuone,preview,noselect,noinsert
 " C-x C-o will call omni in a split window, disable this window
 set completeopt-=preview
-"set shortmess+=c
+set shortmess+=c
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
+" bind to c-x c-o for omni completion
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabCrMapping = 0
+
+" enable omni and set source
+set omnifunc=syntaxcomplete#Complete
+
+" https://stackoverflow.com/questions/35837990/how-to-trigger-omnicomplete-auto-completion-on-keystrokes-in-insert-mode
+" function! OpenCompletion()
+    " if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z') || (v:char == '.'))
+        " call feedkeys("\<C-x>\<C-o>", "n")
+    " endif
+" endfunction
+
+function! OpenCompletion()
+    if !pumvisible() && (v:char == '.')
+        call feedkeys("\<C-x>\<C-o>", "n")
+    endif
+endfunction
+autocmd InsertCharPre * call OpenCompletion()
+" avoid omni auto choose the first
+set completeopt+=menuone,noselect,noinsert
+
+" /usr/share/vim/vim82/ftplugin/python.vim
+" https://vim.fandom.com/wiki/Continue_omnicompletion_for_python_modules
+
+" when pop menu, candidate is the first, press Enter will not complete and just newline, selected == 0 is the first candidate, -1 is not choose, complete_info need vim8.2"
+" pumvisible is true if there is a pop up menu"
+" inoremap <expr> <CR> pumvisible() ? (complete_info().selected == -1 ? '<C-e><CR>' : '<CR>') : '<CR>'
+"
+
 
 "end"
