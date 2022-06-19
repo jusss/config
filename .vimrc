@@ -156,10 +156,10 @@ cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'tabe' : 'e'
 " :let $a="scp://user@localhost:local-listen-port""
 " :e $a/a.hs"
 
-execute pathogen#infect()
+" execute pathogen#infect()
 
 " ale linter
-let g:ale_linters ={'haskell': ['hlint', 'hdevtools', 'hfmt'],}
+" let g:ale_linters ={'haskell': ['hlint', 'hdevtools', 'hfmt'],}
 
 " syntastic linter
 "set statusline+=%#warningmsg#
@@ -182,8 +182,40 @@ let g:ale_linters ={'haskell': ['hlint', 'hdevtools', 'hfmt'],}
 " sleep_before_sync 0
 " then cd ~/remote/project and vim files, :w will rsync to remote
 
+" set pylint as python linter
+autocmd FileType python compiler pylint
 
+" instead of ale or syntastic
+" learnvimscriptthehardway.stevelosh.com/chapters/12.html
+" auto check syntax after :w, set by compiler pylint
+" autocmd BufWritePost *.py execute 'make %'
+autocmd BufWritePost *.py execute '!pylint --errors-only %'
 
+" autocmd CmdlineLeave *.py execute 'make %'
 
+" auto run after :w
+" autocmd BufWritePost *.py execute '!python3 %'
 
+" F5 to run 
+" autocmd FileType python nnoremap <F5> <esc>:w<enter>:!python %:p<enter>
+" autocmd filetype python inoremap <F5> <esc>:w<enter>:!python %:p<enter>
+
+" implement comment like nerdcommenter
+" autocmd filetype javascript nnoremap <buffer> <C-o> I//<esc>
+
+set omnifunc=syntaxcomplete#Complete
+autocmd filetype python set omnifunc=python3complete#Complete
+set completeopt=noinsert,menuone
+
+" autocmd filetype python let SuperTabDefaultCompletionType = "<C-X><C-O>"
+" autocmd filetype python let SuperTabDefaultCompletionType = "context"
+
+" let g:auto_omnicomplete_key= 'a b c d e f'
+" vim /usr/share/vim/vim82/autoload/javascriptcomplete.vim
+" vim /usr/share/vim/vim82/autoload/python3complete.vim
+
+" use :set all, or :set! all, or :set omnifunc? to get the value
+"omnifunc=javascriptcomplete#CompleteJS, this work on archlinux
+"on centos 7, vim7, vim a.py use omni completion instead of keyword completion, and
+"on archlinux, vim8, vim a.js use omni completion instead of keyword completion
 "end"
