@@ -1,3 +1,4 @@
+setxkbmap -layout us -option ctrl:nocaps
 #startdde
 xhost +local: &
 #pgrep wpa_supplicant || ~/network/wifi.sh &
@@ -18,8 +19,8 @@ xinput set-prop 'Elan Touchpad' "libinput Natural Scrolling Enabled" 1
 # notify daemon
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-[[ -f ~/.xmodmaprc ]] && xmodmap ~/.xmodmaprc #I dont know why this wont work
-xmodmap ~/dot.Xmodmap& 
+#[[ -f ~/.xmodmaprc ]] && xmodmap ~/.xmodmaprc #I dont know why this wont work
+#xmodmap ~/dot.Xmodmap& 
 exec fvwm
 #exec xmonad
 #exec gnome-session
