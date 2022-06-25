@@ -296,6 +296,15 @@ apt install firefox-esr locales fonts-wqy-microhei
 vim /etc/locale.gen add zh
 locale-gen
 
+-----------------------------------------------
+android webview start from 5.0, below 5.0 like 4.4.4, there's no webview
+and now play video via browser on 4.4.4, there's nesting windows
+use Mozilla's GeckoView could solve this, since firefox and chrome don't use the same view
+so install firefox 68 for andorid can solve this
+
+fennec-68.11.0.en-US.android-i386.apk
+from https://ftp.mozilla.org/pub/mobile/releases/68.11.0/
+
 
 
 
