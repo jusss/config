@@ -261,7 +261,9 @@ busybox mount -t proc proc $MP/proc
 busybox mount -t sysfs sysfs $MP/sys
 busybox mount -t devpts devpts $MP/dev/pts
 busybox mount -t tmpfs tmpfs $MP/tmp
+mkdir $MP/dev/shm
 busybox mount -t tmpfs tmpfs $MP/dev/shm
+busybox mount -o bind /dev/ashmem $MP/dev/ashmem
 # busybox chroot $MP /bin/bash
 # use 'useradd -m joe -s /bin/bash' to create user joe, and write that export PATH to joe's .bashrc
 # also u can run "busybox chroot $MP /bin/bash -c 'command1;command2'" once and exit chroot
@@ -271,6 +273,7 @@ busybox chroot $MP /bin/su joe
 # run 'sh /sdcard/umount-android.sh' in android terminal
 DP=/dev/block/mmcblk1p1
 MP=/mnt/media_rw/sdcard1
+busybox umount $MP/dev/ashshm
 busybox umount $MP/dev/shm
 busybox umount $MP/tmp
 busybox umount $MP/dev/pts
@@ -284,6 +287,15 @@ busybox umount $DP
 or try linux deploy, click download icon at right top corner,
 installation type to partition, installation path to /dev/block/mmcblk1p1, user name to root
 then click start
+
+--------------------------------------------------------------
+android xserver-xsdl apk is already a Xorg server, so no need to install xorg-server on the chroot env
+just open that xserver-xsdl then in chroot run 'env DISPLAY=127.0.0.1:0 fvwm&' will be ok
+
+apt install firefox-esr locales fonts-wqy-microhei
+vim /etc/locale.gen add zh
+locale-gen
+
 
 
 
