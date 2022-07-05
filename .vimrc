@@ -218,4 +218,9 @@ set completeopt=noinsert,menuone
 "omnifunc=javascriptcomplete#CompleteJS, this work on archlinux
 "on centos 7, vim7, vim a.py use omni completion instead of keyword completion, and
 "on archlinux, vim8, vim a.js use omni completion instead of keyword completion
+
+" apt install jq "
+" :%!jq . will format json file
+autocmd filetype json nnoremap <buffer> <F5> :%!jq . <cr>
+
 "end"
