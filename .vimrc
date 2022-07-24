@@ -230,6 +230,6 @@ autocmd filetype json nnoremap <buffer> <F5> :%!jq . <cr>
 " noremap <F9> :call Pastetoclip()<CR>
 
 " copy yanked data to clipboard
-autocmd TextYankPost * if v:event.operator ==# 'y' | execute "'<,'>w !xclip -selection clipboard" | endif
+autocmd TextYankPost * if v:event.operator ==# 'y' | silent execute "'<,'>w !xclip -selection clipboard" | endif
 
 "end"
