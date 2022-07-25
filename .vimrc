@@ -223,13 +223,13 @@ set completeopt=noinsert,menuone
 " :%!jq . will format json file
 autocmd filetype json nnoremap <buffer> <F5> :%!jq . <cr>
 
-" function! Pastetoclip()
-    " execute "'<,'>w !xclip -selection clipboard"
-" endfunction
+function! Pastetoclip()
+    silent execute "'<,'>w !xclip -selection clipboard"
+endfunction
 
-" noremap <F9> :call Pastetoclip()<CR>
+noremap <F9> :call Pastetoclip()<CR>
 
 " copy yanked data to clipboard
-autocmd TextYankPost * if v:event.operator ==# 'y' | silent execute "'<,'>w !xclip -selection clipboard" | endif
+" autocmd TextYankPost * if v:event.operator ==# 'y' | silent execute "'<,'>w !xclip -selection clipboard" | endif
 
 "end"
