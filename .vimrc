@@ -232,4 +232,7 @@ noremap <F9> :call Pastetoclip()<CR>
 " copy yanked data to clipboard
 " autocmd TextYankPost * if v:event.operator ==# 'y' | silent execute "'<,'>w !xclip -selection clipboard" | endif
 
+" https://stackoverflow.com/questions/14465383
+nnoremap <C-]> g<C-]>
+
 "end"
