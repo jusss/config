@@ -16,6 +16,9 @@ set fileformats=unix,dos
 set expandtab
 set shiftwidth=4
 set tabstop=4
+" use system clipboard for copy and paste, y and p, need +clipboard or
+" +xterm_clipboard, compile it or install vim-gtk not vim-tiny
+" https://vim.fandom.com/wiki/Accessing_the_system_clipboard
 set clipboard^=unnamed,unnamedplus
 "colorscheme happy_hacking"
 "colorscheme github"
@@ -223,16 +226,37 @@ set completeopt=noinsert,menuone
 " :%!jq . will format json file
 autocmd filetype json nnoremap <buffer> <F5> :%!jq . <cr>
 
+
+" F9 yank data to clipboard
 function! Pastetoclip()
     silent execute "'<,'>w !xclip -selection clipboard"
 endfunction
 
-noremap <F9> :call Pastetoclip()<CR>
+" noremap <F9> :call Pastetoclip()<CR>
+
+function Func2X11()
+    :call system('xclip -selection c', @r)
+endfunction
+vnoremap <F9> "ry:call Func2X11()<cr>
+" vnoremap <m-c> "ry:call Func2X11()<cr>
+" vnoremap <ESC-c> "ry:call Func2X11()<cr>
 
 " copy yanked data to clipboard
 " autocmd TextYankPost * if v:event.operator ==# 'y' | silent execute "'<,'>w !xclip -selection clipboard" | endif
 
 " https://stackoverflow.com/questions/14465383
 nnoremap <C-]> g<C-]>
+
+" vim find colorscheme in ~/.vim/colors/vivify.vim
+" colorscheme vivify
+" colorscheme github
+
+" vimdiff file file is alias to vim -d file file
+" vimdiff with different color schema
+if &diff
+    syntax off
+    " colorscheme vivify
+    colorscheme github
+endif
 
 "end"
