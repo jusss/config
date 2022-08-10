@@ -259,4 +259,9 @@ if &diff
     colorscheme github
 endif
 
+" enable status line, modebar in emacs
+set statusline+=%F
+set laststatus=2
+
+
 "end"
