@@ -1,4 +1,5 @@
 ; emacs -q --load simple.emacs
+; package install auto-complete and haskell-mode
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 (tool-bar-mode -1)
