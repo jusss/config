@@ -77,6 +77,9 @@
 ;;; auto-complete perfer upper case, but I want lower case, so ignore case
 (setq ac-ignore-case nil)
 
+
+(require 'haskell-mode)
+
 ;;; (linum-mode 1)
 ;;;M-g g 35
 ;;; like 35G in vim
