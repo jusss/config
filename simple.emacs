@@ -10,7 +10,7 @@
 (global-set-key (kbd "C-,") 'ido-switch-buffer)
 (global-set-key (kbd "C-;") 'set-mark-command)
 (global-set-key (kbd "C-'") 'pop-to-mark-command)
-(global-set-key (kbd "C-/") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-/") 'comment-line)
 (global-set-key (kbd "<f12>") 'ido-switch-buffer)
 (global-set-key (kbd "<f9>") 'set-mark-command)
 (global-set-key (kbd "<f8>") 'pop-to-mark-command) ;;; there's also pop-global-mark
@@ -174,7 +174,6 @@
             (local-set-key (kbd "<f6>") 'my-python-compile2)
             (local-set-key (kbd "C-c r") 'my-python-compile)
             (local-set-key (kbd "C-c e") 'my-python-compile2)
-            (local-set-key (kbd "C--") 'comment-or-uncomment-region)
             (setq-local eldoc-documentation-function #'ignore)
 ))
 
@@ -185,7 +184,6 @@
             (local-set-key (kbd "<f6>") 'my-haskell-compile2)
             (local-set-key (kbd "C-c r") 'my-haskell-compile)
             (local-set-key (kbd "C-c e") 'my-haskell-compile2)
-            (local-set-key (kbd "C--") 'comment-or-uncomment-region)
             (haskell-indentation-mode -1)
             (haskell-indent-mode -1) ;;; just won't work, I don't know why
 ))
