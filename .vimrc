@@ -143,10 +143,10 @@ set tags=~/.vim/python-tags
 "nnoremap p :tabprevious<CR>
 "inoremap p <esc>:tabprevious<CR>
 "esc p equal to alt p, so don't use alt p as tabs switch
-nnoremap <C-f> :tabnext<CR>
-inoremap <C-f> <esc>:tabnext<CR>
-nnoremap <C-b> :tabprevious<CR>
-inoremap <C-b> <esc>:tabprevious<CR>
+nnoremap <C-x>f :tabnext<CR>
+inoremap <C-x>f <esc>:tabnext<CR>
+nnoremap <C-x>b :tabprevious<CR>
+inoremap <C-x>b <esc>:tabprevious<CR>
 
 "use :e to do :tabe"
 cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'tabe' : 'e'
