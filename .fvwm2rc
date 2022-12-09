@@ -413,9 +413,9 @@ Key u A 4 Exec  exec xfce4-terminal
 Key u A MC Exec  exec xfce4-terminal
 Key t A MC Exec  exec xfce4-terminal
 # hold print screen key for 3 sec to screen shot
-Key Print A N Exec exec scrot -s -e 'feh $f'
-Key a A CS Exec exec scrot -s -e 'feh $f'
-Key s A S4 Exec exec scrot -s -e 'feh $f'
+Key Print A N Exec exec scrot -s -e 'mv $f ~/ScreenShot/; feh ~/ScreenShot/$f'
+Key a A CS Exec exec scrot -s -e 'mv $f ~/ScreenShot/; feh ~/ScreenShot/$f'
+Key s A S4 Exec exec scrot -s -e 'mv $f ~/ScreenShot/; feh ~/ScreenShot/$f'
 #Key u A 4 Exec  exec gnome-terminal
 #Key  3 A 4 Exec-xterm
 # 如果使用Exec-xterm的话，当在page 2快捷键打开xterm时，会自动跳到page 1打开窗口，所以不再使用Exec-xterm和Exec-emacs,这个应该跟窗口放置方式有关，默认TileCascadePlacement,改成
