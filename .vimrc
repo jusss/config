@@ -1,6 +1,8 @@
 "autocomplete supertab, indent tab, highlight build-in, comment keybind, F5-run keybind"
 set nocompatible
+set autoindent
 filetype on
+filetype indent on
 filetype plugin on
 filetype plugin indent on
 "there's no space in options or parameters, otherwise, it will be errors"
