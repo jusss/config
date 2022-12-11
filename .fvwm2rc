@@ -37,23 +37,25 @@ DestroyMenu MenuFvwmRoot
 AddToMenu MenuFvwmRoot    " Window "    Title
 +             " Chromium "  Exec exec chromium
 +             " Firefox "   Exec exec firefox
++             " Standby "   Exec exec xset dpms force standby
 +             " Volume "    Exec exec pavucontrol
-+             " ScreenShot " Exec exec scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/Pictures/'
++             " ScreenShot " Exec exec scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/ScreenShot/'
 #+             " System Info" Exec exec gnome-system-monitor
 +             " Terminal "  Exec exec xfce4-terminal
-+			  " Resize"	     Resize
+#+			  " Resize"	     Resize
 #+			  " Maximize"	     Maximize
 +			  " Iconify"	     Iconify
-+			  " Move"	     Move
+#+			  " Move"	     Move
 +			  " Iconify Off"     Iconify Off
 #+			  " Focus"	     Focus
-+			  " Close"	     Close
+#+			  " Close"	     Close
 #+             " Stick"       Stick
 #+			  " Raise"	     Raise
 #+             " Lower"       Lower
-+             " Raise Lower" RaiseLower
+#+             " Raise Lower" RaiseLower
 +             " -------- "
 +             " Suspend "   Exec exec systemctl suspend
+
 MenuStyle * Font "StringEncoding=UTF-8:xft:SimSun:size=11:encoding=iso10646-1"
 # WindowList也会使用MenuStyle的配置
 # TitleColorset是窗口标题栏的背景和字体颜色,MenuColorset是窗口的背景和字体颜色,HilightBack是高亮时的背景色,ActiveFore是高亮时的字体颜色
