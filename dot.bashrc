@@ -19,3 +19,5 @@ export EDITOR=/usr/bin/vim
 alias mpv='mpv --audio-display no' 
 ### alias xclock='xclock -digital -twelve -face DejaVuSans -update 1 -strftime %H:%M:%S %a %Y %m %d'
 alias xclock='xclock -brief -twelve -digital -update 60 -face DejaVuSans'
+shopt -s direxpand
+shopt -s globstar
