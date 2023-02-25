@@ -265,5 +265,7 @@ endif
 set statusline+=%F
 set laststatus=2
 
+set splitright
+set splitbelow
 
 "end"
