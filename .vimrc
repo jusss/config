@@ -186,6 +186,9 @@ cnoreabbrev <expr> e getcmdtype() == ":" && getcmdline() == 'e' ? 'tabe' : 'e'
 " remote_or_local remote
 " sleep_before_sync 0
 " then cd ~/remote/project and vim files, :w will rsync to remote
+" disable vim-arsync
+" vim .vim/plugin/vim-arsync.vim
+" comment 146-150 lines
 
 " set pylint as python linter
 autocmd FileType python compiler pylint
