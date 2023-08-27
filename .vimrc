@@ -47,7 +47,8 @@ endif
 set shortmess+=F
 
 "vim scp://root@moon:22//root/a.hs"
-"if the only one slash, it means $HOME path"
+"if the only one slash, it means $HOME path, directory end with /, and use :Ex
+"to back directory after view file "
 "so vim scp://root@moon:22/a.hs, is /root/a.hs on remote"
 "nnoremap <F6> <esc>:w<enter>:!ssh root@moon runghc /root/%:t<enter>"
 "inoremap <F6> <esc>:w<enter>:!ssh root@moon runghc /root/%:t<enter>"
@@ -136,6 +137,12 @@ set hlsearch
 " ctags -R -o ~/.vim/python-tags ~/project"
 " use C-] to jump, and C-t jump back"
 set tags=~/.vim/python-tags
+
+" or in the root of source repository,
+" ctags -R * 
+" then
+" set autochdir
+" set tags=tags;
 
 " C-v then Alt-n to insert ^[n for key mapping to tabnext"
 " :tabe or :tabnew new-tab, open new file"
