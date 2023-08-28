@@ -103,6 +103,7 @@ set undodir=$HOME/.vim/
 noremap <C-d> :sh<CR>
 
 " C-/ to comment or uncomment, nerdcommenter plugin"
+" leader key may be \, so \ c space will do the same
 let NERDSpaceDelims=1
 if has ('win32')
     nmap <C-/> <leader>c<Space>
