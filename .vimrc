@@ -104,8 +104,10 @@ noremap <C-d> :sh<CR>
 
 " C-/ to comment or uncomment, nerdcommenter plugin"
 " leader key may be \, so \ c space will do the same
-" in iPadOS C-/ won't be recognized, it only recognize alphabet character, so
-" use C-l to instead of C-/
+" in iPadOS C-/ won't be recognized, it only recognize alphabet character
+" https://vim.fandom.com/wiki/Comment_Lines_according_to_a_given_filetype
+" select lines then co will comment
+vmap co <leader>c<Space>
 let NERDSpaceDelims=1
 if has ('win32')
     nmap <C-/> <leader>c<Space>
