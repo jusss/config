@@ -114,6 +114,9 @@ endfunction
 " the control slash C-/ is equivalent of C-_
 vmap <C-/> :call SimpleComment()<CR>
 vmap <C-_> :call SimpleComment()<CR>
+" https://vim.fandom.com/wiki/Comment_Lines_according_to_a_given_filetype
+" select lines then co will comment
+vmap co :call SimpleComment()<CR>
 " change cmdheight = 2 if it shows enter to continue
 set cmdheight=1
 
