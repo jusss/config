@@ -96,17 +96,32 @@ autocmd filetype javascript let g:Comment = "// " | let g:EndComment = ""
 autocmd filetype css let g:Comment = "/* " | let g:EndComment = " */"
 
 "@ is split symbol, like /"
-function! SimpleComment()
-    if strpart(getline('.'),0,len(g:Comment)) == g:Comment
-        execute ":s@^".g:Comment."@@g"
-        execute ":s@".g:EndComment."$@@g"
-    else
-        execute ":s@^@".g:Comment."@g"
-        execute ":s@$@".g:EndComment."@g"
-    endif
+function! SimpleComment() range
+" let l:non_whitespace_position = match(getline('.'), '\S')
+let l:first_line_non_whitespace_position = match(getline(a:firstline), '\S')
+
+if strpart(getline(a:firstline),l:first_line_non_whitespace_position,len(g:Comment)) == g:Comment
+silent! execute a:firstline . "," . a:lastline . "s@".g:Comment."@@"
+silent! execute a:firstline . "," . a:lastline . "s@".g:EndComment."$@@"
+else
+" execute "normal! ".l:non_whitespace_position."| i".g:Comment
+" execute ":s@^@".g:Comment."@"
+silent! execute a:firstline . "," . a:lastline . "s@" . '\S' . "@".g:Comment."&@"
+silent! execute a:firstline . "," . a:lastline . "s@$@".g:EndComment."@"
+endif
 endfunction
 
 " the control slash C-/ is equivalent of C-_
 vmap <C-/> :call SimpleComment()<CR>
 vmap <C-_> :call SimpleComment()<CR>
+" change cmdheight = 2 if it shows enter to continue
+set cmdheight=1
 
+" vim variable has scope, in function it's local variable, out of function is global variable
+" global variable is g:var, local variable is l:var, function parameter is a:var
+" let define and change local and global variable, set change internal variable
+" let g:ot = 0, if g:ot == 0, let g:ot = 2 will alter ot's value
+" pumvisible() check if pop up menu is done
+" help 'completeopt' check variable completeopt definition
+" vmap <F3> :call func() vmap is used for visual mode like selected lines
+" all the omnifunc support languages in /usr/share/vim/vim81/autoload/
