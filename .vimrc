@@ -283,4 +283,7 @@ set laststatus=2
 set splitright
 set splitbelow
 
+" set term size, use :term to open terminal
+set termwinsize=6x0
+
 "end"
