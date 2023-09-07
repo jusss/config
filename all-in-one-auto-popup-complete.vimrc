@@ -254,7 +254,7 @@ nnoremap <C-]> g<C-]>
 if &diff
     syntax off
     " colorscheme vivify
-    colorscheme github
+    colorscheme pablo
 endif
 
 " enable status line, modebar in emacs
@@ -434,3 +434,9 @@ function! SimpleComplete()
 endfunction
 
 autocmd InsertCharPre * call SimpleComplete()
+
+" F9 to fold code, za to toggle, space to unfold, zc to close, zo to open
+autocmd filetype python nnoremap <buffer> <F9> :setlocal foldmethod=indent<cr>
+autocmd filetype python nnoremap <buffer> fo :setlocal foldmethod=indent<cr>
+autocmd filetype haskell nnoremap <buffer> <F9> :setlocal foldmethod=indent<cr>
+autocmd filetype haskell nnoremap <buffer> fo :setlocal foldmethod=indent<cr>

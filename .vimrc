@@ -286,4 +286,9 @@ set splitbelow
 " set term size, use :term to open terminal
 set termwinsize=6x0
 
+" F9 to fold code, za to toggle, space to unfold, zc to close, zo to open
+autocmd filetype python nnoremap <buffer> <F9> :setlocal foldmethod=indent<cr>
+autocmd filetype python nnoremap <buffer> fo :setlocal foldmethod=indent<cr>
+autocmd filetype haskell nnoremap <buffer> <F9> :setlocal foldmethod=indent<cr>
+autocmd filetype haskell nnoremap <buffer> fo :setlocal foldmethod=indent<cr>
 "end"
