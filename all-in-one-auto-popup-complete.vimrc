@@ -426,9 +426,11 @@ function! SimpleComplete()
 
     if !pumvisible() && (v:char == '.')
         let g:complete_counter = 0
+        let g:ot = 1
         silent! call feedkeys("\<C-x>\<C-o>", 'n')
     elseif !pumvisible() && (g:complete_counter >= 2)
         let g:complete_counter = 0
+        let g:ot = 0
         silent! call feedkeys("\<C-p>", 'n')
     endif
 endfunction
