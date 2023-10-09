@@ -442,3 +442,5 @@ autocmd filetype python nnoremap <buffer> <F9> :setlocal foldmethod=indent<cr>
 autocmd filetype python nnoremap <buffer> fo :setlocal foldmethod=indent<cr>
 autocmd filetype haskell nnoremap <buffer> <F9> :setlocal foldmethod=indent<cr>
 autocmd filetype haskell nnoremap <buffer> fo :setlocal foldmethod=indent<cr>
+
+autocmd filetype python nnoremap <buffer> ff :w<enter>:!python3 %:p<enter>
