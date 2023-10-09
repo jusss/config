@@ -21,3 +21,5 @@ alias mpv='mpv --audio-display no'
 alias xclock='xclock -brief -twelve -digital -update 60 -face DejaVuSans'
 shopt -s direxpand
 shopt -s globstar
+alias mcp='sudo rsync -RrvP '
+
