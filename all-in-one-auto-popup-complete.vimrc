@@ -239,8 +239,25 @@ vnoremap <F9> "ry:call Func2X11()<cr>
 " vnoremap <m-c> "ry:call Func2X11()<cr>
 " vnoremap <ESC-c> "ry:call Func2X11()<cr>
 
+function! GetVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        echom "empty"
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    echom lines[0]
+    return join(lines, "\n")
+endfunction
+
 " copy yanked data to clipboard
 " autocmd TextYankPost * if v:event.operator ==# 'y' | silent execute "'<,'>w !xclip -selection clipboard" | endif
+"autocmd TextYankPost * if v:event.operator ==# 'y' | call  GetVisualSelection() | endif
+" set clipboard=unnamedplus
+autocmd TextYankPost * silent execute "\"+y"
 
 " https://stackoverflow.com/questions/14465383
 nnoremap <C-]> g<C-]>
@@ -383,7 +400,7 @@ vmap <C-_> :call SimpleComment()<CR>
 " https://vim.fandom.com/wiki/Comment_Lines_according_to_a_given_filetype
 " select lines then co will comment
 vmap co :call SimpleComment()<CR>
-" change cmdheight = 2 if it shows enter to continue
+" change cmdheight = 2 if it shows enter to continue, or to use echom to debug
 set cmdheight=1
 
 " vim variable has scope, in function it's local variable, out of function is global variable
